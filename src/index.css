@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "SF Pro Text", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  font-size: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: #e9eef9;
+  background-color: #0a0e1a;
+  background:
+    radial-gradient(900px 500px at 10% 10%, rgba(123, 167, 255, 0.25), transparent 60%),
+    radial-gradient(700px 600px at 90% 20%, rgba(184, 208, 255, 0.18), transparent 55%),
+    radial-gradient(500px 450px at 50% 90%, rgba(123, 167, 255, 0.12), transparent 60%),
+    #0a0e1a;
+}
+
+/* Hide scrollbars but keep functionality */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Ensure images scale properly */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fix for high DPI displays (125%, 150%, etc.) */
+@media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
+  body {
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  html {
+    font-size: 15px;
+  }
+}
+
+/* Glass panel effect - Fractal Seer style */
+.glass-panel {
+  background: linear-gradient(135deg, rgba(20, 28, 51, 0.8), rgba(16, 22, 42, 0.6));
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(120, 160, 240, 0.2);
+  box-shadow: 0 20px 80px -40px rgba(15, 23, 42, 0.75);
+}
+
+/* Smooth transitions */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(123, 167, 255, 0.3);
+  color: #e9eef9;
+}
+
+::-moz-selection {
+  background-color: rgba(123, 167, 255, 0.3);
+  color: #e9eef9;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid rgba(123, 167, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar for when needed */
+.custom-scrollbar::-webkit-scrollbar {
+  display: block;
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(20, 28, 51, 0.3);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(123, 167, 255, 0.3);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(123, 167, 255, 0.5);
+}
+
+/* Animation utilities */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #7BA7FF 0%, #B8D0FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effect */
+.glow-effect {
+  box-shadow: 
+    0 0 20px rgba(123, 167, 255, 0.3),
+    0 0 40px rgba(123, 167, 255, 0.2),
+    0 0 60px rgba(123, 167, 255, 0.1);
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 20px 40px rgba(15, 23, 42, 0.4),
+    0 0 0 1px rgba(123, 167, 255, 0.3);
+}
