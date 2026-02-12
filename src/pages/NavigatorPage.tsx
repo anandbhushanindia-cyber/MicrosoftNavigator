@@ -3,26 +3,37 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { NavigatorLayout } from '../components/navigator/NavigatorLayout';
 import { LandingScreen } from '../components/navigator/LandingScreen';
-import { ContextSelector } from '../components/navigator/ContextSelector';
+import { ScenarioSelector } from '../components/navigator/ScenarioSelector';
+import { SubScenarioSelector } from '../components/navigator/SubScenarioSelector';
 import { QuestionFlow } from '../components/navigator/QuestionFlow';
 import { RecommendationScreen } from '../components/navigator/RecommendationScreen';
+import { IdleWarningModal } from '../components/navigator/IdleWarningModal';
 
 import { useNavigator } from '../hooks/useNavigator';
+import { useIdleTimeout } from '../hooks/useIdleTimeout';
 
 export const NavigatorPage: React.FC = () => {
   const {
     currentStep,
     setCurrentStep,
-    selectContext,
+    selectedScenario,
+    selectScenario,
+    selectSubScenario,
     currentQuestion,
     currentQuestionIndex,
     totalQuestions,
     addAnswer,
+    goBack,
     recommendation,
-    leadershipMode,
-    toggleLeadershipMode,
     reset,
+    scenarios,
   } = useNavigator();
+
+  const { showWarning, warningSecondsLeft, dismissWarning } = useIdleTimeout(reset, {
+    timeoutMs: 120000,
+    warningMs: 15000,
+    enabled: currentStep !== 'landing',
+  });
 
   return (
     <NavigatorLayout>
@@ -38,25 +49,44 @@ export const NavigatorPage: React.FC = () => {
             className="w-full"
           >
             <LandingScreen
-              onStart={() => setCurrentStep('context')}
+              onStart={() => setCurrentStep('scenario')}
             />
           </motion.div>
         )}
 
-        {/* Context Selection */}
-        {currentStep === 'context' && (
+        {/* Scenario Selection */}
+        {currentStep === 'scenario' && (
           <motion.div
-            key="context"
+            key="scenario"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
             className="w-full"
           >
-            <ContextSelector
-              onSelect={(contextId) => {
-                selectContext(contextId);
-              }}
+            <ScenarioSelector
+              scenarios={scenarios}
+              onSelect={selectScenario}
+              onBack={goBack}
+            />
+          </motion.div>
+        )}
+
+        {/* Sub-Scenario Selection */}
+        {currentStep === 'subscenario' && selectedScenario && (
+          <motion.div
+            key="subscenario"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.35, ease: 'easeOut' }}
+            className="w-full"
+          >
+            <SubScenarioSelector
+              subScenarios={selectedScenario.subScenarios}
+              scenarioTitle={selectedScenario.title}
+              onSelect={selectSubScenario}
+              onBack={goBack}
             />
           </motion.div>
         )}
@@ -75,14 +105,15 @@ export const NavigatorPage: React.FC = () => {
               question={currentQuestion}
               currentIndex={currentQuestionIndex}
               totalQuestions={totalQuestions}
-              onAnswer={(optionId, tags, weight) => {
+              onAnswer={(optionId, signalPath, weight) => {
                 addAnswer(
                   currentQuestion.id,
                   optionId,
-                  tags,
+                  signalPath,
                   weight
                 );
               }}
+              onBack={goBack}
             />
           </motion.div>
         )}
@@ -99,13 +130,18 @@ export const NavigatorPage: React.FC = () => {
           >
             <RecommendationScreen
               recommendation={recommendation}
-              leadershipMode={leadershipMode}
-              onToggleMode={toggleLeadershipMode}
               onReset={reset}
             />
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Idle Warning Modal */}
+      <IdleWarningModal
+        visible={showWarning}
+        secondsLeft={warningSecondsLeft}
+        onDismiss={dismissWarning}
+      />
     </NavigatorLayout>
   );
 };

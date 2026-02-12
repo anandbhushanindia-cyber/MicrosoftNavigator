@@ -1,135 +1,256 @@
-import { useState } from 'react';
-import type  { Answer, Offering, Recommendation, NavigatorStep, LeadershipMode, QuestionsData } from '../types/navigator.types';
-import questionsData from '../data/questions.json';
-import offeringsData from '../data/offerings.json';
+import { useState, useMemo } from 'react';
+import type {
+  Answer,
+  Scenario,
+  Recommendation,
+  NavigatorStep,
+  SignalPathScore,
+  OfferingName,
+  OfferingScore,
+  SignalOfferingMapping,
+} from '../types/navigator.types';
+import scenariosData from '../data/scenarios.json';
+
+const OFFERING_NAMES: OfferingName[] = ['Data', 'AI', 'AMM', 'DPDE'];
+const SUPPORTING_THRESHOLD = 0.4;
+const OPTIONAL_THRESHOLD = 0.25;
+const MIN_SCORE_TO_DISPLAY = 10;
 
 export const useNavigator = () => {
   const [currentStep, setCurrentStep] = useState<NavigatorStep>('landing');
-  const [selectedContext, setSelectedContext] = useState<string | null>(null);
+  const [selectedScenarioId, setSelectedScenarioId] = useState<string | null>(null);
+  const [selectedSubScenarioId, setSelectedSubScenarioId] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [leadershipMode, setLeadershipMode] = useState<LeadershipMode>('technical');
   const [recommendation, setRecommendation] = useState<Recommendation | null>(null);
 
-  const data = questionsData as QuestionsData;
-  const offerings = offeringsData.offerings as Offering[];
+  const scenarios = scenariosData.scenarios as Scenario[];
+  const signalMatrix = scenariosData.signalMappingMatrix as SignalOfferingMapping[];
 
-  // Get context-specific questions
-  const contextQuestions = selectedContext 
-    ? data.contexts[selectedContext]?.questions || []
-    : [];
+  // Build lookup map for signal → offering multipliers
+  const signalMatrixMap = useMemo(() => {
+    const map: Record<string, SignalOfferingMapping> = {};
+    for (const entry of signalMatrix) {
+      map[entry.signalPath] = entry;
+    }
+    return map;
+  }, [signalMatrix]);
 
-  const selectContext = (contextId: string) => {
-    setSelectedContext(contextId);
-    setCurrentQuestionIndex(0); // Reset question index
-    setAnswers([]); // Clear previous answers
+  // Derived state
+  const selectedScenario = useMemo(
+    () => scenarios.find(s => s.id === selectedScenarioId) ?? null,
+    [scenarios, selectedScenarioId]
+  );
+
+  const selectedSubScenario = useMemo(
+    () => selectedScenario?.subScenarios.find(ss => ss.id === selectedSubScenarioId) ?? null,
+    [selectedScenario, selectedSubScenarioId]
+  );
+
+  const scenarioQuestions = selectedScenario?.questions ?? [];
+
+  // Helper: look up offering multipliers for a signal path
+  const getMultipliers = (signalPath: string): Record<OfferingName, number> => {
+    const entry = signalMatrixMap[signalPath];
+    if (entry) {
+      return { Data: entry.Data, AI: entry.AI, AMM: entry.AMM, DPDE: entry.DPDE };
+    }
+    return { Data: 0, AI: 0, AMM: 0, DPDE: 0 };
+  };
+
+  // --- Actions ---
+
+  const selectScenario = (scenarioId: string) => {
+    setSelectedScenarioId(scenarioId);
+    setSelectedSubScenarioId(null);
+    setAnswers([]);
+    setCurrentQuestionIndex(0);
+    setRecommendation(null);
+    setCurrentStep('subscenario');
+  };
+
+  const selectSubScenario = (subScenarioId: string) => {
+    setSelectedSubScenarioId(subScenarioId);
+    setCurrentQuestionIndex(0);
+    setAnswers([]);
+    setRecommendation(null);
     setCurrentStep('questions');
   };
 
-  const addAnswer = (questionId: string, optionId: string, tags: string[], weight: number) => {
-    const newAnswer: Answer = { questionId, optionId, tags, weight };
-    setAnswers(prev => [...prev, newAnswer]);
-    
-    if (currentQuestionIndex < contextQuestions.length - 1) {
+  const addAnswer = (questionId: string, optionId: string, signalPath: string, weight: number) => {
+    const newAnswer: Answer = { questionId, optionId, signalPath, weight };
+    const updatedAnswers = [...answers, newAnswer];
+    setAnswers(updatedAnswers);
+
+    if (currentQuestionIndex < scenarioQuestions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
     } else {
-      generateRecommendation([...answers, newAnswer]);
+      generateRecommendation(updatedAnswers);
     }
   };
 
   const generateRecommendation = (allAnswers: Answer[]) => {
-    // Aggregate tag scores
-    const tagScores: Record<string, number> = {};
-    
-    // Add heavy context weight
-    if (selectedContext) {
-      const contextWeightMap: Record<string, string[]> = {
-        'data': ['data_transformation_high', 'data_transformation_primary'],
-        'ai': ['ai_integration_primary', 'ai_integration_high'],
-        'apps': ['amm_primary', 'amm_high'],
-        'speed': ['product_engineering_primary', 'product_engineering_high'],
-        'cost': ['cost_optimization', 'finops_critical'],
-        'customer': ['product_engineering_fit', 'ai_integration_medium', 'data_transformation_medium']
-      };
-      
-      const contextTags = contextWeightMap[selectedContext] || [];
-      contextTags.forEach(tag => {
-        tagScores[tag] = 8; // Very high weight for initial context
-      });
+    const scenario = scenarios.find(s => s.id === selectedScenarioId);
+    const subScenario = scenario?.subScenarios.find(ss => ss.id === selectedSubScenarioId);
+
+    if (!scenario || !subScenario) return;
+
+    // 1. Initialize offering scores
+    const offeringTotals: Record<OfferingName, number> = { Data: 0, AI: 0, AMM: 0, DPDE: 0 };
+
+    // 2. Initialize signal path scores (for display)
+    const signalScores: Record<string, number> = {};
+
+    // 3. Process sub-scenario signal
+    const subMultipliers = getMultipliers(subScenario.signalPath);
+    for (const offering of OFFERING_NAMES) {
+      offeringTotals[offering] += subScenario.weight * subMultipliers[offering];
     }
-    
-    // Add answer weights
-    allAnswers.forEach(answer => {
-      answer.tags.forEach(tag => {
-        tagScores[tag] = (tagScores[tag] || 0) + answer.weight;
+    signalScores[subScenario.signalPath] = (signalScores[subScenario.signalPath] || 0) + subScenario.weight;
+
+    // 4. Process each answer
+    for (const answer of allAnswers) {
+      const multipliers = getMultipliers(answer.signalPath);
+      for (const offering of OFFERING_NAMES) {
+        offeringTotals[offering] += answer.weight * multipliers[offering];
+      }
+      signalScores[answer.signalPath] = (signalScores[answer.signalPath] || 0) + answer.weight;
+    }
+
+    // 5. Sort offerings by score descending
+    const sortedOfferings: OfferingScore[] = OFFERING_NAMES
+      .map(offering => ({ offering, score: offeringTotals[offering] }))
+      .sort((a, b) => b.score - a.score);
+
+    const primaryOfferingScore = sortedOfferings[0];
+    const primaryOffering = primaryOfferingScore.offering;
+
+    // 6. Determine supporting and optional offerings
+    let supportingOffering: OfferingName | undefined;
+    let optionalOffering: OfferingName | undefined;
+
+    if (sortedOfferings.length > 1) {
+      const second = sortedOfferings[1];
+      if (second.score >= primaryOfferingScore.score * SUPPORTING_THRESHOLD && second.score >= MIN_SCORE_TO_DISPLAY) {
+        supportingOffering = second.offering;
+      }
+    }
+    if (sortedOfferings.length > 2) {
+      const third = sortedOfferings[2];
+      if (third.score >= primaryOfferingScore.score * OPTIONAL_THRESHOLD && third.score >= MIN_SCORE_TO_DISPLAY) {
+        optionalOffering = third.offering;
+      }
+    }
+
+    // 7. Sort signal paths by score for display
+    const sortedSignals: SignalPathScore[] = Object.entries(signalScores)
+      .map(([signalPath, score]) => ({ signalPath, score }))
+      .sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score;
+        if (a.signalPath === subScenario.signalPath) return -1;
+        if (b.signalPath === subScenario.signalPath) return 1;
+        return 0;
       });
+
+    // 8. Look up scenario's signal path mapping for rich content
+    const primarySignal = sortedSignals[0];
+    const supportingSignal = sortedSignals.length > 1 ? sortedSignals[1] : null;
+    const mappings = scenario.signalPathMappings;
+    const primaryMapping = mappings.find(m => m.signalPath === primarySignal.signalPath);
+    const supportingMapping = supportingSignal
+      ? mappings.find(m => m.signalPath === supportingSignal.signalPath)
+      : null;
+
+    // 9. Calculate confidence
+    const totalOfferingScore = sortedOfferings.reduce((sum, s) => sum + s.score, 0);
+    const confidence = totalOfferingScore > 0
+      ? Math.min(Math.round((primaryOfferingScore.score / totalOfferingScore) * 100), 95)
+      : 70;
+
+    setRecommendation({
+      scenarioTitle: scenario.title,
+      subScenarioText: subScenario.text,
+      primaryOffering,
+      supportingOffering,
+      optionalOffering,
+      offeringScores: sortedOfferings,
+      primarySignalPath: primarySignal.signalPath,
+      primaryRecommendation: primaryMapping?.primaryRecommendation || primarySignal.signalPath,
+      primaryDescription: primaryMapping?.description || '',
+      primaryTechStack: primaryMapping?.techStack || [],
+      supportingSignalPath: supportingSignal?.signalPath || '',
+      supportingCapability: supportingMapping?.supportingCapability || '',
+      supportingDescription: supportingMapping?.description || '',
+      confidence,
+      signalScores: sortedSignals,
+      challenges: primaryMapping?.challenges || [],
+      solutions: primaryMapping?.solutions || [],
+      approach: primaryMapping?.approach || [],
+      capabilities: primaryMapping?.capabilities || [],
+      ibmOffers: primaryMapping?.ibmOffers || [],
     });
-
-    // Score each offering
-    const offeringScores = offerings.map(offering => {
-      const score = Object.entries(tagScores)
-        .filter(([tag]) => tag.includes(offering.tagPrefix) || tag.includes(offering.id))
-        .reduce((sum, [, value]) => sum + value, 0);
-      
-      return { offering, score };
-    });
-
-    // Sort by score
-    offeringScores.sort((a, b) => b.score - a.score);
-
-    // Primary = highest score
-    const primary = offeringScores[0].offering;
-    
-    // Complementary = next 1-2 with score > threshold
-    const complementary = offeringScores
-      .slice(1)
-      .filter(o => o.score >= 6)
-      .slice(0, 2)
-      .map(o => o.offering);
-
-    // Calculate confidence
-    const totalScore = offeringScores.reduce((sum, o) => sum + o.score, 0);
-    const confidence = totalScore > 0 
-      ? Math.min(Math.round((offeringScores[0].score / totalScore) * 100), 95)
-      : 50;
-
-    // Generate rationale
-    const topTags = Object.entries(tagScores)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 3)
-      .map(([tag]) => tag.replace(/_/g, ' '));
-
-    const rationale = `Based on your ${topTags.join(', ')} priorities`;
-
-    setRecommendation({ primary, complementary, confidence, rationale });
     setCurrentStep('results');
+  };
+
+  const goBack = () => {
+    switch (currentStep) {
+      case 'scenario':
+        setCurrentStep('landing');
+        setSelectedScenarioId(null);
+        break;
+      case 'subscenario':
+        setCurrentStep('scenario');
+        setSelectedSubScenarioId(null);
+        break;
+      case 'questions':
+        if (currentQuestionIndex > 0) {
+          setCurrentQuestionIndex(prev => prev - 1);
+          setAnswers(prev => prev.slice(0, -1));
+        } else {
+          setCurrentStep('subscenario');
+          setAnswers([]);
+        }
+        break;
+      case 'results':
+        setCurrentStep('subscenario');
+        setAnswers([]);
+        setCurrentQuestionIndex(0);
+        setRecommendation(null);
+        break;
+      default:
+        break;
+    }
   };
 
   const reset = () => {
     setCurrentStep('landing');
-    setSelectedContext(null);
+    setSelectedScenarioId(null);
+    setSelectedSubScenarioId(null);
     setAnswers([]);
     setCurrentQuestionIndex(0);
     setRecommendation(null);
   };
 
-  const toggleLeadershipMode = () => {
-    setLeadershipMode(prev => prev === 'technical' ? 'leadership' : 'technical');
-  };
-
   return {
+    // State
     currentStep,
-    setCurrentStep,
-    selectedContext,
-    selectContext,
+    selectedScenarioId,
+    selectedSubScenarioId,
+    selectedScenario,
+    selectedSubScenario,
     answers,
-    addAnswer,
-    currentQuestion: contextQuestions[currentQuestionIndex],
+    currentQuestion: scenarioQuestions[currentQuestionIndex],
     currentQuestionIndex,
-    totalQuestions: contextQuestions.length,
-    leadershipMode,
-    toggleLeadershipMode,
+    totalQuestions: scenarioQuestions.length,
     recommendation,
+    scenarios,
+
+    // Actions
+    setCurrentStep,
+    selectScenario,
+    selectSubScenario,
+    addAnswer,
+    goBack,
     reset,
   };
 };

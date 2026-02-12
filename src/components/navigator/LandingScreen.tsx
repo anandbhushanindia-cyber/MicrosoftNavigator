@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Navigation, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 interface LandingScreenProps {
   onStart: () => void;
@@ -16,22 +16,23 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onStart }) => {
     >
       {/* Hero */}
       <div className="mb-14">
-        {/* Icon */}
+        {/* IBM + Microsoft Logos */}
         <motion.div
           initial={{ y: 24, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.15 }}
-          className="
-            inline-flex items-center justify-center
-            w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28
-            rounded-2xl
-            bg-gradient-to-br from-blue-500 to-indigo-600
-            mb-8 shadow-2xl
-          "
+          className="flex items-center justify-center gap-6 sm:gap-8 mb-10"
         >
-          <Navigation
-            className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 text-white"
-            strokeWidth={1.6}
+          <img
+            src="/logos/ibm.svg"
+            alt="IBM"
+            className="h-10 sm:h-12 lg:h-14 w-auto"
+          />
+          <div className="w-px h-10 sm:h-12 lg:h-14 bg-gray-300" />
+          <img
+            src="/logos/microsoft.svg"
+            alt="Microsoft"
+            className="h-8 sm:h-10 lg:h-12 w-auto"
           />
         </motion.div>
 
@@ -58,7 +59,7 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onStart }) => {
           transition={{ delay: 0.35 }}
           className="text-xl sm:text-2xl text-gray-700 mb-4"
         >
-          From Business Friction to Transformation Clarity
+          Discover your transformation path with IBM + Microsoft
         </motion.p>
 
         {/* Attribution */}
@@ -68,70 +69,29 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onStart }) => {
           transition={{ delay: 0.45 }}
           className="text-base sm:text-lg text-gray-500"
         >
-          Curated by IBM Consulting Microsoft Offering Team
+          Powered by IBM Consulting
         </motion.p>
       </div>
 
-      {/* Framing Stats */}
-      <motion.div
-        initial={{ y: 16, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.55 }}
-        className="
-          flex flex-wrap items-center justify-center
-          gap-10 sm:gap-14
-          mb-14
-        "
-      >
-        <div className="text-center">
-          <div className="text-3xl sm:text-4xl font-semibold text-indigo-600 mb-1">
-            ~3
-          </div>
-          <div className="text-sm sm:text-base text-gray-600">
-            Minutes
-          </div>
-        </div>
-
-        <div className="w-px h-12 sm:h-16 bg-gray-300" />
-
-        <div className="text-center">
-          <div className="text-3xl sm:text-4xl font-semibold text-indigo-600 mb-1">
-            6
-          </div>
-          <div className="text-sm sm:text-base text-gray-600">
-            Strategic Questions
-          </div>
-        </div>
-
-        <div className="w-px h-12 sm:h-16 bg-gray-300" />
-
-        <div className="text-center">
-          <div className="text-3xl sm:text-4xl font-semibold text-indigo-600 mb-1">
-            1
-          </div>
-          <div className="text-sm sm:text-base text-gray-600">
-            Clear Direction
-          </div>
-        </div>
-      </motion.div>
+      
 
       {/* CTA */}
       <motion.button
         initial={{ y: 16, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.65 }}
-        whileHover={{ scale: 1.04 }}
         whileTap={{ scale: 0.96 }}
         onClick={onStart}
         className="
           inline-flex items-center gap-3
-          px-10 sm:px-14 py-4 sm:py-5
+          px-10 sm:px-14 py-5 sm:py-6
           bg-gradient-to-r from-blue-500 to-indigo-600
-          hover:from-blue-600 hover:to-indigo-700
+          active:from-blue-600 active:to-indigo-700
           text-white text-lg sm:text-xl font-semibold
           rounded-2xl
-          shadow-2xl hover:shadow-indigo-500/40
+          shadow-2xl
           transition-all
+          min-h-[64px]
           focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-400/40
         "
       >

@@ -32,13 +32,17 @@ body,
 body {
   margin: 0;
   min-height: 100vh;
-  color: #e9eef9;
-  background-color: #0a0e1a;
+  color: #1a202c;
+  background-color: #f7f8fa;
   background:
-    radial-gradient(900px 500px at 10% 10%, rgba(123, 167, 255, 0.25), transparent 60%),
-    radial-gradient(700px 600px at 90% 20%, rgba(184, 208, 255, 0.18), transparent 55%),
-    radial-gradient(500px 450px at 50% 90%, rgba(123, 167, 255, 0.12), transparent 60%),
-    #0a0e1a;
+    radial-gradient(900px 500px at 10% 10%, rgba(59, 130, 246, 0.06), transparent 60%),
+    radial-gradient(700px 600px at 90% 20%, rgba(99, 102, 241, 0.04), transparent 55%),
+    #f7f8fa;
+  /* Kiosk touch optimization */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* Hide scrollbars but keep functionality */

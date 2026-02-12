@@ -8,7 +8,7 @@ interface NavigatorLayoutProps {
 export const NavigatorLayout: React.FC<NavigatorLayoutProps> = ({ children }) => {
   return (
     <div className="fixed inset-0 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-100">
-      
+
       {/* Ambient Background Layer */}
       <div className="absolute inset-0 pointer-events-none">
         <div
@@ -30,17 +30,19 @@ export const NavigatorLayout: React.FC<NavigatorLayoutProps> = ({ children }) =>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 
-              {/* Brand Block */}
-              <div className="flex items-center gap-4">
-                <span className="text-blue-600 text-xl font-semibold tracking-tight">
-                  IBM
-                </span>
-
-                <div className="w-px h-7 bg-gray-300" />
-
-                <span className="text-gray-700 text-lg font-medium tracking-tight">
-                  Microsoft
-                </span>
+              {/* Brand Block — Logos */}
+              <div className="flex items-center gap-5">
+                <img
+                  src="/logos/ibm.svg"
+                  alt="IBM"
+                  className="h-7 sm:h-8 lg:h-9 w-auto"
+                />
+                <div className="w-px h-7 sm:h-8 bg-gray-300" />
+                <img
+                  src="/logos/microsoft.svg"
+                  alt="Microsoft"
+                  className="h-6 sm:h-7 lg:h-8 w-auto"
+                />
               </div>
 
               {/* Context Meta */}

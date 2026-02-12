@@ -1,7 +1,18 @@
+// --- Sub-Scenario ---
+export interface SubScenario {
+  id: string;
+  text: string;
+  businessMeaning: string;
+  signalPath: string;
+  weight: number;
+}
+
+// --- Questions ---
 export interface QuestionOption {
   id: string;
   text: string;
-  tags: string[];
+  businessMeaning: string;
+  signalPath: string;
   weight: number;
 }
 
@@ -11,50 +22,107 @@ export interface Question {
   options: QuestionOption[];
 }
 
-export interface ContextQuestions {
-  name: string;
-  questions: Question[];
-}
-
-export interface QuestionsData {
-  contexts: {
-    [key: string]: ContextQuestions;
-  };
-}
-
-export interface ViewMode {
-  problem: string;
-  solution: string;
-  approach: string;
-}
-
-export interface Offering {
+// --- IBM Offer (rich media item) ---
+export interface IBMOffer {
   id: string;
-  name: string;
-  tagPrefix: string;
-  icon: string;
-  shortDescription: string;
+  title: string;
+  description: string;
+  type: 'video' | 'architecture' | 'demo' | 'document' | 'tool';
+  mediaUrl?: string;
+  thumbnailUrl?: string;
+  referenceUrl: string;
+}
+
+// --- Signal Path Mapping ---
+export interface SignalPathMapping {
+  signalPath: string;
+  primaryRecommendation: string;
+  supportingCapability: string;
+  description: string;
+  techStack: string[];
+  challenges: string[];
+  solutions: string[];
+  approach: string[];
   capabilities: string[];
-  readinessSignals: string[];
-  technicalView: ViewMode;
-  leadershipView: ViewMode;
-  demoVideo?: string;
-  collateralPDF?: string;
+  ibmOffers: IBMOffer[];
+}
+
+// --- Scenario (top-level) ---
+export interface Scenario {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  color: string;
+  enabled: boolean;
+  offeringGroup?: string;
+  subScenarios: SubScenario[];
+  questions: Question[];
+  signalPathMappings: SignalPathMapping[];
+}
+
+// --- Offerings ---
+export type OfferingName = 'Data' | 'AI' | 'AMM' | 'DPDE';
+
+export interface OfferingScore {
+  offering: OfferingName;
+  score: number;
+}
+
+export interface SignalOfferingMapping {
+  signalPath: string;
+  Data: number;
+  AI: number;
+  AMM: number;
+  DPDE: number;
+}
+
+// --- Scoring ---
+export interface SignalPathScore {
+  signalPath: string;
+  score: number;
 }
 
 export interface Answer {
   questionId: string;
   optionId: string;
-  tags: string[];
+  signalPath: string;
   weight: number;
 }
 
+// --- Recommendation ---
 export interface Recommendation {
-  primary: Offering;
-  complementary: Offering[];
+  scenarioTitle: string;
+  subScenarioText: string;
+  primaryOffering: OfferingName;
+  supportingOffering?: OfferingName;
+  optionalOffering?: OfferingName;
+  offeringScores: OfferingScore[];
+  primarySignalPath: string;
+  primaryRecommendation: string;
+  primaryDescription: string;
+  primaryTechStack: string[];
+  supportingSignalPath: string;
+  supportingCapability: string;
+  supportingDescription: string;
   confidence: number;
-  rationale: string;
+  signalScores: SignalPathScore[];
+  challenges: string[];
+  solutions: string[];
+  approach: string[];
+  capabilities: string[];
+  ibmOffers: IBMOffer[];
 }
 
-export type NavigatorStep = 'landing' | 'context' | 'questions' | 'results';
+// --- Navigation ---
+export type NavigatorStep = 'landing' | 'scenario' | 'subscenario' | 'questions' | 'results';
 export type LeadershipMode = 'technical' | 'leadership';
+
+// --- Kiosk ---
+export interface KioskConfig {
+  idleTimeoutMs: number;
+  warningDurationMs: number;
+  touchTargetMinPx: number;
+  enableFullscreen: boolean;
+  preventGestures: boolean;
+}

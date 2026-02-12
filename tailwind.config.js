@@ -14,6 +14,7 @@ export default {
         'xl': '1280px',
         '2xl': '1536px',
         '3xl': '1920px',
+        'kiosk': '1920px',
       },
       fontFamily: {
         display: ['"SF Pro Display"', '"Segoe UI"', '"Helvetica Neue"', 'Arial', 'sans-serif'],
