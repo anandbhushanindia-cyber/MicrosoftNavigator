@@ -1,6 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Database, Zap, ShieldCheck, ChevronRight, Bot, Rocket, RefreshCw, Activity, Clock, Cloud, GitBranch, TrendingUp } from 'lucide-react';
+import {
+  ArrowLeft,
+  Database,
+  Zap,
+  ShieldCheck,
+  ChevronRight,
+  Bot,
+  Rocket,
+  RefreshCw,
+  Activity,
+  Clock,
+  Cloud,
+  GitBranch,
+  TrendingUp,
+} from 'lucide-react';
 import type { Scenario } from '../../types/navigator.types';
 
 interface ScenarioSelectorProps {
@@ -9,17 +23,77 @@ interface ScenarioSelectorProps {
   onBack: () => void;
 }
 
+// --- Icon registry ---
 const SCENARIO_ICONS: Record<string, React.ReactNode> = {
-  Database: <Database className="w-7 h-7 sm:w-8 sm:h-8" />,
-  Zap: <Zap className="w-7 h-7 sm:w-8 sm:h-8" />,
-  ShieldCheck: <ShieldCheck className="w-7 h-7 sm:w-8 sm:h-8" />,
-  Bot: <Bot className="w-7 h-7 sm:w-8 sm:h-8" />,
-  Rocket: <Rocket className="w-7 h-7 sm:w-8 sm:h-8" />,
-  RefreshCw: <RefreshCw className="w-7 h-7 sm:w-8 sm:h-8" />,
-  Activity: <Activity className="w-7 h-7 sm:w-8 sm:h-8" />,
-  Cloud: <Cloud className="w-7 h-7 sm:w-8 sm:h-8" />,
-  GitBranch: <GitBranch className="w-7 h-7 sm:w-8 sm:h-8" />,
-  TrendingUp: <TrendingUp className="w-7 h-7 sm:w-8 sm:h-8" />,
+  Database: <Database className="w-6 h-6 sm:w-7 sm:h-7" />,
+  Zap: <Zap className="w-6 h-6 sm:w-7 sm:h-7" />,
+  ShieldCheck: <ShieldCheck className="w-6 h-6 sm:w-7 sm:h-7" />,
+  Bot: <Bot className="w-6 h-6 sm:w-7 sm:h-7" />,
+  Rocket: <Rocket className="w-6 h-6 sm:w-7 sm:h-7" />,
+  RefreshCw: <RefreshCw className="w-6 h-6 sm:w-7 sm:h-7" />,
+  Activity: <Activity className="w-6 h-6 sm:w-7 sm:h-7" />,
+  Cloud: <Cloud className="w-6 h-6 sm:w-7 sm:h-7" />,
+  GitBranch: <GitBranch className="w-6 h-6 sm:w-7 sm:h-7" />,
+  TrendingUp: <TrendingUp className="w-6 h-6 sm:w-7 sm:h-7" />,
+};
+
+// --- IBM Carbon-inspired offering group color config ---
+const OFFERING_GROUP_CONFIG: Record<string, {
+  label: string;
+  accentColor: string;
+  badgeBg: string;
+  badgeText: string;
+  iconBg: string;
+  iconText: string;
+  cardBg: string;
+  hoverBorder: string;
+  activeBorder: string;
+}> = {
+  DT: {
+    label: 'Data Transformation',
+    accentColor: 'border-l-blue-600',
+    badgeBg: 'bg-blue-50',
+    badgeText: 'text-blue-700',
+    iconBg: 'bg-blue-100',
+    iconText: 'text-blue-600',
+    cardBg: 'bg-blue-50/40',
+    hoverBorder: 'active:border-blue-400',
+    activeBorder: 'focus-visible:ring-blue-300/40',
+  },
+  AMM: {
+    label: 'App Modernization',
+    accentColor: 'border-l-teal-600',
+    badgeBg: 'bg-teal-50',
+    badgeText: 'text-teal-700',
+    iconBg: 'bg-teal-100',
+    iconText: 'text-teal-600',
+    cardBg: 'bg-teal-50/40',
+    hoverBorder: 'active:border-teal-400',
+    activeBorder: 'focus-visible:ring-teal-300/40',
+  },
+  DPDE: {
+    label: 'Product Engineering',
+    accentColor: 'border-l-purple-600',
+    badgeBg: 'bg-purple-50',
+    badgeText: 'text-purple-700',
+    iconBg: 'bg-purple-100',
+    iconText: 'text-purple-600',
+    cardBg: 'bg-purple-50/40',
+    hoverBorder: 'active:border-purple-400',
+    activeBorder: 'focus-visible:ring-purple-300/40',
+  },
+};
+
+const DEFAULT_GROUP_CONFIG = {
+  label: 'Transformation',
+  accentColor: 'border-l-gray-400',
+  badgeBg: 'bg-gray-50',
+  badgeText: 'text-gray-600',
+  iconBg: 'bg-gray-100',
+  iconText: 'text-gray-500',
+  cardBg: 'bg-gray-50/40',
+  hoverBorder: 'active:border-gray-400',
+  activeBorder: 'focus-visible:ring-gray-300/40',
 };
 
 export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
@@ -33,7 +107,7 @@ export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="w-full max-w-4xl mx-auto"
+      className="w-full max-w-6xl mx-auto"
     >
       {/* Back Button */}
       <motion.button
@@ -63,62 +137,73 @@ export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
         </p>
       </motion.div>
 
-      {/* Scenario Cards */}
-      <div className="flex flex-col gap-4">
+      {/* Scenario Tiles — 2-Column Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {scenarios.map((scenario, index) => {
           const isEnabled = scenario.enabled;
+          const group = OFFERING_GROUP_CONFIG[scenario.offeringGroup || ''] || DEFAULT_GROUP_CONFIG;
 
           return (
             <motion.button
               key={scenario.id}
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25 + index * 0.08, duration: 0.35, ease: 'easeOut' }}
-              whileTap={isEnabled ? { scale: 0.98 } : undefined}
+              transition={{ delay: 0.2 + index * 0.06, duration: 0.35, ease: 'easeOut' }}
+              whileTap={isEnabled ? { scale: 0.97 } : undefined}
               onClick={() => isEnabled && onSelect(scenario.id)}
               disabled={!isEnabled}
               className={`
-                relative text-left rounded-2xl sm:rounded-3xl p-6 sm:p-7
-                border-2 transition-all min-h-[100px]
-                focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300/40
+                relative text-left rounded-xl
+                border border-gray-200 border-l-4 ${group.accentColor}
+                transition-all min-h-[180px]
+                focus:outline-none focus-visible:ring-4 ${group.activeBorder}
                 ${isEnabled
-                  ? 'bg-white border-gray-200 active:border-indigo-400 active:shadow-lg cursor-pointer'
-                  : 'bg-gray-50 border-gray-100 cursor-not-allowed opacity-60'
+                  ? `${group.cardBg} ${group.hoverBorder} active:shadow-lg cursor-pointer hover:shadow-md`
+                  : 'bg-gray-50/60 border-l-gray-300 cursor-not-allowed opacity-60'
                 }
               `}
               aria-label={scenario.title}
             >
-              <div className="flex items-center gap-5 sm:gap-6">
-                {/* Icon */}
-                <div className={`
-                  shrink-0 inline-flex items-center justify-center
-                  w-14 h-14 sm:w-16 sm:h-16 rounded-2xl
-                  bg-gradient-to-br ${scenario.color}
-                  text-white shadow-lg
-                  ${!isEnabled ? 'opacity-50' : ''}
-                `}>
-                  {SCENARIO_ICONS[scenario.icon] || <Database className="w-7 h-7 sm:w-8 sm:h-8" />}
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-1">
-                    {scenario.title}
-                  </h3>
-                  <p className="text-base sm:text-lg text-gray-500 leading-relaxed line-clamp-2">
-                    {scenario.description}
-                  </p>
-                </div>
-
-                {/* Arrow or Coming Soon Badge */}
-                <div className="shrink-0 self-center">
-                  {isEnabled ? (
-                    <ChevronRight className="w-6 h-6 text-gray-400" />
-                  ) : (
-                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-400 bg-gray-100 px-3 py-1.5 rounded-full whitespace-nowrap">
-                      <Clock className="w-3.5 h-3.5" />
+              <div className="flex flex-col h-full p-5 sm:p-6">
+                {/* Offering Group Badge */}
+                <div className="flex items-center justify-between mb-4">
+                  <span className={`inline-flex items-center px-2.5 py-1 rounded text-[11px] font-semibold uppercase tracking-wider ${group.badgeBg} ${group.badgeText}`}>
+                    {group.label}
+                  </span>
+                  {!isEnabled && (
+                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-gray-400 bg-gray-100 px-2.5 py-1 rounded whitespace-nowrap">
+                      <Clock className="w-3 h-3" />
                       Coming Soon
                     </span>
+                  )}
+                </div>
+
+                {/* Icon + Title Row */}
+                <div className="flex items-start gap-4 mb-3">
+                  <div className={`
+                    shrink-0 inline-flex items-center justify-center
+                    w-12 h-12 sm:w-14 sm:h-14 rounded-xl
+                    ${isEnabled ? `${group.iconBg} ${group.iconText}` : 'bg-gray-100 text-gray-400'}
+                  `}>
+                    {SCENARIO_ICONS[scenario.icon] || <Database className="w-6 h-6 sm:w-7 sm:h-7" />}
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 leading-snug pt-1 flex-1 min-w-0">
+                    {scenario.title}
+                  </h3>
+                </div>
+
+                {/* Description */}
+                <p className="text-sm sm:text-base text-gray-500 leading-relaxed line-clamp-2 flex-1 mb-3">
+                  {scenario.description}
+                </p>
+
+                {/* Footer with Chevron */}
+                <div className="flex items-center justify-end">
+                  {isEnabled && (
+                    <div className="flex items-center gap-1 text-xs font-medium text-gray-400">
+                      <span>Explore</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </div>
                   )}
                 </div>
               </div>
