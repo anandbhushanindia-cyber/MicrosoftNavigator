@@ -16,6 +16,8 @@ import {
   TrendingUp,
 } from 'lucide-react';
 import type { Scenario } from '../../types/navigator.types';
+import { EditableText } from '../admin/EditableText';
+import { useAdmin } from '../../contexts/AdminContext';
 
 interface ScenarioSelectorProps {
   scenarios: Scenario[];
@@ -101,6 +103,8 @@ export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
   onSelect,
   onBack,
 }) => {
+  const { updateScenarioField } = useAdmin();
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 30 }}
@@ -119,7 +123,7 @@ export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
         className="flex items-center gap-2 text-gray-500 mb-6 px-3 py-2 rounded-xl active:bg-gray-100 transition-colors min-h-[48px]"
       >
         <ArrowLeft className="w-5 h-5" />
-        <span className="text-base font-medium">Back</span>
+        <EditableText labelKey="scenario.backButton" as="span" className="text-base font-medium" />
       </motion.button>
 
       {/* Header */}
@@ -130,10 +134,18 @@ export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
         className="mb-10 sm:mb-12"
       >
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 mb-4">
-          What best describes your current challenge?
+          <EditableText
+            labelKey="scenario.heading"
+            as="span"
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900"
+          />
         </h2>
         <p className="text-lg sm:text-xl text-gray-500">
-          Select the scenario that resonates most with your situation
+          <EditableText
+            labelKey="scenario.subheading"
+            as="span"
+            className="text-lg sm:text-xl text-gray-500"
+          />
         </p>
       </motion.div>
 
@@ -168,7 +180,11 @@ export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
                 {/* Offering Group Badge */}
                 <div className="flex items-center justify-between mb-4">
                   <span className={`inline-flex items-center px-2.5 py-1 rounded text-[11px] font-semibold uppercase tracking-wider ${group.badgeBg} ${group.badgeText}`}>
-                    {group.label}
+                    <EditableText
+                      labelKey={`scenario.group.${scenario.offeringGroup || 'default'}`}
+                      as="span"
+                      className="text-[11px] font-semibold uppercase tracking-wider"
+                    />
                   </span>
                   {!isEnabled && (
                     <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-gray-400 bg-gray-100 px-2.5 py-1 rounded whitespace-nowrap">
@@ -188,20 +204,35 @@ export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
                     {SCENARIO_ICONS[scenario.icon] || <Database className="w-6 h-6 sm:w-7 sm:h-7" />}
                   </div>
                   <h3 className="text-lg sm:text-xl font-semibold text-gray-900 leading-snug pt-1 flex-1 min-w-0">
-                    {scenario.title}
+                    <EditableText
+                      value={scenario.title}
+                      onSave={(v) => updateScenarioField(scenario.id, 'title', v)}
+                      as="span"
+                      className="text-lg sm:text-xl font-semibold text-gray-900 leading-snug"
+                    />
                   </h3>
                 </div>
 
                 {/* Description */}
                 <p className="text-sm sm:text-base text-gray-500 leading-relaxed line-clamp-2 flex-1 mb-3">
-                  {scenario.description}
+                  <EditableText
+                    value={scenario.description}
+                    onSave={(v) => updateScenarioField(scenario.id, 'description', v)}
+                    as="span"
+                    multiline
+                    className="text-sm sm:text-base text-gray-500 leading-relaxed"
+                  />
                 </p>
 
                 {/* Footer with Chevron */}
                 <div className="flex items-center justify-end">
                   {isEnabled && (
                     <div className="flex items-center gap-1 text-xs font-medium text-gray-400">
-                      <span>Explore</span>
+                      <EditableText
+                        labelKey="scenario.explore"
+                        as="span"
+                        className="text-xs font-medium text-gray-400"
+                      />
                       <ChevronRight className="w-4 h-4" />
                     </div>
                   )}

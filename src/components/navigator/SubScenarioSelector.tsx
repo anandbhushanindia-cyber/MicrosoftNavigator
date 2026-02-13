@@ -2,9 +2,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ChevronRight } from 'lucide-react';
 import type { SubScenario } from '../../types/navigator.types';
+import { EditableText } from '../admin/EditableText';
+import { useAdmin } from '../../contexts/AdminContext';
 
 interface SubScenarioSelectorProps {
   subScenarios: SubScenario[];
+  scenarioId: string;
   scenarioTitle: string;
   onSelect: (subScenarioId: string) => void;
   onBack: () => void;
@@ -12,10 +15,12 @@ interface SubScenarioSelectorProps {
 
 export const SubScenarioSelector: React.FC<SubScenarioSelectorProps> = ({
   subScenarios,
+  scenarioId,
   scenarioTitle,
   onSelect,
   onBack,
 }) => {
+  const { updateScenarioField } = useAdmin();
   return (
     <motion.section
       initial={{ opacity: 0, y: 30 }}
@@ -34,7 +39,7 @@ export const SubScenarioSelector: React.FC<SubScenarioSelectorProps> = ({
         className="flex items-center gap-2 text-gray-500 mb-6 px-3 py-2 rounded-xl active:bg-gray-100 transition-colors min-h-[48px]"
       >
         <ArrowLeft className="w-5 h-5" />
-        <span className="text-base font-medium">Back to scenarios</span>
+        <EditableText labelKey="subscenario.backButton" as="span" className="text-base font-medium" />
       </motion.button>
 
       {/* Breadcrumb */}
@@ -57,10 +62,18 @@ export const SubScenarioSelector: React.FC<SubScenarioSelectorProps> = ({
         className="mb-10 sm:mb-12"
       >
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 mb-4">
-          Tell us more about your situation
+          <EditableText
+            labelKey="subscenario.heading"
+            as="span"
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900"
+          />
         </h2>
         <p className="text-lg sm:text-xl text-gray-500">
-          Select the option that best matches where you are today
+          <EditableText
+            labelKey="subscenario.subheading"
+            as="span"
+            className="text-lg sm:text-xl text-gray-500"
+          />
         </p>
       </motion.div>
 
@@ -86,13 +99,23 @@ export const SubScenarioSelector: React.FC<SubScenarioSelectorProps> = ({
             <div className="flex flex-col h-full justify-between gap-4">
               {/* Sub-scenario text */}
               <h3 className="text-lg sm:text-xl font-semibold text-gray-900 leading-snug">
-                {subScenario.text}
+                <EditableText
+                  value={subScenario.text}
+                  onSave={(v) => updateScenarioField(scenarioId, `subScenarios.${subScenario.id}.text`, v)}
+                  as="span"
+                  className="text-lg sm:text-xl font-semibold text-gray-900 leading-snug"
+                />
               </h3>
 
               {/* Business meaning + chevron */}
               <div className="flex items-center justify-between gap-3">
                 <span className="text-sm text-gray-500 leading-snug">
-                  {subScenario.businessMeaning}
+                  <EditableText
+                    value={subScenario.businessMeaning}
+                    onSave={(v) => updateScenarioField(scenarioId, `subScenarios.${subScenario.id}.businessMeaning`, v)}
+                    as="span"
+                    className="text-sm text-gray-500 leading-snug"
+                  />
                 </span>
                 <ChevronRight className="w-5 h-5 text-gray-400 shrink-0" />
               </div>

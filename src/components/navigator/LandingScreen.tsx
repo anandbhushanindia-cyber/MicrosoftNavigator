@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
+import { EditableText } from '../admin/EditableText';
 
 interface LandingScreenProps {
   onStart: () => void;
@@ -47,9 +48,12 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onStart }) => {
             mb-6 leading-tight
           "
         >
-          Microsoft Transformation
-          <br />
-          Navigator
+          <EditableText
+            labelKey="landing.heading"
+            as="span"
+            renderNewlines
+            className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight"
+          />
         </motion.h1>
 
         {/* Subtitle */}
@@ -59,7 +63,11 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onStart }) => {
           transition={{ delay: 0.35 }}
           className="text-xl sm:text-2xl text-gray-700 mb-4"
         >
-          Discover your transformation path with IBM + Microsoft
+          <EditableText
+            labelKey="landing.subtitle"
+            as="span"
+            className="text-xl sm:text-2xl text-gray-700"
+          />
         </motion.p>
 
         {/* Attribution */}
@@ -69,7 +77,11 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onStart }) => {
           transition={{ delay: 0.45 }}
           className="text-base sm:text-lg text-gray-500"
         >
-          Powered by IBM Consulting
+          <EditableText
+            labelKey="landing.attribution"
+            as="span"
+            className="text-base sm:text-lg text-gray-500"
+          />
         </motion.p>
       </div>
 
@@ -95,7 +107,11 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onStart }) => {
           focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-400/40
         "
       >
-        Begin Your Journey
+        <EditableText
+          labelKey="landing.cta"
+          as="span"
+          className="text-lg sm:text-xl font-semibold"
+        />
         <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
       </motion.button>
 
@@ -106,7 +122,11 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onStart }) => {
         transition={{ delay: 0.85 }}
         className="text-gray-500 mt-10 sm:mt-14 text-sm sm:text-base"
       >
-        Trusted by global enterprises modernizing with Microsoft and IBM
+        <EditableText
+          labelKey="landing.trustLine"
+          as="span"
+          className="text-gray-500 text-sm sm:text-base"
+        />
       </motion.p>
     </motion.section>
   );

@@ -11,12 +11,17 @@ import { IdleWarningModal } from '../components/navigator/IdleWarningModal';
 
 import { useNavigator } from '../hooks/useNavigator';
 import { useIdleTimeout } from '../hooks/useIdleTimeout';
+import { useAdmin } from '../contexts/AdminContext';
+import { AdminToolbar } from '../components/admin/AdminToolbar';
 
 export const NavigatorPage: React.FC = () => {
+  const { getConfig } = useAdmin();
+
   const {
     currentStep,
     setCurrentStep,
     selectedScenario,
+    selectedScenarioId,
     selectScenario,
     selectSubScenario,
     currentQuestion,
@@ -30,8 +35,8 @@ export const NavigatorPage: React.FC = () => {
   } = useNavigator();
 
   const { showWarning, warningSecondsLeft, dismissWarning } = useIdleTimeout(reset, {
-    timeoutMs: 120000,
-    warningMs: 15000,
+    timeoutMs: getConfig('idleTimeoutMs'),
+    warningMs: getConfig('warningMs'),
     enabled: currentStep !== 'landing',
   });
 
@@ -84,6 +89,7 @@ export const NavigatorPage: React.FC = () => {
           >
             <SubScenarioSelector
               subScenarios={selectedScenario.subScenarios}
+              scenarioId={selectedScenario.id}
               scenarioTitle={selectedScenario.title}
               onSelect={selectSubScenario}
               onBack={goBack}
@@ -103,6 +109,7 @@ export const NavigatorPage: React.FC = () => {
           >
             <QuestionFlow
               question={currentQuestion}
+              scenarioId={selectedScenarioId || ''}
               currentIndex={currentQuestionIndex}
               totalQuestions={totalQuestions}
               onAnswer={(optionId, signalPath, weight) => {
@@ -142,6 +149,9 @@ export const NavigatorPage: React.FC = () => {
         secondsLeft={warningSecondsLeft}
         onDismiss={dismissWarning}
       />
+
+      {/* Admin Toolbar (only visible in admin mode) */}
+      <AdminToolbar />
     </NavigatorLayout>
   );
 };

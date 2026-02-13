@@ -2,9 +2,12 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Circle, ArrowLeft } from 'lucide-react';
 import type { Question } from '../../types/navigator.types';
+import { EditableText } from '../admin/EditableText';
+import { useAdmin } from '../../contexts/AdminContext';
 
 interface QuestionFlowProps {
   question: Question;
+  scenarioId: string;
   currentIndex: number;
   totalQuestions: number;
   onAnswer: (optionId: string, signalPath: string, weight: number) => void;
@@ -13,11 +16,13 @@ interface QuestionFlowProps {
 
 export const QuestionFlow: React.FC<QuestionFlowProps> = ({
   question,
+  scenarioId,
   currentIndex,
   totalQuestions,
   onAnswer,
   onBack,
 }) => {
+  const { updateScenarioField } = useAdmin();
   const progress = ((currentIndex + 1) / totalQuestions) * 100;
 
   return (
@@ -39,7 +44,11 @@ export const QuestionFlow: React.FC<QuestionFlowProps> = ({
       >
         <ArrowLeft className="w-5 h-5" />
         <span className="text-base font-medium">
-          {currentIndex === 0 ? 'Back to sub-scenarios' : 'Previous question'}
+          {currentIndex === 0 ? (
+            <EditableText labelKey="question.backToSub" as="span" className="text-base font-medium" />
+          ) : (
+            <EditableText labelKey="question.backPrevious" as="span" className="text-base font-medium" />
+          )}
         </span>
       </motion.button>
 
@@ -74,7 +83,12 @@ export const QuestionFlow: React.FC<QuestionFlowProps> = ({
           transition={{ duration: 0.3 }}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 mb-10 leading-tight">
-            {question.text}
+            <EditableText
+              value={question.text}
+              onSave={(v) => updateScenarioField(scenarioId, `questions.${question.id}.text`, v)}
+              as="span"
+              className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight"
+            />
           </h2>
 
           {/* Options */}
@@ -121,7 +135,12 @@ export const QuestionFlow: React.FC<QuestionFlowProps> = ({
 
                   {/* Option Text */}
                   <span className="flex-1 text-lg sm:text-xl text-gray-700 group-active:text-gray-900 transition-colors">
-                    {option.text}
+                    <EditableText
+                      value={option.text}
+                      onSave={(v) => updateScenarioField(scenarioId, `questions.${question.id}.options.${option.id}.text`, v)}
+                      as="span"
+                      className="text-lg sm:text-xl text-gray-700"
+                    />
                   </span>
 
                   {/* Arrow */}

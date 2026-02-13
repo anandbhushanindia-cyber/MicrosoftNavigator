@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { NavigatorPage } from './pages/NavigatorPage'
 import { enableKioskMode, disableKioskMode } from './utils/kiosk'
+import { AdminProvider } from './contexts/AdminContext'
 
 function App() {
   useEffect(() => {
@@ -8,7 +9,11 @@ function App() {
     return () => disableKioskMode();
   }, []);
 
-  return <NavigatorPage />
+  return (
+    <AdminProvider>
+      <NavigatorPage />
+    </AdminProvider>
+  )
 }
 
 export default App

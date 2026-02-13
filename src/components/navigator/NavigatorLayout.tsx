@@ -1,11 +1,15 @@
 import React from 'react';
 import { Calendar, MapPin } from 'lucide-react';
+import { EditableText } from '../admin/EditableText';
+import { useAdmin } from '../../contexts/AdminContext';
 
 interface NavigatorLayoutProps {
   children: React.ReactNode;
 }
 
 export const NavigatorLayout: React.FC<NavigatorLayoutProps> = ({ children }) => {
+  const { handleTripleTap } = useAdmin();
+
   return (
     <div className="fixed inset-0 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-100">
 
@@ -30,8 +34,11 @@ export const NavigatorLayout: React.FC<NavigatorLayoutProps> = ({ children }) =>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 
-              {/* Brand Block — Logos */}
-              <div className="flex items-center gap-5">
+              {/* Brand Block — Logos (triple-tap to toggle admin mode) */}
+              <div
+                className="flex items-center gap-5"
+                onClick={handleTripleTap}
+              >
                 <img
                   src="/logos/ibm.svg"
                   alt="IBM"
@@ -49,11 +56,19 @@ export const NavigatorLayout: React.FC<NavigatorLayoutProps> = ({ children }) =>
               <div className="flex items-center gap-4 text-gray-500 text-xs sm:text-sm font-medium">
                 <div className="flex items-center gap-1.5">
                   <MapPin className="w-4 h-4" />
-                  Bangalore
+                  <EditableText
+                    labelKey="layout.location"
+                    as="span"
+                    className="text-xs sm:text-sm font-medium"
+                  />
                 </div>
                 <div className="flex items-center gap-1.5">
                   <Calendar className="w-4 h-4" />
-                  March 8, 2026
+                  <EditableText
+                    labelKey="layout.date"
+                    as="span"
+                    className="text-xs sm:text-sm font-medium"
+                  />
                 </div>
               </div>
 

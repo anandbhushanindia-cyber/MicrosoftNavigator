@@ -23,6 +23,8 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import type { Recommendation, IBMOffer, OfferingName } from '../../types/navigator.types';
+import { EditableText } from '../admin/EditableText';
+import { EditableList } from '../admin/EditableList';
 
 interface RecommendationScreenProps {
   recommendation: Recommendation;
@@ -383,11 +385,11 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
           >
             <Sparkles className="w-3.5 h-3.5 text-blue-600" />
             <span className="text-xs sm:text-sm font-semibold text-blue-600 uppercase tracking-wider">
-              Personalized Recommendation
+              <EditableText labelKey="results.badge" as="span" className="text-xs sm:text-sm font-semibold text-blue-600 uppercase tracking-wider" />
             </span>
           </motion.div>
           <motion.h1 {...fadeIn(0.2)} className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-2">
-            Your Transformation Path
+            <EditableText labelKey="results.heading" as="span" className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900" />
           </motion.h1>
           <motion.p {...fadeIn(0.25)} className="text-base sm:text-lg lg:text-xl text-gray-600">
             For your challenge: &ldquo;{scenarioTitle}&rdquo; &mdash; {subScenarioText}
@@ -425,8 +427,12 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
                       <div className="flex items-center gap-2">
                         <TrendingUp className="w-5 h-5 text-blue-600" />
                         <div>
-                          <div className="text-sm font-semibold text-gray-900">Solution Optics</div>
-                          <div className="text-xs text-gray-500">Based on your responses</div>
+                          <div className="text-sm font-semibold text-gray-900">
+                            <EditableText labelKey="results.solutionOptics" as="span" className="text-sm font-semibold text-gray-900" />
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            <EditableText labelKey="results.basedOnResponses" as="span" className="text-xs text-gray-500" />
+                          </div>
                         </div>
                       </div>
                       <motion.div
@@ -538,16 +544,21 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-red-500 flex items-center justify-center shadow-md shrink-0">
                     <AlertTriangle className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900">Your Challenge</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900">
+                    <EditableText labelKey="results.yourChallenge" as="span" className="text-lg sm:text-xl font-bold text-gray-900" />
+                  </h3>
                 </div>
-                <ul className="space-y-3">
-                  {challenges.map((item, idx) => (
+                <EditableList
+                  items={challenges}
+                  onSave={() => {}}
+                  className="space-y-3"
+                  renderItem={(item, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <span className="mt-1.5 w-2 h-2 rounded-full bg-rose-400 shrink-0" />
                       <span className="text-sm sm:text-base text-gray-700 leading-relaxed">{item}</span>
                     </li>
-                  ))}
-                </ul>
+                  )}
+                />
               </div>
             </div>
           </motion.div>
@@ -561,16 +572,21 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center shadow-md shrink-0">
                     <CheckCircle className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900">IBM + Microsoft Solution</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900">
+                    <EditableText labelKey="results.ibmSolution" as="span" className="text-lg sm:text-xl font-bold text-gray-900" />
+                  </h3>
                 </div>
-                <ul className="space-y-3">
-                  {solutions.map((item, idx) => (
+                <EditableList
+                  items={solutions}
+                  onSave={() => {}}
+                  className="space-y-3"
+                  renderItem={(item, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <span className="mt-1.5 w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
                       <span className="text-sm sm:text-base text-gray-700 leading-relaxed">{item}</span>
                     </li>
-                  ))}
-                </ul>
+                  )}
+                />
               </div>
             </div>
           </motion.div>
@@ -584,18 +600,23 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center shadow-md shrink-0">
                     <ArrowRightCircle className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900">Delivery Approach</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900">
+                    <EditableText labelKey="results.deliveryApproach" as="span" className="text-lg sm:text-xl font-bold text-gray-900" />
+                  </h3>
                 </div>
-                <ul className="space-y-3">
-                  {approach.map((item, idx) => (
+                <EditableList
+                  items={approach}
+                  onSave={() => {}}
+                  className="space-y-3"
+                  renderItem={(item, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <span className="mt-0.5 w-6 h-6 rounded-lg bg-blue-100 flex items-center justify-center shrink-0">
                         <span className="text-xs font-bold text-blue-600">{idx + 1}</span>
                       </span>
                       <span className="text-sm sm:text-base text-gray-700 leading-relaxed">{item}</span>
                     </li>
-                  ))}
-                </ul>
+                  )}
+                />
               </div>
             </div>
           </motion.div>
@@ -609,7 +630,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
               <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-5 sm:p-6">
                 <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-4 flex items-center gap-2">
                   <Zap className="w-4 h-4 text-amber-500" />
-                  Key Capabilities
+                  <EditableText labelKey="results.keyCapabilities" as="span" className="text-sm font-bold text-gray-700 uppercase tracking-wider" />
                 </h3>
                 <div className="flex flex-wrap gap-2.5">
                   {capabilities.map((cap, idx) => (
@@ -635,7 +656,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
               <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-5 sm:p-6">
                 <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-4 flex items-center gap-2">
                   <Cpu className="w-4 h-4 text-blue-500" />
-                  Technology Stack
+                  <EditableText labelKey="results.techStack" as="span" className="text-sm font-bold text-gray-700 uppercase tracking-wider" />
                 </h3>
                 <div className="flex flex-wrap gap-2.5">
                   {primaryTechStack.map((tech, idx) => (
@@ -663,7 +684,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
             <motion.div {...fadeIn(1.0)} className="mb-8 lg:mb-10">
               <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-5 flex items-center gap-2">
                 <ExternalLink className="w-4 h-4 text-indigo-500" />
-                What IBM Offers
+                <EditableText labelKey="results.whatIbmOffers" as="span" className="text-sm font-bold text-gray-700 uppercase tracking-wider" />
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-6">
                 {offerGroups.map((group, idx) => (
@@ -686,7 +707,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
           <motion.div {...fadeIn(1.3)}>
             <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-5 sm:p-6">
               <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-4">
-                Signal Path Analysis
+                <EditableText labelKey="results.signalAnalysis" as="span" className="text-sm font-bold text-gray-700 uppercase tracking-wider" />
               </h3>
               <div className="space-y-3">
                 {signalScores.map((signal, idx) => {
@@ -730,7 +751,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
                     </div>
                     <div>
                       <div className="text-xs font-bold text-purple-600 uppercase tracking-wider mb-0.5">
-                        Supporting Capability
+                        <EditableText labelKey="results.supportingCapability" as="span" className="text-xs font-bold text-purple-600 uppercase tracking-wider" />
                       </div>
                       <h3 className="text-lg sm:text-xl font-bold text-gray-900">
                         {supportingCapability}
@@ -773,7 +794,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
             className="group flex items-center gap-3 px-8 sm:px-10 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 active:from-blue-600 active:to-indigo-700 text-white font-semibold rounded-xl transition-all shadow-lg min-h-[56px] text-base sm:text-lg"
           >
             <RotateCcw className="w-5 h-5 group-active:-rotate-180 transition-transform duration-500" />
-            Start Over
+            <EditableText labelKey="results.startOver" as="span" className="font-semibold" />
           </button>
         </motion.div>
       </div>
@@ -800,7 +821,7 @@ const QRCodeButton: React.FC<{ personalizedURL: string; prefersReducedMotion: bo
       <div className="absolute inset-0 bg-white opacity-0 group-active:opacity-20 transition-opacity rounded-xl" />
       <div className="relative flex items-center gap-2">
         <QrCode className="w-5 h-5" />
-        <span className="text-base">Scan for Full Report</span>
+        <span className="text-base"><EditableText labelKey="results.scanReport" as="span" className="text-base" /></span>
       </div>
 
       {isExpanded && (

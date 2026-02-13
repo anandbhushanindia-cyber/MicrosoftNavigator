@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Timer } from 'lucide-react';
+import { EditableText } from '../admin/EditableText';
 
 interface IdleWarningModalProps {
   visible: boolean;
@@ -49,12 +50,20 @@ export const IdleWarningModal: React.FC<IdleWarningModalProps> = ({
 
             {/* Title */}
             <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-3">
-              Still exploring?
+              <EditableText
+                labelKey="idle.title"
+                as="span"
+                className="text-2xl sm:text-3xl font-semibold text-gray-900"
+              />
             </h3>
 
             {/* Subtitle */}
             <p className="text-lg text-gray-500 mb-8">
-              This session will reset in
+              <EditableText
+                labelKey="idle.subtitle"
+                as="span"
+                className="text-lg text-gray-500"
+              />
             </p>
 
             {/* Countdown */}
@@ -83,7 +92,11 @@ export const IdleWarningModal: React.FC<IdleWarningModalProps> = ({
                 focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300/40
               "
             >
-              Tap to Continue
+              <EditableText
+                labelKey="idle.cta"
+                as="span"
+                className="text-xl font-semibold"
+              />
             </motion.button>
           </motion.div>
         </motion.div>

@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react';
 import type {
   Answer,
-  Scenario,
   Recommendation,
   NavigatorStep,
   SignalPathScore,
@@ -9,14 +8,13 @@ import type {
   OfferingScore,
   SignalOfferingMapping,
 } from '../types/navigator.types';
-import scenariosData from '../data/scenarios.json';
+import { useAdmin } from '../contexts/AdminContext';
 
 const OFFERING_NAMES: OfferingName[] = ['Data', 'AI', 'AMM', 'DPDE'];
-const SUPPORTING_THRESHOLD = 0.4;
-const OPTIONAL_THRESHOLD = 0.25;
-const MIN_SCORE_TO_DISPLAY = 10;
 
 export const useNavigator = () => {
+  const { getScenarios, getSignalMatrix, getConfig } = useAdmin();
+
   const [currentStep, setCurrentStep] = useState<NavigatorStep>('landing');
   const [selectedScenarioId, setSelectedScenarioId] = useState<string | null>(null);
   const [selectedSubScenarioId, setSelectedSubScenarioId] = useState<string | null>(null);
@@ -24,8 +22,13 @@ export const useNavigator = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [recommendation, setRecommendation] = useState<Recommendation | null>(null);
 
-  const scenarios = scenariosData.scenarios as Scenario[];
-  const signalMatrix = scenariosData.signalMappingMatrix as SignalOfferingMapping[];
+  const scenarios = getScenarios();
+  const signalMatrix = getSignalMatrix();
+
+  // Admin-configurable thresholds
+  const SUPPORTING_THRESHOLD = getConfig('supportingThreshold');
+  const OPTIONAL_THRESHOLD = getConfig('optionalThreshold');
+  const MIN_SCORE_TO_DISPLAY = getConfig('minScoreToDisplay');
 
   // Build lookup map for signal → offering multipliers
   const signalMatrixMap = useMemo(() => {
