@@ -9,6 +9,7 @@ import type {
   SignalOfferingMapping,
 } from '../types/navigator.types';
 import { useAdmin } from '../contexts/AdminContext';
+import { buildOffersFromArtifacts } from '../utils/artifactHelpers';
 
 const OFFERING_NAMES: OfferingName[] = ['Data', 'AI', 'AMM', 'DPDE'];
 
@@ -170,7 +171,15 @@ export const useNavigator = () => {
       ? Math.min(Math.round((primaryOfferingScore.score / totalOfferingScore) * 100), 95)
       : 70;
 
+    // Build IBM Offers from real artifact files for this offering group
+    const offeringGroup = scenario.offeringGroup || '';
+    const ibmOffers = buildOffersFromArtifacts(
+      offeringGroup,
+      primaryMapping?.ibmOffers || [],
+    );
+
     setRecommendation({
+      offeringGroup,
       scenarioTitle: scenario.title,
       subScenarioText: subScenario.text,
       primaryOffering,
@@ -190,7 +199,7 @@ export const useNavigator = () => {
       solutions: primaryMapping?.solutions || [],
       approach: primaryMapping?.approach || [],
       capabilities: primaryMapping?.capabilities || [],
-      ibmOffers: primaryMapping?.ibmOffers || [],
+      ibmOffers,
     });
     setCurrentStep('results');
   };

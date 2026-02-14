@@ -31,6 +31,8 @@ export interface IBMOffer {
   mediaUrl?: string;
   thumbnailUrl?: string;
   referenceUrl: string;
+  fileType?: 'mp4' | 'png' | 'pdf' | 'pptx' | 'xlsx' | 'jpg';
+  fileSize?: string;
 }
 
 // --- Signal Path Mapping ---
@@ -92,6 +94,7 @@ export interface Answer {
 
 // --- Recommendation ---
 export interface Recommendation {
+  offeringGroup?: string;
   scenarioTitle: string;
   subScenarioText: string;
   primaryOffering: OfferingName;

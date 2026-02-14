@@ -25,6 +25,8 @@ import {
 import type { Recommendation, IBMOffer, OfferingName } from '../../types/navigator.types';
 import { EditableText } from '../admin/EditableText';
 import { EditableList } from '../admin/EditableList';
+import { DocumentCard } from './DocumentCard';
+import { ZoomableMediaModal } from './ZoomableMediaModal';
 
 interface RecommendationScreenProps {
   recommendation: Recommendation;
@@ -81,11 +83,19 @@ const OFFER_TYPE_LABELS: Record<IBMOffer['type'], string> = {
   tool: 'Tool',
 };
 
-// Media component with graceful fallback
-const MediaDisplay: React.FC<{ offer: IBMOffer }> = ({ offer }) => {
+// Detect file extension from URL
+const getFileExt = (url?: string): string =>
+  (url?.split('?')[0]?.split('.').pop() || '').toLowerCase();
+
+// Media component with graceful fallback — supports PNG, MP4, PDF, PPTX, XLSX
+const MediaDisplay: React.FC<{ offer: IBMOffer; onZoom?: (offer: IBMOffer) => void }> = ({ offer, onZoom }) => {
   const [hasError, setHasError] = useState(false);
 
-  const isVideo = offer.type === 'video' || offer.type === 'demo';
+  const ext = offer.fileType || getFileExt(offer.mediaUrl);
+  const isVideo = ext === 'mp4' || ext === 'webm' || offer.type === 'video' || offer.type === 'demo';
+  const isPdf = ext === 'pdf';
+  const isOfficeDoc = ext === 'pptx' || ext === 'xlsx';
+  const isImage = ['png', 'jpg', 'jpeg', 'svg', 'gif'].includes(ext);
 
   if (hasError || !offer.mediaUrl) {
     return (
@@ -100,12 +110,16 @@ const MediaDisplay: React.FC<{ offer: IBMOffer }> = ({ offer }) => {
     );
   }
 
+  // Video (MP4, WebM)
   if (isVideo) {
     return (
-      <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-black">
+      <div
+        className="relative w-full aspect-video rounded-xl overflow-hidden bg-black cursor-pointer"
+        onClick={() => onZoom?.(offer)}
+      >
         <video
           src={offer.mediaUrl}
-          poster={offer.thumbnailUrl || '/media/placeholder.svg'}
+          poster={offer.thumbnailUrl}
           controls
           muted
           playsInline
@@ -113,20 +127,75 @@ const MediaDisplay: React.FC<{ offer: IBMOffer }> = ({ offer }) => {
           onError={() => setHasError(true)}
           className="w-full h-full object-cover"
         />
+        <div className="absolute top-2 right-2 bg-black/60 px-2 py-1 rounded text-[10px] font-medium text-white/80 pointer-events-none">
+          Click to expand
+        </div>
       </div>
     );
   }
 
-  // Image-based (architecture, tool, document)
-  return (
-    <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-50 border border-slate-200">
-      <img
-        src={offer.mediaUrl}
-        alt={offer.title}
-        onError={() => setHasError(true)}
-        className="w-full h-full object-contain p-2"
-        loading="lazy"
+  // PDF — render as iframe with click-to-expand
+  if (isPdf) {
+    return (
+      <div
+        className="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-50 border border-slate-200 cursor-pointer"
+        onClick={() => onZoom?.(offer)}
+      >
+        <iframe
+          src={offer.mediaUrl}
+          title={offer.title}
+          className="w-full h-full pointer-events-none"
+          style={{ border: 'none' }}
+        />
+        <div className="absolute inset-0 bg-transparent" />
+        <div className="absolute bottom-2 right-2 bg-white/90 px-2 py-1 rounded text-[10px] font-medium text-slate-600 shadow-sm">
+          PDF — Click to expand
+        </div>
+      </div>
+    );
+  }
+
+  // Office docs (PPTX, XLSX) — styled download card
+  if (isOfficeDoc) {
+    return (
+      <DocumentCard
+        url={offer.mediaUrl}
+        fileName={offer.title}
+        description={offer.description}
+        fileSize={offer.fileSize}
+        fileType={ext as 'pptx' | 'xlsx'}
       />
+    );
+  }
+
+  // Image (PNG, JPG, etc.)
+  if (isImage) {
+    return (
+      <div
+        className="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-50 border border-slate-200 cursor-pointer"
+        onClick={() => onZoom?.(offer)}
+      >
+        <img
+          src={offer.mediaUrl}
+          alt={offer.title}
+          onError={() => setHasError(true)}
+          className="w-full h-full object-contain p-2"
+          loading="lazy"
+        />
+        <div className="absolute bottom-2 right-2 bg-white/90 px-2 py-1 rounded text-[10px] font-medium text-slate-600 shadow-sm">
+          Click to zoom
+        </div>
+      </div>
+    );
+  }
+
+  // Fallback — unknown type
+  return (
+    <div className="w-full aspect-video bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex flex-col items-center justify-center gap-3 border border-slate-200">
+      <div className="w-14 h-14 rounded-2xl bg-white shadow-md flex items-center justify-center text-slate-400">
+        {OFFER_TYPE_ICONS[offer.type]}
+      </div>
+      <span className="text-sm font-medium text-slate-500">{offer.title}</span>
     </div>
   );
 };
@@ -151,7 +220,8 @@ const OfferTypeCarousel: React.FC<{
   items: IBMOffer[];
   prefersReducedMotion: boolean | null;
   animDelay: number;
-}> = ({ type, items, prefersReducedMotion, animDelay }) => {
+  onZoom?: (offer: IBMOffer) => void;
+}> = ({ type, items, prefersReducedMotion, animDelay, onZoom }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const hasMultiple = items.length > 1;
 
@@ -244,7 +314,7 @@ const OfferTypeCarousel: React.FC<{
             >
               {/* Media Area */}
               <div className="px-5 py-2">
-                <MediaDisplay offer={currentItem} />
+                <MediaDisplay offer={currentItem} onZoom={onZoom} />
               </div>
 
               {/* Content */}
@@ -334,6 +404,12 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
 
   const prefersReducedMotion = useReducedMotion();
   const [displayConfidence, setDisplayConfidence] = useState(0);
+
+  // Zoom modal state
+  const [zoomOffer, setZoomOffer] = useState<IBMOffer | null>(null);
+  const handleZoom = useCallback((offer: IBMOffer) => {
+    setZoomOffer(offer);
+  }, []);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -694,6 +770,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
                     items={group.items}
                     prefersReducedMotion={prefersReducedMotion}
                     animDelay={1.1 + idx * 0.1}
+                    onZoom={handleZoom}
                   />
                 ))}
               </div>
@@ -797,6 +874,12 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
             <EditableText labelKey="results.startOver" as="span" className="font-semibold" />
           </button>
         </motion.div>
+
+        {/* Zoom / Lightbox Modal */}
+        <ZoomableMediaModal
+          offer={zoomOffer}
+          onClose={() => setZoomOffer(null)}
+        />
       </div>
     </div>
   );

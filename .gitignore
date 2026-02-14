@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Artifact binaries (uploaded to Azure separately)
+public/Artifacts/
