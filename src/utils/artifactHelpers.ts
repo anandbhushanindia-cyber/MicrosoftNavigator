@@ -1,4 +1,5 @@
 import { ARTIFACT_MANIFEST, type ArtifactFile } from '../data/artifactManifest';
+import { ARTIFACT_BASE_URL } from '../config/artifacts';
 import type { IBMOffer } from '../types/navigator.types';
 
 /**
@@ -24,9 +25,9 @@ export function buildOffersFromArtifacts(
     title: artifact.title,
     description: artifact.description,
     type: offerType,
-    // Encode URI to handle spaces & special chars in file names
-    mediaUrl: encodeURI(artifact.path),
-    referenceUrl: encodeURI(artifact.path),
+    // Build full URL: base + relative path, then encode for spaces & special chars
+    mediaUrl: encodeURI(`${ARTIFACT_BASE_URL}/${artifact.path}`),
+    referenceUrl: encodeURI(`${ARTIFACT_BASE_URL}/${artifact.path}`),
     fileType: artifact.fileType,
     fileSize: artifact.fileSize,
   });
