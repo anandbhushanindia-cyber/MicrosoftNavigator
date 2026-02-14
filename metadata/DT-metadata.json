@@ -1,0 +1,18 @@
+{
+  "DT-Artifacts/video/DT Overview.mp4": {
+    "title": "Data Transformation Overview",
+    "description": "IBM Data Transformation solution overview with Microsoft"
+  },
+  "DT-Artifacts/architecture/DT_architecture-kit-data-transformation-microsoft.pdf": {
+    "title": "Data Transformation Architecture Kit",
+    "description": "Architecture blueprint for data transformation on Microsoft"
+  },
+  "DT-Artifacts/tools/DT_client-presentation-data-transformation-with-microsoft-v1.pdf": {
+    "title": "Client Presentation - Data Transformation",
+    "description": "Client-facing presentation for data transformation with Microsoft"
+  },
+  "DT-Artifacts/tools/DT_solutioning-guidance with microsoft_WIP.pdf": {
+    "title": "Solutioning Guidance with Microsoft",
+    "description": "Solution design guidance for data transformation engagements"
+  }
+}

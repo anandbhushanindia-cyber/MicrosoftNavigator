@@ -27,6 +27,7 @@ import { EditableText } from '../admin/EditableText';
 import { EditableList } from '../admin/EditableList';
 import { DocumentCard } from './DocumentCard';
 import { ZoomableMediaModal } from './ZoomableMediaModal';
+import { useArtifacts } from '../../hooks/useArtifacts';
 
 interface RecommendationScreenProps {
   recommendation: Recommendation;
@@ -399,8 +400,15 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
     solutions,
     approach,
     capabilities,
-    ibmOffers,
+    ibmOffers: staticOffers,
   } = recommendation;
+
+  // Dynamically load artifacts from Azure Blob Storage (falls back to static)
+  const { offers: dynamicOffers, isLoading: artifactsLoading } = useArtifacts(
+    recommendation.offeringGroup,
+    staticOffers,
+  );
+  const ibmOffers = dynamicOffers;
 
   const prefersReducedMotion = useReducedMotion();
   const [displayConfidence, setDisplayConfidence] = useState(0);
@@ -754,29 +762,40 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
         </div>
 
         {/* ─── WHAT IBM OFFERS — TYPE-BASED CONTAINERS ─── */}
-        {ibmOffers.length > 0 && (() => {
-          const offerGroups = groupOffersByType(ibmOffers);
-          return (
-            <motion.div {...fadeIn(1.0)} className="mb-8 lg:mb-10">
-              <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-5 flex items-center gap-2">
-                <ExternalLink className="w-4 h-4 text-indigo-500" />
-                <EditableText labelKey="results.whatIbmOffers" as="span" className="text-sm font-bold text-gray-700 uppercase tracking-wider" />
-              </h3>
+        {(ibmOffers.length > 0 || artifactsLoading) && (
+          <motion.div {...fadeIn(1.0)} className="mb-8 lg:mb-10">
+            <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-5 flex items-center gap-2">
+              <ExternalLink className="w-4 h-4 text-indigo-500" />
+              <EditableText labelKey="results.whatIbmOffers" as="span" className="text-sm font-bold text-gray-700 uppercase tracking-wider" />
+            </h3>
+            {artifactsLoading ? (
+              /* Loading skeleton — 3 pulsing placeholder cards */
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-6">
-                {offerGroups.map((group, idx) => (
+                {[0, 1, 2].map((i) => (
+                  <div key={i} className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 animate-pulse">
+                    <div className="h-5 w-24 bg-gray-200 rounded-full mb-4" />
+                    <div className="aspect-video bg-gray-200 rounded-xl mb-4" />
+                    <div className="h-4 w-3/4 bg-gray-200 rounded mb-2" />
+                    <div className="h-3 w-1/2 bg-gray-100 rounded" />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-6">
+                {groupOffersByType(ibmOffers).map((group, idx) => (
                   <OfferTypeCarousel
                     key={group.type}
                     type={group.type}
                     items={group.items}
                     prefersReducedMotion={prefersReducedMotion}
-                    animDelay={1.1 + idx * 0.1}
+                    animDelay={idx * 0.1}
                     onZoom={handleZoom}
                   />
                 ))}
               </div>
-            </motion.div>
-          );
-        })()}
+            )}
+          </motion.div>
+        )}
 
         {/* ─── SIGNAL PATH ANALYSIS + SUPPORTING CAPABILITY ─── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6 mb-8 lg:mb-10">

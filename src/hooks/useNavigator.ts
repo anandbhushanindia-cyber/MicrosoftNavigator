@@ -7,9 +7,9 @@ import type {
   OfferingName,
   OfferingScore,
   SignalOfferingMapping,
+  IBMOffer,
 } from '../types/navigator.types';
 import { useAdmin } from '../contexts/AdminContext';
-import { buildOffersFromArtifacts } from '../utils/artifactHelpers';
 
 const OFFERING_NAMES: OfferingName[] = ['Data', 'AI', 'AMM', 'DPDE'];
 
@@ -171,12 +171,9 @@ export const useNavigator = () => {
       ? Math.min(Math.round((primaryOfferingScore.score / totalOfferingScore) * 100), 95)
       : 70;
 
-    // Build IBM Offers from real artifact files for this offering group
+    // IBM Offers are loaded dynamically by RecommendationScreen via useArtifacts hook
     const offeringGroup = scenario.offeringGroup || '';
-    const ibmOffers = buildOffersFromArtifacts(
-      offeringGroup,
-      primaryMapping?.ibmOffers || [],
-    );
+    const ibmOffers: IBMOffer[] = [];
 
     setRecommendation({
       offeringGroup,

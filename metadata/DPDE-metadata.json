@@ -1,0 +1,38 @@
+{
+  "DPDE-Artifacts/video/DPDE Overview.mp4": {
+    "title": "Digital Product Engineering Overview",
+    "description": "IBM Digital Product Design & Engineering solution overview"
+  },
+  "DPDE-Artifacts/architecture/Azure SaaS-PaaS-IaaS.png": {
+    "title": "Azure SaaS / PaaS / IaaS",
+    "description": "Azure service model comparison for product engineering"
+  },
+  "DPDE-Artifacts/architecture/DPDE Reference Architecture - Arch Kit.png": {
+    "title": "DPDE Reference Architecture",
+    "description": "Reference architecture kit for digital product engineering"
+  },
+  "DPDE-Artifacts/architecture/DPDE Security Overview-Arch Kit.png": {
+    "title": "DPDE Security Overview",
+    "description": "Security architecture overview for product engineering"
+  },
+  "DPDE-Artifacts/architecture/IBM SDLC Assistant Pack.png": {
+    "title": "IBM SDLC Assistant Pack",
+    "description": "SDLC assistant pack for automated development lifecycle"
+  },
+  "DPDE-Artifacts/tools/Requirement driven development with IBM SDLC Automation.png": {
+    "title": "Requirement-Driven Development",
+    "description": "IBM SDLC Automation for requirement-driven development"
+  },
+  "DPDE-Artifacts/tools/Agentic SDLC and ADLC.pdf": {
+    "title": "Agentic SDLC and ADLC",
+    "description": "Agentic Software & Application Development Lifecycle"
+  },
+  "DPDE-Artifacts/tools/Product Design and Engineering - Solution Guidance.pdf": {
+    "title": "Product Design & Engineering Guidance",
+    "description": "Solution guidance for product design and engineering"
+  },
+  "DPDE-Artifacts/tools/Kiosk Config for Use Cases.xlsx": {
+    "title": "Kiosk Configuration - Use Cases",
+    "description": "Use case configuration spreadsheet for kiosk deployments"
+  }
+}

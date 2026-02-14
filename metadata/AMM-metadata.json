@@ -1,0 +1,34 @@
+{
+  "AMM-Artifacts/video/AMM Overview.mp4": {
+    "title": "Application Modernization Overview",
+    "description": "IBM Application Migration & Modernization solution overview"
+  },
+  "AMM-Artifacts/architecture/Apply-Azure-Hybrid-benefit-to-save-cost.png": {
+    "title": "Azure Hybrid Benefit - Cost Savings",
+    "description": "Apply Azure Hybrid Benefit to reduce cloud costs"
+  },
+  "AMM-Artifacts/architecture/Apply-for-Microsoft-Funding-Programs-to-save-cost.png": {
+    "title": "Microsoft Funding Programs",
+    "description": "Apply for Microsoft funding programs to optimize costs"
+  },
+  "AMM-Artifacts/architecture/Resolve cost reporting problems with improved tagging strategy.png": {
+    "title": "Cost Reporting - Tagging Strategy",
+    "description": "Resolve cost reporting issues with improved tagging"
+  },
+  "AMM-Artifacts/architecture/Resolve High memory-and-CPU-Usage.png": {
+    "title": "Resolve High Memory & CPU Usage",
+    "description": "Architecture for resolving high memory and CPU utilization"
+  },
+  "AMM-Artifacts/architecture/Resolve lack of Governance in SKU Selection.png": {
+    "title": "SKU Selection Governance",
+    "description": "Resolve governance gaps in SKU selection"
+  },
+  "AMM-Artifacts/architecture/Resolve Low memory-&-CPU Usage.png": {
+    "title": "Resolve Low Memory & CPU Usage",
+    "description": "Architecture for right-sizing underutilized resources"
+  },
+  "AMM-Artifacts/tools/Technology-Stack.pdf": {
+    "title": "AMM Technology Stack",
+    "description": "Technology stack overview for application modernization"
+  }
+}
