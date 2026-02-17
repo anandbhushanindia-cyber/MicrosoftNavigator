@@ -117,6 +117,23 @@ export interface Recommendation {
   ibmOffers: IBMOffer[];
 }
 
+// --- Contextual Content (sub-scenario + signal path specific) ---
+export interface ContextualContent {
+  challenges: string[];
+  solutions: string[];
+  approach: string[];
+}
+
+export interface AnswerModifier {
+  challengeAppend?: string;
+  solutionAppend?: string;
+}
+
+export interface ContextualContentFile {
+  entries: Record<string, ContextualContent>;       // key = "subScenarioId:primarySignalPath"
+  answerModifiers: Record<string, AnswerModifier>;  // key = questionOptionId
+}
+
 // --- Navigation ---
 export type NavigatorStep = 'landing' | 'scenario' | 'subscenario' | 'questions' | 'results';
 export type LeadershipMode = 'technical' | 'leadership';

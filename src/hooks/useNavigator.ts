@@ -8,8 +8,13 @@ import type {
   OfferingScore,
   SignalOfferingMapping,
   IBMOffer,
+  ContextualContentFile,
+  ContextualContent,
 } from '../types/navigator.types';
 import { useAdmin } from '../contexts/AdminContext';
+import contextualContentData from '../data/contextualContent.json';
+
+const contextualContent = contextualContentData as ContextualContentFile;
 
 const OFFERING_NAMES: OfferingName[] = ['Data', 'AI', 'AMM', 'DPDE'];
 
@@ -175,6 +180,34 @@ export const useNavigator = () => {
     const offeringGroup = scenario.offeringGroup || '';
     const ibmOffers: IBMOffer[] = [];
 
+    // 10. Resolve contextual content (sub-scenario + primary signal specific)
+    const contextKey = `${selectedSubScenarioId}:${primarySignal.signalPath}`;
+    const contextual: ContextualContent | undefined = contextualContent.entries[contextKey];
+
+    // Fallback chain: contextual (journey-specific) → signalPathMapping (signal-level) → empty
+    let resolvedChallenges = contextual?.challenges || primaryMapping?.challenges || [];
+    let resolvedSolutions = contextual?.solutions || primaryMapping?.solutions || [];
+    const resolvedApproach = contextual?.approach || primaryMapping?.approach || [];
+
+    // 11. Inject answer modifiers for high-weight (≥3) answers
+    if (contextualContent.answerModifiers) {
+      for (const answer of allAnswers) {
+        if (answer.weight >= 3) {
+          const mod = contextualContent.answerModifiers[answer.optionId];
+          if (mod?.challengeAppend && !resolvedChallenges.includes(mod.challengeAppend)) {
+            resolvedChallenges = [...resolvedChallenges, mod.challengeAppend];
+          }
+          if (mod?.solutionAppend && !resolvedSolutions.includes(mod.solutionAppend)) {
+            resolvedSolutions = [...resolvedSolutions, mod.solutionAppend];
+          }
+        }
+      }
+    }
+
+    // Cap at 5 items to prevent visual overflow
+    resolvedChallenges = resolvedChallenges.slice(0, 5);
+    resolvedSolutions = resolvedSolutions.slice(0, 5);
+
     setRecommendation({
       offeringGroup,
       scenarioTitle: scenario.title,
@@ -192,9 +225,9 @@ export const useNavigator = () => {
       supportingDescription: supportingMapping?.description || '',
       confidence,
       signalScores: sortedSignals,
-      challenges: primaryMapping?.challenges || [],
-      solutions: primaryMapping?.solutions || [],
-      approach: primaryMapping?.approach || [],
+      challenges: resolvedChallenges,
+      solutions: resolvedSolutions,
+      approach: resolvedApproach,
       capabilities: primaryMapping?.capabilities || [],
       ibmOffers,
     });

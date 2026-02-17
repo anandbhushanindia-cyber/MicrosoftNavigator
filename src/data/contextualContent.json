@@ -1,0 +1,1498 @@
+{
+  "entries": {
+    "sc1_sub1:Data Platform Modernization": {
+      "challenges": [
+        "Legacy data warehouse limiting agility with batch-only operations",
+        "High maintenance costs for aging on-premise DW infrastructure",
+        "Unable to scale data workloads for modern analytics demands",
+        "Data teams locked into proprietary vendor tools and formats"
+      ],
+      "solutions": [
+        "Migrate legacy DW to Microsoft Fabric unified lakehouse",
+        "Deploy IBM Migration Assistant for automated schema and ETL conversion",
+        "Implement OneLake for centralized, vendor-neutral data storage",
+        "Enable hybrid batch and streaming pipelines with Azure Data Factory"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Inventory legacy DW schemas, map ETL dependencies, size migration waves",
+        "Phase 2: Foundation — Deploy Fabric workspace, configure OneLake, establish data domains",
+        "Phase 3: Migration — Execute automated migration waves with IBM tooling and rollback gates",
+        "Phase 4: Activation — Enable analytics workloads, train data teams, decommission legacy"
+      ]
+    },
+    "sc1_sub1:Platform Consolidation": {
+      "challenges": [
+        "Legacy data warehouse coexisting with newer cloud tools creating duplication",
+        "Teams maintaining parallel pipelines across legacy and cloud platforms",
+        "Inconsistent data definitions between on-prem DW and cloud analytics",
+        "Rising costs from running both legacy and modern platforms simultaneously"
+      ],
+      "solutions": [
+        "Consolidate legacy DW and cloud tools into unified Microsoft Fabric platform",
+        "Eliminate duplicate ETL pipelines with OneLake-based unified data flows",
+        "Deploy IBM Data Platform Genius to map and rationalize data assets",
+        "Establish single governance model with Microsoft Purview across all sources"
+      ],
+      "approach": [
+        "Phase 1: Discovery — Audit legacy DW and cloud tools, identify overlapping pipelines",
+        "Phase 2: Architecture — Design unified lakehouse replacing both legacy and fragmented cloud tools",
+        "Phase 3: Consolidation — Migrate legacy DW workloads and retire duplicate cloud pipelines",
+        "Phase 4: Governance — Implement unified data policies and cost monitoring"
+      ]
+    },
+    "sc1_sub1:Real-Time Analytics": {
+      "challenges": [
+        "Legacy data warehouse environment unable to support real-time workloads",
+        "Batch-only processing creating hours or days of latency in decision-making",
+        "No streaming architecture to complement existing DW reporting",
+        "Business demanding real-time insights but infrastructure is batch-bound"
+      ],
+      "solutions": [
+        "Extend legacy DW with Fabric Real-Time Analytics for streaming workloads",
+        "Build event-driven pipelines with Azure Event Hubs alongside DW migration",
+        "Deploy Power BI Real-Time dashboards for operational decision-making",
+        "Enable IBM accelerators for real-time data quality and ingestion"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Identify high-value real-time use cases within legacy DW workloads",
+        "Phase 2: Architecture — Design hybrid batch and streaming architecture on Fabric",
+        "Phase 3: Implementation — Deploy streaming pipelines while migrating batch workloads",
+        "Phase 4: Activation — Launch real-time dashboards and retire legacy batch reports"
+      ]
+    },
+    "sc1_sub2:Platform Consolidation": {
+      "challenges": [
+        "Data fragmented across on-prem systems and multiple cloud platforms",
+        "Duplicate ETL pipelines creating inconsistency and inflated costs",
+        "No single source of truth for enterprise analytics and reporting",
+        "Integration complexity growing with each new cloud tool adoption"
+      ],
+      "solutions": [
+        "Consolidate all data sources into OneLake on Microsoft Fabric",
+        "Eliminate duplicate ETL with unified Fabric data flows and pipelines",
+        "Deploy IBM Data Platform Genius for intelligent consolidation planning",
+        "Enable centralized governance with Microsoft Purview across the estate"
+      ],
+      "approach": [
+        "Phase 1: Discovery — Map all data sources across on-prem and cloud, identify redundancies",
+        "Phase 2: Architecture — Design unified lakehouse on Fabric with data domains",
+        "Phase 3: Consolidation — Migrate and unify data in prioritized waves",
+        "Phase 4: Governance — Implement enterprise-wide policies and decommission redundant tools"
+      ]
+    },
+    "sc1_sub2:Data Platform Modernization": {
+      "challenges": [
+        "Hybrid data estate spanning on-prem and cloud with no unified platform",
+        "Multiple data warehouse technologies creating management overhead",
+        "Teams working in silos across different platforms with inconsistent tooling",
+        "Data movement between environments causing latency and quality issues"
+      ],
+      "solutions": [
+        "Modernize hybrid estate onto unified Microsoft Fabric platform",
+        "Deploy IBM Migration Assistant to automate cross-platform data migration",
+        "Implement OneLake as single storage layer bridging on-prem and cloud data",
+        "Enable unified analytics experience with Fabric for all data teams"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Inventory all platforms in hybrid estate, classify workload types",
+        "Phase 2: Foundation — Deploy Fabric workspace and OneLake, plan migration sequence",
+        "Phase 3: Migration — Migrate on-prem and cloud workloads to Fabric in priority waves",
+        "Phase 4: Optimization — Tune performance, retire legacy platforms, enable self-service"
+      ]
+    },
+    "sc1_sub3:Platform Consolidation": {
+      "challenges": [
+        "Redundant ETL pipelines driving up operational and licensing costs",
+        "Tool sprawl with multiple overlapping analytics platforms",
+        "IT budget consumed by maintaining duplicate infrastructure",
+        "No clear ownership or rationalization plan for overlapping tools"
+      ],
+      "solutions": [
+        "Rationalize tools by consolidating onto Microsoft Fabric unified platform",
+        "Eliminate redundant ETL and replace with Fabric data pipelines",
+        "Deploy IBM TCO assessment tooling to quantify consolidation savings",
+        "Establish cost governance framework with Azure Cost Management"
+      ],
+      "approach": [
+        "Phase 1: Cost Analysis — Audit all data tools, quantify TCO, identify consolidation targets",
+        "Phase 2: Rationalization — Design target architecture eliminating redundant platforms",
+        "Phase 3: Migration — Migrate workloads from duplicate tools to Fabric in cost-priority order",
+        "Phase 4: Cost Governance — Implement ongoing cost monitoring and optimization policies"
+      ]
+    },
+    "sc1_sub3:Data Platform Modernization": {
+      "challenges": [
+        "High operational costs from maintaining duplicate legacy ETL pipelines",
+        "Multiple legacy tools performing overlapping data processing tasks",
+        "Budget pressure forcing difficult choices between maintenance and innovation",
+        "Technical debt in legacy pipelines blocking adoption of modern analytics"
+      ],
+      "solutions": [
+        "Modernize legacy ETL to Microsoft Fabric data pipelines and dataflows",
+        "Deploy IBM Migration Assistant for automated pipeline conversion",
+        "Implement OneLake to eliminate redundant data copies and storage costs",
+        "Enable cost-efficient analytics with Fabric pay-as-you-go model"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Catalog all ETL pipelines, calculate per-pipeline costs",
+        "Phase 2: Foundation — Deploy Fabric workspace, design cost-optimized pipeline architecture",
+        "Phase 3: Migration — Convert legacy pipelines to Fabric with IBM automation tooling",
+        "Phase 4: Optimization — Decommission legacy tools, validate cost savings, train teams"
+      ]
+    },
+    "sc1_sub4:Real-Time Analytics": {
+      "challenges": [
+        "Business decisions delayed by batch-only processing cycles",
+        "No streaming architecture for event-driven operational intelligence",
+        "Operational dashboards showing stale data hours or days old",
+        "Competitive disadvantage from inability to act on real-time signals"
+      ],
+      "solutions": [
+        "Deploy Fabric Real-Time Analytics for streaming data ingestion",
+        "Build event-driven pipelines with Azure Event Hubs and Stream Analytics",
+        "Create live operational dashboards with Power BI Real-Time",
+        "Enable automated alerting and real-time decision support workflows"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Identify real-time data sources and latency requirements",
+        "Phase 2: Architecture — Design streaming pipeline with Event Hubs and Fabric",
+        "Phase 3: Implementation — Build and deploy real-time ingestion and processing",
+        "Phase 4: Dashboards — Launch live Power BI dashboards and automated alerting"
+      ]
+    },
+    "sc1_sub4:Data Platform Modernization": {
+      "challenges": [
+        "Real-time analytics needs blocked by legacy batch-only infrastructure",
+        "Existing data warehouse cannot support sub-second query requirements",
+        "Growing business demand for operational intelligence outpacing platform capabilities",
+        "Manual data refresh cycles creating blind spots in decision-making"
+      ],
+      "solutions": [
+        "Modernize to Microsoft Fabric with both batch and real-time capabilities",
+        "Deploy IBM accelerators for rapid data pipeline modernization",
+        "Implement OneLake with streaming ingestion for real-time data access",
+        "Enable hybrid analytics supporting both historical and real-time queries"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Map real-time requirements against current platform limitations",
+        "Phase 2: Foundation — Deploy Fabric with real-time analytics workspace configuration",
+        "Phase 3: Migration — Modernize batch pipelines and add streaming data flows",
+        "Phase 4: Activation — Launch real-time dashboards and decommission batch-only processes"
+      ]
+    },
+
+    "sc2_sub1:Platform Unification": {
+      "challenges": [
+        "Data scattered across disconnected systems blocking AI and Copilot adoption",
+        "No single source of truth for training AI models or enabling analytics",
+        "Siloed data preventing cross-functional AI use cases from scaling",
+        "High integration costs from point-to-point data connections"
+      ],
+      "solutions": [
+        "Unify all data sources into OneLake on Microsoft Fabric",
+        "Deploy IBM Data Platform Genius for intelligent platform design",
+        "Build unified data products for AI and analytics consumption",
+        "Enable cross-functional data sharing with governance guardrails"
+      ],
+      "approach": [
+        "Phase 1: Discovery — Map disconnected data sources, assess AI readiness gaps",
+        "Phase 2: Platform — Deploy Fabric and OneLake, establish data domain ownership",
+        "Phase 3: Unification — Migrate and integrate data sources in prioritized waves",
+        "Phase 4: AI Activation — Enable AI and Copilot workloads on the unified platform"
+      ]
+    },
+    "sc2_sub1:Data Governance": {
+      "challenges": [
+        "Disconnected data systems lack consistent governance and lineage",
+        "AI initiatives blocked because data quality is unknown across sources",
+        "Compliance risks from ungoverned data spread across multiple platforms",
+        "No enterprise-wide data catalog or classification in place"
+      ],
+      "solutions": [
+        "Deploy Microsoft Purview for unified governance across disconnected sources",
+        "Implement automated data lineage to track data from source to AI model",
+        "Build enterprise data catalog with classification and sensitivity labels",
+        "Enable IBM GenAI quality accelerators for automated data profiling"
+      ],
+      "approach": [
+        "Phase 1: Governance Audit — Assess governance gaps across all disconnected systems",
+        "Phase 2: Foundation — Deploy Purview, define data ownership and governance policies",
+        "Phase 3: Integration — Connect all data sources to Purview for unified lineage tracking",
+        "Phase 4: AI Trust — Validate data quality scores and certify data for AI consumption"
+      ]
+    },
+    "sc2_sub1:AI-Ready Data Foundation": {
+      "challenges": [
+        "No unified data foundation to support enterprise AI and Copilot rollout",
+        "Data scattered across disconnected systems lacks the structure AI requires",
+        "Missing semantic layer connecting business context to raw data assets",
+        "AI projects stalling because data preparation takes months not weeks"
+      ],
+      "solutions": [
+        "Build unified AI-ready data platform on Microsoft Fabric with OneLake",
+        "Create semantic data models connecting business context to data assets",
+        "Deploy IBM GenAI Accelerators for automated data quality enrichment",
+        "Enable Copilot integration on clean, governed, and semantically modeled data"
+      ],
+      "approach": [
+        "Phase 1: AI Readiness — Assess data quality, semantic gaps, and Copilot prerequisites",
+        "Phase 2: Unification — Consolidate data into Fabric and build semantic foundation",
+        "Phase 3: AI Enablement — Deploy Copilot and Azure OpenAI on governed data products",
+        "Phase 4: Scale — Expand AI use cases and enable self-service AI across functions"
+      ]
+    },
+    "sc2_sub2:Data Governance": {
+      "challenges": [
+        "No automated governance or data lineage tracking in place",
+        "Compliance risks from ungoverned sensitive data across the enterprise",
+        "Low trust in data quality blocking AI and Copilot adoption plans",
+        "Manual data management consuming IT resources and causing delays"
+      ],
+      "solutions": [
+        "Deploy Microsoft Purview for enterprise-wide automated governance",
+        "Implement automated data lineage and sensitivity classification",
+        "Establish compliance frameworks integrated with Azure Policy",
+        "Build data trust layer with IBM GenAI quality accelerators"
+      ],
+      "approach": [
+        "Phase 1: Governance Audit — Assess current policies, compliance gaps, and data risks",
+        "Phase 2: Foundation — Deploy Purview, define data ownership and domain boundaries",
+        "Phase 3: Automation — Implement automated lineage, classification, and monitoring",
+        "Phase 4: AI Trust — Validate data quality and certify data for Copilot deployment"
+      ]
+    },
+    "sc2_sub2:Platform Unification": {
+      "challenges": [
+        "Governance gaps compounded by data sprawl across multiple platforms",
+        "Compliance risks increasing as data grows across ungoverned systems",
+        "No unified view of data assets making governance enforcement impossible",
+        "Manual compliance processes unable to keep pace with data growth"
+      ],
+      "solutions": [
+        "Unify data sources into Microsoft Fabric with built-in governance controls",
+        "Deploy Purview alongside Fabric for governance-first platform unification",
+        "Implement automated compliance monitoring across the unified platform",
+        "Enable IBM governance accelerators for rapid policy deployment"
+      ],
+      "approach": [
+        "Phase 1: Discovery — Map ungoverned data sources and assess compliance exposure",
+        "Phase 2: Platform — Deploy Fabric with Purview governance integrated from day one",
+        "Phase 3: Unification — Migrate data to governed OneLake in compliance-priority order",
+        "Phase 4: Monitoring — Establish continuous governance monitoring and audit trails"
+      ]
+    },
+    "sc2_sub3:Data Unification": {
+      "challenges": [
+        "Isolated AI initiatives limited by siloed and incomplete data sets",
+        "Analytics teams unable to access cross-departmental data for AI models",
+        "Duplicate data copies across teams creating inconsistency and waste",
+        "No unified architecture supporting both AI training and BI workloads"
+      ],
+      "solutions": [
+        "Build unified lakehouse on Microsoft Fabric with OneLake storage",
+        "Consolidate siloed data into shared, governed data domains",
+        "Enable cross-functional data access with role-based governance policies",
+        "Create unified data products supporting both AI and analytics use cases"
+      ],
+      "approach": [
+        "Phase 1: Data Landscape — Map siloed data across AI and analytics teams",
+        "Phase 2: Lakehouse Design — Architect unified lakehouse with shared data domains",
+        "Phase 3: Integration — Migrate and unify siloed data with Azure Data Factory",
+        "Phase 4: AI Activation — Enable AI models and analytics on the unified platform"
+      ]
+    },
+    "sc2_sub3:AI-Ready Data Foundation": {
+      "challenges": [
+        "Isolated AI projects cannot scale because data remains in team silos",
+        "AI model quality degraded by inconsistent and duplicate data sources",
+        "No enterprise data foundation connecting existing AI work to broader goals",
+        "AI teams spending most time on data wrangling instead of model development"
+      ],
+      "solutions": [
+        "Build enterprise AI data foundation unifying siloed AI data on Fabric",
+        "Deploy semantic data models connecting AI models to governed data products",
+        "Enable IBM GenAI Accelerators to automate data preparation for AI",
+        "Create self-service data products reducing AI team data wrangling time"
+      ],
+      "approach": [
+        "Phase 1: AI Assessment — Audit existing AI initiatives and their data dependencies",
+        "Phase 2: Foundation — Build unified AI data platform connecting isolated projects",
+        "Phase 3: Enablement — Deploy Copilot and Azure OpenAI on unified, governed data",
+        "Phase 4: Scale — Standardize AI data products for enterprise-wide reuse"
+      ]
+    },
+    "sc2_sub4:AI-Ready Data Foundation": {
+      "challenges": [
+        "Enterprise data not structured or governed for Copilot consumption",
+        "Missing semantic layer connecting business context to underlying data",
+        "Data quality gaps preventing reliable Copilot and AI model outputs",
+        "No clear roadmap from current state to Copilot-ready enterprise data"
+      ],
+      "solutions": [
+        "Build Copilot-ready semantic data models on Microsoft Fabric",
+        "Deploy Microsoft Purview for automated governance and data quality",
+        "Implement IBM GenAI Accelerators for data quality enrichment at scale",
+        "Enable Azure OpenAI and Copilot integration with governed data products"
+      ],
+      "approach": [
+        "Phase 1: Copilot Readiness — Assess data quality, semantic gaps, and Copilot prerequisites",
+        "Phase 2: Semantic Foundation — Build data models and business context layer on Fabric",
+        "Phase 3: AI Enablement — Deploy Copilot and Azure OpenAI on governed data",
+        "Phase 4: Enterprise Scale — Expand Copilot use cases across business functions"
+      ]
+    },
+    "sc2_sub4:Data Governance": {
+      "challenges": [
+        "Copilot adoption blocked by lack of governed, high-quality enterprise data",
+        "No automated data lineage to trace data from source to Copilot output",
+        "Sensitive data exposed without proper classification for AI consumption",
+        "Business units lack confidence in data accuracy for AI-driven decisions"
+      ],
+      "solutions": [
+        "Deploy Microsoft Purview for Copilot-ready data governance",
+        "Implement automated data classification and sensitivity labeling for AI",
+        "Build data quality dashboards validating AI-readiness scores by domain",
+        "Enable IBM GenAI quality accelerators for Copilot data certification"
+      ],
+      "approach": [
+        "Phase 1: AI Governance Audit — Assess data governance readiness for Copilot deployment",
+        "Phase 2: Foundation — Deploy Purview with AI-specific governance policies and domains",
+        "Phase 3: Certification — Automate data quality scoring and Copilot readiness validation",
+        "Phase 4: Copilot Launch — Enable Copilot on certified, governed data products"
+      ]
+    },
+    "sc2_sub4:Platform Unification": {
+      "challenges": [
+        "Copilot requires unified enterprise data but data is spread across systems",
+        "No single platform providing the semantic and governed data Copilot needs",
+        "Data preparation for Copilot blocked by fragmented data infrastructure",
+        "Enterprise AI strategy stalled without a unified data foundation"
+      ],
+      "solutions": [
+        "Unify enterprise data into Microsoft Fabric as the Copilot data platform",
+        "Build semantic data products on OneLake optimized for Copilot consumption",
+        "Deploy IBM platform design tools for rapid unification planning",
+        "Enable Copilot-ready governance with Purview integrated into Fabric"
+      ],
+      "approach": [
+        "Phase 1: Discovery — Map data sources required for priority Copilot use cases",
+        "Phase 2: Platform — Deploy Fabric and OneLake with Copilot-optimized configuration",
+        "Phase 3: Unification — Migrate and model data for Copilot consumption in priority order",
+        "Phase 4: Copilot Activation — Launch Copilot on unified, governed data products"
+      ]
+    },
+
+    "amm1_sub1:App Modernization": {
+      "challenges": [
+        "Monolithic architecture creating tight coupling and deployment bottlenecks",
+        "Single codebase preventing independent scaling of business components",
+        "Every change requiring full regression testing and coordinated releases",
+        "Legacy technology stack limiting access to modern cloud services"
+      ],
+      "solutions": [
+        "Decompose monoliths into modular services using IBM Mono2Micro tooling",
+        "Migrate to Azure App Service and Azure Kubernetes Service for elastic scaling",
+        "Implement API-first architecture for loosely coupled service communication",
+        "Enable incremental modernization with strangler fig pattern"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Analyze monolith dependencies, identify decomposition boundaries",
+        "Phase 2: Architecture — Design target microservices architecture on Azure",
+        "Phase 3: Modernization — Extract and migrate services incrementally with IBM tooling",
+        "Phase 4: Optimization — Enable auto-scaling, monitoring, and continuous deployment"
+      ]
+    },
+    "amm1_sub1:Cloud-Native Transformation": {
+      "challenges": [
+        "Monolithic legacy systems impossible to containerize without refactoring",
+        "Application architecture tightly coupled preventing cloud-native adoption",
+        "Teams lack experience with containers, Kubernetes, and microservices",
+        "Business demanding cloud-native agility but legacy stack cannot deliver"
+      ],
+      "solutions": [
+        "Re-architect monoliths into containerized microservices on AKS",
+        "Deploy IBM Cloud Transformation Advisor for automated refactoring guidance",
+        "Implement container orchestration with Azure Kubernetes Service",
+        "Enable service mesh for secure, observable inter-service communication"
+      ],
+      "approach": [
+        "Phase 1: Analysis — Domain-driven design analysis and microservices decomposition strategy",
+        "Phase 2: Platform — Deploy AKS clusters, configure container infrastructure",
+        "Phase 3: Refactoring — Incrementally extract and containerize services with IBM tooling",
+        "Phase 4: Maturity — Implement service mesh, observability, and auto-scaling"
+      ]
+    },
+    "amm1_sub1:DevOps Modernization": {
+      "challenges": [
+        "Monolithic codebase forcing long release cycles and manual deployments",
+        "No CI/CD pipeline for the legacy application stack",
+        "Testing bottleneck from needing full regression on every change",
+        "Development and operations teams working in silos without collaboration"
+      ],
+      "solutions": [
+        "Implement GitHub Actions CI/CD pipelines for automated build and deployment",
+        "Deploy Azure DevOps for end-to-end pipeline management and work tracking",
+        "Enable automated testing frameworks to reduce regression cycle time",
+        "Establish DevOps culture with IBM Garage methodology"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Audit current development and release processes",
+        "Phase 2: Pipeline — Design and implement CI/CD with GitHub Actions and Azure DevOps",
+        "Phase 3: Automation — Add automated testing, quality gates, and deployment approvals",
+        "Phase 4: Culture — Train teams on DevOps practices with IBM Garage methodology"
+      ]
+    },
+    "amm1_sub2:Cloud Optimization": {
+      "challenges": [
+        "High infrastructure and licensing costs for legacy application maintenance",
+        "Budget consumed by keeping legacy systems running instead of innovating",
+        "Cost escalation from running parallel legacy and cloud environments",
+        "No visibility into per-application cost allocation and optimization levers"
+      ],
+      "solutions": [
+        "Right-size and migrate to Azure with IBM cloud economics assessment",
+        "Implement Azure Cost Management with per-application cost allocation",
+        "Deploy reserved instances and spot VMs for cost-efficient workloads",
+        "Enable IBM FinOps practices for continuous cloud cost optimization"
+      ],
+      "approach": [
+        "Phase 1: Cost Analysis — Audit current infrastructure costs and identify savings",
+        "Phase 2: Migration — Rehost high-cost workloads to optimized Azure configurations",
+        "Phase 3: Optimization — Implement reserved capacity, auto-scaling, and right-sizing",
+        "Phase 4: FinOps — Establish continuous cost governance and optimization practices"
+      ]
+    },
+    "amm1_sub2:App Modernization": {
+      "challenges": [
+        "High maintenance costs driven by legacy application complexity",
+        "Expensive vendor licensing for outdated middleware and runtime platforms",
+        "IT budget locked into operational maintenance with no room for innovation",
+        "Legacy applications requiring specialized skills that are increasingly scarce"
+      ],
+      "solutions": [
+        "Modernize legacy apps to Azure PaaS to eliminate infrastructure overhead",
+        "Replace expensive middleware with Azure-native services and open-source alternatives",
+        "Deploy IBM application assessment tools to prioritize cost-driven modernization",
+        "Enable managed services reducing operational burden and skill dependencies"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Catalog applications, calculate per-app maintenance costs",
+        "Phase 2: Prioritization — Rank applications by cost savings potential and complexity",
+        "Phase 3: Modernization — Migrate high-cost applications to Azure PaaS with IBM tooling",
+        "Phase 4: Optimization — Decommission legacy licenses and validate cost reductions"
+      ]
+    },
+    "amm1_sub3:Cloud-Native Transformation": {
+      "challenges": [
+        "Applications unable to scale with demand causing performance degradation",
+        "Fixed infrastructure capacity unable to handle peak workload spikes",
+        "Scaling requires manual intervention and over-provisioning of resources",
+        "Customer experience degraded during high-traffic periods"
+      ],
+      "solutions": [
+        "Containerize applications and deploy on AKS for elastic auto-scaling",
+        "Implement horizontal pod autoscaling and cluster autoscaler on AKS",
+        "Deploy Azure Container Apps for serverless scaling of event-driven workloads",
+        "Enable IBM cloud-native advisory for architecture best practices"
+      ],
+      "approach": [
+        "Phase 1: Analysis — Profile application workload patterns and scaling bottlenecks",
+        "Phase 2: Platform — Deploy AKS with auto-scaling configured for workload profiles",
+        "Phase 3: Migration — Containerize and deploy applications with scaling policies",
+        "Phase 4: Optimization — Tune scaling parameters, enable predictive scaling"
+      ]
+    },
+    "amm1_sub3:App Modernization": {
+      "challenges": [
+        "Monolithic architecture preventing independent scaling of components",
+        "Application performance bottlenecks from vertical-only scaling model",
+        "Unable to leverage cloud-native scaling without significant refactoring",
+        "Business growth constrained by application platform limitations"
+      ],
+      "solutions": [
+        "Decompose scalability-critical components into independently scalable services",
+        "Migrate to Azure App Service with built-in auto-scale capabilities",
+        "Deploy IBM Mono2Micro to identify optimal decomposition boundaries",
+        "Enable event-driven scaling with Azure Functions for burst workloads"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Identify scaling bottlenecks and decomposition candidates",
+        "Phase 2: Architecture — Design scalable target architecture on Azure",
+        "Phase 3: Modernization — Extract and deploy scalable services incrementally",
+        "Phase 4: Validation — Load test, tune scaling policies, and enable monitoring"
+      ]
+    },
+    "amm1_sub4:DevOps Modernization": {
+      "challenges": [
+        "Manual deployment processes causing weeks-long release cycles",
+        "No automated testing leading to high defect rates in production",
+        "Release coordination across teams creating bottlenecks and delays",
+        "Lack of CI/CD preventing rapid iteration and feedback loops"
+      ],
+      "solutions": [
+        "Implement end-to-end CI/CD with GitHub Actions and Azure DevOps",
+        "Deploy automated testing at unit, integration, and end-to-end levels",
+        "Enable feature flags and blue-green deployments for safe, frequent releases",
+        "Establish IBM Garage DevOps practices for cultural transformation"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Audit current release process, identify automation gaps",
+        "Phase 2: Pipeline — Build CI/CD pipelines with automated quality gates",
+        "Phase 3: Automation — Add test automation, deployment strategies, and monitoring",
+        "Phase 4: Culture — Coach teams on DevOps practices and continuous improvement"
+      ]
+    },
+    "amm1_sub4:App Modernization": {
+      "challenges": [
+        "Slow release cycles caused by tightly coupled monolithic codebases",
+        "Every release requiring full system testing due to component interdependencies",
+        "Development teams blocked by shared codebase merge conflicts",
+        "Innovation pace constrained by legacy deployment and testing processes"
+      ],
+      "solutions": [
+        "Modularize applications enabling independent component release cycles",
+        "Deploy IBM application modernization tools for safe decomposition",
+        "Implement Azure App Service deployment slots for zero-downtime releases",
+        "Enable trunk-based development with feature flags for continuous delivery"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Analyze codebase coupling and release cycle bottlenecks",
+        "Phase 2: Architecture — Design modular architecture enabling independent deployments",
+        "Phase 3: Modernization — Decompose and migrate to independently deployable services",
+        "Phase 4: Acceleration — Enable rapid release cycles with automated CI/CD"
+      ]
+    },
+
+    "amm2_sub1:Cloud Optimization": {
+      "challenges": [
+        "Cloud costs escalating month over month without proportional value increase",
+        "Over-provisioned resources running 24/7 regardless of actual demand",
+        "No cost allocation model to attribute spend to business units or applications",
+        "Lack of FinOps practices allowing cloud waste to accumulate unchecked"
+      ],
+      "solutions": [
+        "Implement Azure Cost Management with granular per-app cost attribution",
+        "Deploy IBM FinOps assessment to identify immediate optimization opportunities",
+        "Right-size VMs and enable auto-scaling based on actual usage patterns",
+        "Establish reserved capacity strategy for predictable workloads"
+      ],
+      "approach": [
+        "Phase 1: Cost Audit — Analyze cloud spend, identify waste and optimization levers",
+        "Phase 2: Quick Wins — Right-size resources, enable auto-shutdown, apply reservations",
+        "Phase 3: Architecture — Redesign high-cost workloads for cost-efficient patterns",
+        "Phase 4: FinOps — Establish continuous cost governance and optimization practices"
+      ]
+    },
+    "amm2_sub1:Cloud-Native Transformation": {
+      "challenges": [
+        "High cloud costs driven by VM-based lift-and-shift without optimization",
+        "Applications not leveraging cloud-native services resulting in resource waste",
+        "Fixed infrastructure model preventing cost-efficient scaling patterns",
+        "Cloud spend growing linearly with users instead of optimized elastic scaling"
+      ],
+      "solutions": [
+        "Re-architect high-cost workloads to cloud-native AKS and Container Apps",
+        "Enable serverless computing with Azure Functions for event-driven workloads",
+        "Implement auto-scaling to match resources with actual demand patterns",
+        "Deploy IBM cloud-native advisory for cost-optimized architecture"
+      ],
+      "approach": [
+        "Phase 1: Analysis — Profile application costs and identify cloud-native candidates",
+        "Phase 2: Architecture — Design cost-optimized cloud-native target state",
+        "Phase 3: Migration — Re-architect and deploy to containers and serverless",
+        "Phase 4: Optimization — Validate cost savings and tune scaling parameters"
+      ]
+    },
+    "amm2_sub2:Cloud-Native Transformation": {
+      "challenges": [
+        "Application performance bottlenecks from suboptimal cloud architecture",
+        "Latency issues caused by poorly designed inter-service communication",
+        "Scaling limitations from VM-based deployment without container orchestration",
+        "User experience degraded during peak loads and traffic spikes"
+      ],
+      "solutions": [
+        "Re-architect to microservices on AKS with optimized network topology",
+        "Implement service mesh for resilient, low-latency service communication",
+        "Deploy Azure Front Door and CDN for global performance optimization",
+        "Enable IBM performance engineering practices for continuous tuning"
+      ],
+      "approach": [
+        "Phase 1: Performance Audit — Profile application bottlenecks and latency sources",
+        "Phase 2: Architecture — Design cloud-native architecture optimized for performance",
+        "Phase 3: Migration — Re-architect and deploy services with performance SLAs",
+        "Phase 4: Tuning — Implement observability, continuous profiling, and auto-optimization"
+      ]
+    },
+    "amm2_sub2:Cloud Optimization": {
+      "challenges": [
+        "Poor performance driving over-provisioning and inflated cloud costs",
+        "Applications throwing resources at performance problems instead of optimizing",
+        "No performance profiling or observability to identify root causes",
+        "Users experiencing slow response times despite high infrastructure spend"
+      ],
+      "solutions": [
+        "Implement Azure Monitor and Application Insights for performance visibility",
+        "Right-size resources based on actual performance profiles, not estimates",
+        "Deploy IBM performance optimization tooling for application-level tuning",
+        "Enable auto-scaling tied to performance metrics instead of static provisioning"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Profile performance bottlenecks and resource utilization",
+        "Phase 2: Optimization — Right-size, tune application settings, fix performance issues",
+        "Phase 3: Architecture — Refactor poorly performing components for cloud efficiency",
+        "Phase 4: Monitoring — Deploy continuous performance monitoring and alerting"
+      ]
+    },
+    "amm2_sub3:DevSecOps Modernization": {
+      "challenges": [
+        "Security and governance gaps across cloud applications and infrastructure",
+        "No centralized security visibility across cloud workloads",
+        "Compliance requirements not consistently enforced in cloud environments",
+        "Security reviews happening too late in the development cycle"
+      ],
+      "solutions": [
+        "Deploy Microsoft Defender for Cloud for unified security posture management",
+        "Implement Azure Policy for automated compliance enforcement",
+        "Enable GitHub Advanced Security for shift-left vulnerability detection",
+        "Establish IBM DevSecOps practices embedding security in development pipelines"
+      ],
+      "approach": [
+        "Phase 1: Security Audit — Assess current cloud security posture and compliance gaps",
+        "Phase 2: Foundation — Deploy Defender for Cloud and Azure Policy baselines",
+        "Phase 3: Integration — Embed security scanning into CI/CD pipelines",
+        "Phase 4: Governance — Establish continuous security monitoring and compliance reporting"
+      ]
+    },
+    "amm2_sub4:Cloud-Native Transformation": {
+      "challenges": [
+        "Applications still running on VMs without leveraging cloud-native capabilities",
+        "Unable to adopt containers and Kubernetes due to skills and architecture gaps",
+        "Manual infrastructure management preventing elastic scaling and automation",
+        "Falling behind competitors who have embraced cloud-native architectures"
+      ],
+      "solutions": [
+        "Containerize applications and deploy on Azure Kubernetes Service",
+        "Implement Azure Container Apps for simpler serverless container workloads",
+        "Deploy IBM cloud-native transformation playbook for structured adoption",
+        "Enable Infrastructure as Code with Terraform and Azure Bicep"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Evaluate application readiness for containerization",
+        "Phase 2: Platform — Deploy AKS and container infrastructure with IaC",
+        "Phase 3: Migration — Containerize and deploy applications in priority waves",
+        "Phase 4: Maturity — Implement advanced patterns like service mesh and GitOps"
+      ]
+    },
+    "amm2_sub4:Cloud Optimization": {
+      "challenges": [
+        "VM-based architecture creating high costs without cloud-native benefits",
+        "Limited cloud-native adoption preventing access to managed service savings",
+        "Infrastructure overhead from managing VMs instead of using platform services",
+        "Cloud spend inefficient due to running workloads on unoptimized compute"
+      ],
+      "solutions": [
+        "Migrate VM workloads to Azure PaaS and managed container services",
+        "Deploy Azure Container Apps for cost-efficient containerized workloads",
+        "Implement IBM cloud economics assessment for optimized target architecture",
+        "Enable auto-scaling and serverless patterns to reduce idle compute costs"
+      ],
+      "approach": [
+        "Phase 1: Analysis — Audit VM fleet, categorize workloads by cloud-native readiness",
+        "Phase 2: Architecture — Design PaaS-first target architecture with cost models",
+        "Phase 3: Migration — Move workloads from VMs to managed services in waves",
+        "Phase 4: Optimization — Validate cost savings and enable continuous optimization"
+      ]
+    },
+
+    "amm3_sub1:App Modernization": {
+      "challenges": [
+        "Significant workloads split between on-prem and Azure creating management overhead",
+        "No unified application management across hybrid infrastructure",
+        "Inconsistent deployment and monitoring practices between environments",
+        "Hybrid complexity slowing down modernization and innovation"
+      ],
+      "solutions": [
+        "Implement Azure Arc for unified management across on-prem and cloud",
+        "Deploy IBM hybrid modernization framework for structured migration planning",
+        "Enable consistent CI/CD pipelines spanning both environments",
+        "Migrate priority workloads to Azure while managing hybrid transition"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Inventory hybrid estate, classify workloads by migration readiness",
+        "Phase 2: Architecture — Design hybrid management architecture with Azure Arc",
+        "Phase 3: Modernization — Migrate priority workloads while maintaining hybrid operations",
+        "Phase 4: Optimization — Consolidate management, reduce hybrid complexity"
+      ]
+    },
+    "amm3_sub1:Hybrid Modernization": {
+      "challenges": [
+        "Mixed on-prem and cloud infrastructure with inconsistent management practices",
+        "No unified operational model spanning hybrid environments",
+        "Workload placement decisions made ad-hoc without strategic framework",
+        "Hybrid estate growing in complexity with each new cloud adoption"
+      ],
+      "solutions": [
+        "Deploy Azure Arc for unified hybrid infrastructure management",
+        "Implement IBM hybrid modernization roadmap with phased migration waves",
+        "Enable Azure Stack HCI for consistent hybrid cloud experience",
+        "Establish unified monitoring with Azure Monitor across all environments"
+      ],
+      "approach": [
+        "Phase 1: Discovery — Map entire hybrid estate, assess workload placement",
+        "Phase 2: Strategy — Define hybrid operating model and migration prioritization",
+        "Phase 3: Execution — Implement unified management and begin migration waves",
+        "Phase 4: Optimization — Reduce hybrid footprint and optimize operational costs"
+      ]
+    },
+    "amm3_sub2:Integration Modernization": {
+      "challenges": [
+        "Point-to-point integrations between legacy and cloud apps creating fragility",
+        "Custom integration code requiring constant maintenance as systems change",
+        "No standard API layer for communication between on-prem and cloud services",
+        "Integration failures causing business process disruptions across environments"
+      ],
+      "solutions": [
+        "Deploy Azure API Management as centralized integration gateway",
+        "Implement Azure Service Bus for reliable asynchronous messaging",
+        "Enable IBM integration modernization tooling for legacy connector migration",
+        "Build event-driven integration patterns replacing brittle point-to-point links"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Map all integration points, identify fragile connections",
+        "Phase 2: Architecture — Design API-first integration architecture on Azure",
+        "Phase 3: Migration — Replace point-to-point integrations with managed services",
+        "Phase 4: Governance — Establish API governance and integration monitoring"
+      ]
+    },
+    "amm3_sub2:Hybrid Modernization": {
+      "challenges": [
+        "Complex integrations between on-prem and cloud creating operational overhead",
+        "Integration layer not designed for hybrid scale causing reliability issues",
+        "Teams spending excessive time maintaining custom integration middleware",
+        "Hybrid integration complexity blocking new application deployments"
+      ],
+      "solutions": [
+        "Modernize hybrid integrations with Azure Integration Services suite",
+        "Deploy Azure Logic Apps for workflow orchestration across environments",
+        "Implement IBM hybrid integration patterns for reliable cross-environment communication",
+        "Enable API Management for standardized hybrid service exposure"
+      ],
+      "approach": [
+        "Phase 1: Discovery — Audit all hybrid integrations, classify by complexity and risk",
+        "Phase 2: Architecture — Design modern integration architecture spanning hybrid estate",
+        "Phase 3: Modernization — Replace custom middleware with Azure managed integration services",
+        "Phase 4: Operations — Establish integration monitoring and SLA management"
+      ]
+    },
+    "amm3_sub3:DevSecOps Modernization": {
+      "challenges": [
+        "Different security models applied across on-prem and cloud environments",
+        "No unified compliance view spanning the hybrid estate",
+        "Security gaps at integration boundaries between environments",
+        "Manual governance processes unable to scale across hybrid infrastructure"
+      ],
+      "solutions": [
+        "Deploy Microsoft Defender for Cloud with hybrid coverage via Azure Arc",
+        "Implement unified Azure Policy across on-prem and cloud environments",
+        "Enable IBM DevSecOps practices standardized across the hybrid estate",
+        "Build centralized compliance dashboard with cross-environment visibility"
+      ],
+      "approach": [
+        "Phase 1: Security Audit — Assess security posture gaps across hybrid environments",
+        "Phase 2: Unification — Deploy Defender for Cloud and Azure Policy across all environments",
+        "Phase 3: Integration — Embed security into CI/CD for both on-prem and cloud workloads",
+        "Phase 4: Governance — Establish continuous compliance monitoring across hybrid estate"
+      ]
+    },
+    "amm3_sub4:Hybrid Modernization": {
+      "challenges": [
+        "No phased modernization roadmap for the hybrid transformation journey",
+        "Ad-hoc cloud migrations creating technical debt and inconsistency",
+        "Stakeholders unable to align on modernization priorities and timeline",
+        "Hybrid estate growing more complex without strategic direction"
+      ],
+      "solutions": [
+        "Develop comprehensive hybrid modernization roadmap with IBM Garage methodology",
+        "Implement Azure Migrate for structured assessment and migration planning",
+        "Deploy Azure Arc for unified management during the transformation journey",
+        "Enable wave-based migration with clear business value milestones"
+      ],
+      "approach": [
+        "Phase 1: Strategy — Define hybrid modernization vision, priorities, and success metrics",
+        "Phase 2: Roadmap — Build phased migration plan with business value at each milestone",
+        "Phase 3: Execution — Execute migration waves with Azure Migrate and IBM tooling",
+        "Phase 4: Evolution — Continuously optimize and evolve the hybrid operating model"
+      ]
+    },
+    "amm3_sub4:App Modernization": {
+      "challenges": [
+        "No modernization roadmap leaving legacy applications aging in place",
+        "Teams unsure which applications to migrate, modernize, or retire",
+        "Legacy applications blocking cloud-native adoption and innovation",
+        "Technical debt accumulating without a structured remediation plan"
+      ],
+      "solutions": [
+        "Deploy IBM application portfolio assessment for modernization prioritization",
+        "Implement Azure Migrate for structured application discovery and assessment",
+        "Create wave-based modernization plan aligned to business value",
+        "Enable IBM Garage co-creation for modernization strategy development"
+      ],
+      "approach": [
+        "Phase 1: Portfolio Assessment — Evaluate all applications for modernization disposition",
+        "Phase 2: Roadmap — Prioritize applications into migration waves by business value",
+        "Phase 3: Modernization — Execute first wave targeting highest-value applications",
+        "Phase 4: Iteration — Continue waves, retire legacy, and measure transformation impact"
+      ]
+    },
+
+    "dpde1_sub1:Dev Platform Modernization": {
+      "challenges": [
+        "Outdated development tools slowing down engineering velocity",
+        "Legacy toolchain lacking integration with modern cloud services",
+        "Developers spending time on manual tasks instead of writing code",
+        "No unified engineering platform across development teams"
+      ],
+      "solutions": [
+        "Migrate to GitHub Enterprise with integrated CI/CD and code review",
+        "Deploy Azure DevOps for unified project management and pipeline orchestration",
+        "Enable GitHub Copilot for AI-assisted code generation and review",
+        "Implement IBM engineering platform modernization accelerator"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Audit current toolchain, identify modernization gaps",
+        "Phase 2: Platform — Deploy GitHub Enterprise and Azure DevOps as unified platform",
+        "Phase 3: Migration — Migrate repositories, pipelines, and workflows to modern tools",
+        "Phase 4: Enablement — Train teams, enable Copilot, and measure productivity gains"
+      ]
+    },
+    "dpde1_sub1:DevOps Modernization": {
+      "challenges": [
+        "Legacy development toolchain has no CI/CD integration capabilities",
+        "Build and deployment processes tied to outdated infrastructure",
+        "No automated testing framework compatible with legacy tools",
+        "Engineering teams unable to adopt modern DevOps practices on legacy toolchain"
+      ],
+      "solutions": [
+        "Implement GitHub Actions for CI/CD alongside toolchain modernization",
+        "Deploy Azure DevOps pipelines with automated testing and quality gates",
+        "Enable Infrastructure as Code with Terraform and Azure Bicep",
+        "Establish IBM DevOps practices tailored to the modernization journey"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Map current tools to modern alternatives, plan migration",
+        "Phase 2: Pipeline — Build CI/CD pipelines on GitHub Actions and Azure DevOps",
+        "Phase 3: Automation — Add test automation, IaC, and deployment strategies",
+        "Phase 4: Adoption — Train teams and drive cultural shift toward DevOps practices"
+      ]
+    },
+    "dpde1_sub2:DevOps Modernization": {
+      "challenges": [
+        "Manual testing consuming weeks in every release cycle",
+        "No automated regression testing causing high defect escape rates",
+        "Release management dependent on manual coordination across teams",
+        "Quality issues discovered late in cycle causing costly rework"
+      ],
+      "solutions": [
+        "Deploy automated testing frameworks for unit, integration, and E2E testing",
+        "Implement GitHub Actions CI/CD with automated quality gates",
+        "Enable blue-green and canary deployments for safe, frequent releases",
+        "Establish IBM quality engineering practices for shift-left testing"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Audit testing and release processes, quantify cycle time",
+        "Phase 2: Automation — Implement test automation across all levels",
+        "Phase 3: Pipeline — Build end-to-end CI/CD with automated quality gates",
+        "Phase 4: Optimization — Reduce cycle time, enable continuous delivery"
+      ]
+    },
+    "dpde1_sub2:Dev Platform Modernization": {
+      "challenges": [
+        "Manual testing and release processes caused by outdated tooling",
+        "Legacy test frameworks incompatible with modern automation approaches",
+        "Release bottleneck from tools that cannot support continuous delivery",
+        "Quality and velocity trade-off forced by inadequate toolchain"
+      ],
+      "solutions": [
+        "Modernize to GitHub Enterprise with integrated testing and deployment",
+        "Deploy Azure Test Plans for comprehensive test management",
+        "Enable AI-assisted test generation with GitHub Copilot",
+        "Implement IBM engineering modernization playbook for automated quality"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Evaluate current test and release tooling gaps",
+        "Phase 2: Platform — Deploy modern development platform with integrated testing",
+        "Phase 3: Automation — Migrate test cases and enable automated execution",
+        "Phase 4: Delivery — Establish continuous delivery with automated quality assurance"
+      ]
+    },
+    "dpde1_sub3:AI Engineering": {
+      "challenges": [
+        "Developers spending time on repetitive, non-value tasks",
+        "Code review cycles taking too long and creating bottlenecks",
+        "Boilerplate code and documentation consuming productive engineering time",
+        "No AI-assisted development tools to augment developer capabilities"
+      ],
+      "solutions": [
+        "Deploy GitHub Copilot for AI-assisted code generation and completion",
+        "Enable Copilot Chat for contextual code explanation and debugging",
+        "Implement AI-powered code review with automated suggestion and fix",
+        "Establish IBM AI engineering practices for maximum Copilot adoption"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Measure current developer productivity and identify bottlenecks",
+        "Phase 2: Enablement — Deploy GitHub Copilot with organizational policies and guardrails",
+        "Phase 3: Adoption — Train developers on effective Copilot usage patterns",
+        "Phase 4: Optimization — Measure productivity gains and expand AI engineering practices"
+      ]
+    },
+    "dpde1_sub3:Dev Platform Modernization": {
+      "challenges": [
+        "Low developer productivity caused by fragmented and outdated tooling",
+        "No integrated development environment connecting code, build, and deploy",
+        "Developers context-switching between multiple disconnected tools",
+        "Engineering velocity below industry benchmarks due to tool friction"
+      ],
+      "solutions": [
+        "Consolidate onto GitHub Enterprise as the unified development platform",
+        "Deploy Codespaces for instant, pre-configured cloud development environments",
+        "Enable GitHub Copilot for AI-augmented development within the platform",
+        "Implement IBM platform engineering practices for developer experience optimization"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Audit toolchain fragmentation, measure developer productivity",
+        "Phase 2: Platform — Deploy GitHub Enterprise with Codespaces and Copilot",
+        "Phase 3: Migration — Consolidate repositories and workflows onto unified platform",
+        "Phase 4: Optimization — Measure and iterate on developer experience improvements"
+      ]
+    },
+    "dpde1_sub4:AI Engineering": {
+      "challenges": [
+        "Engineering teams not leveraging AI to accelerate development workflows",
+        "Manual code writing, testing, and documentation consuming team capacity",
+        "Competitors adopting AI-assisted development gaining velocity advantage",
+        "No organizational strategy for AI-driven engineering transformation"
+      ],
+      "solutions": [
+        "Deploy GitHub Copilot Enterprise for organization-wide AI-assisted development",
+        "Enable Copilot Workspace for AI-driven task planning and implementation",
+        "Implement AI-powered testing and code review automation",
+        "Establish IBM AI engineering transformation roadmap"
+      ],
+      "approach": [
+        "Phase 1: Strategy — Define AI engineering vision, use cases, and success metrics",
+        "Phase 2: Deployment — Roll out GitHub Copilot with policies and training",
+        "Phase 3: Integration — Embed AI into CI/CD, testing, and code review workflows",
+        "Phase 4: Scale — Expand AI engineering practices across all development teams"
+      ]
+    },
+    "dpde1_sub4:Dev Platform Modernization": {
+      "challenges": [
+        "Current toolchain cannot support AI-assisted development workflows",
+        "Engineering platform lacks integration with AI and Copilot services",
+        "Teams eager to adopt AI development but tooling is a blocker",
+        "No modern development platform to serve as foundation for AI engineering"
+      ],
+      "solutions": [
+        "Modernize to GitHub Enterprise as the AI-ready development platform",
+        "Deploy GitHub Copilot integrated into the new development environment",
+        "Enable Codespaces with pre-configured AI development environments",
+        "Implement IBM platform modernization enabling AI-first engineering"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Evaluate toolchain AI-readiness and modernization path",
+        "Phase 2: Platform — Deploy GitHub Enterprise with Copilot and Codespaces",
+        "Phase 3: Migration — Move teams to modern platform with AI tools enabled",
+        "Phase 4: Transformation — Measure AI adoption impact and expand capabilities"
+      ]
+    },
+
+    "dpde2_sub1:DevSecOps Modernization": {
+      "challenges": [
+        "Legacy security controls unable to keep pace with modern threats",
+        "Security reviews happening manually at end of development cycle",
+        "No automated vulnerability scanning in build and deployment pipelines",
+        "Security team as bottleneck gating all releases"
+      ],
+      "solutions": [
+        "Deploy GitHub Advanced Security for shift-left vulnerability detection",
+        "Implement Microsoft Defender for DevOps integrated into CI/CD pipelines",
+        "Enable automated SAST, DAST, and dependency scanning in every build",
+        "Establish IBM DevSecOps practices embedding security in development culture"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Audit legacy security controls and identify modernization gaps",
+        "Phase 2: Integration — Embed security scanning into GitHub Actions CI/CD pipelines",
+        "Phase 3: Automation — Enable automated remediation and security policy enforcement",
+        "Phase 4: Culture — Train development teams on security-first engineering practices"
+      ]
+    },
+    "dpde2_sub1:Compliance Modernization": {
+      "challenges": [
+        "Legacy security controls creating compliance gaps and audit failures",
+        "Manual compliance processes unable to keep pace with regulatory changes",
+        "No automated evidence collection for compliance audits",
+        "Security and compliance treated as separate concerns without integration"
+      ],
+      "solutions": [
+        "Deploy Azure Policy and Microsoft Defender for automated compliance enforcement",
+        "Implement compliance-as-code with automated evidence collection",
+        "Enable IBM compliance modernization framework for regulatory alignment",
+        "Build unified security and compliance dashboard with real-time reporting"
+      ],
+      "approach": [
+        "Phase 1: Compliance Audit — Assess regulatory requirements and current control gaps",
+        "Phase 2: Framework — Deploy compliance-as-code with Azure Policy baselines",
+        "Phase 3: Automation — Enable automated compliance checks and evidence collection",
+        "Phase 4: Monitoring — Establish continuous compliance monitoring and reporting"
+      ]
+    },
+    "dpde2_sub2:Compliance Modernization": {
+      "challenges": [
+        "Difficulty meeting regulatory and audit requirements consistently",
+        "Manual compliance processes causing delays and human errors",
+        "No automated mapping between controls and regulatory frameworks",
+        "Audit preparation consuming weeks of team effort each cycle"
+      ],
+      "solutions": [
+        "Implement compliance-as-code mapping controls to regulatory frameworks",
+        "Deploy Azure Policy with built-in regulatory compliance blueprints",
+        "Enable automated audit trail and evidence collection with Microsoft Defender",
+        "Establish IBM compliance automation accelerators for rapid deployment"
+      ],
+      "approach": [
+        "Phase 1: Gap Analysis — Map current controls against regulatory requirements",
+        "Phase 2: Framework — Deploy compliance-as-code with regulatory blueprint mappings",
+        "Phase 3: Automation — Enable automated compliance checks and continuous monitoring",
+        "Phase 4: Reporting — Build real-time compliance dashboards and audit-ready reporting"
+      ]
+    },
+    "dpde2_sub2:DevSecOps Modernization": {
+      "challenges": [
+        "Compliance challenges driven by lack of security automation in development",
+        "No automated controls in CI/CD to enforce compliance standards",
+        "Development teams unaware of compliance requirements during coding",
+        "Compliance violations discovered only during periodic audits"
+      ],
+      "solutions": [
+        "Embed compliance checks into CI/CD pipelines with GitHub Advanced Security",
+        "Deploy Azure Policy to enforce compliance standards at infrastructure level",
+        "Enable automated compliance scanning in every pull request and deployment",
+        "Establish IBM DevSecOps compliance framework for proactive enforcement"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Map compliance requirements to development pipeline stages",
+        "Phase 2: Integration — Embed compliance gates into CI/CD and IaC pipelines",
+        "Phase 3: Automation — Enable continuous compliance monitoring in development",
+        "Phase 4: Governance — Establish compliance reporting tied to release metrics"
+      ]
+    },
+    "dpde2_sub3:Security Platform Consolidation": {
+      "challenges": [
+        "Multiple security tools providing fragmented and incomplete visibility",
+        "No unified security posture across applications and infrastructure",
+        "Tool overlap creating alert fatigue and inconsistent threat detection",
+        "High operational cost from maintaining multiple security platforms"
+      ],
+      "solutions": [
+        "Consolidate security tools onto Microsoft Defender for Cloud unified platform",
+        "Deploy Microsoft Sentinel for centralized SIEM and threat intelligence",
+        "Enable IBM security consolidation assessment for tool rationalization",
+        "Build unified security operations dashboard with cross-platform visibility"
+      ],
+      "approach": [
+        "Phase 1: Audit — Inventory all security tools, assess overlap and gaps",
+        "Phase 2: Architecture — Design unified security platform on Microsoft Defender",
+        "Phase 3: Consolidation — Migrate security capabilities and retire redundant tools",
+        "Phase 4: Operations — Establish unified SecOps with consolidated alerting and response"
+      ]
+    },
+    "dpde2_sub3:DevSecOps Modernization": {
+      "challenges": [
+        "Fragmented security tools not integrated into the development workflow",
+        "Developers unable to get security feedback within their normal tools",
+        "Security findings scattered across multiple platforms without prioritization",
+        "No single pane of glass for security posture across the SDLC"
+      ],
+      "solutions": [
+        "Consolidate security scanning into GitHub Advanced Security within the IDE",
+        "Deploy Microsoft Defender for DevOps for unified pipeline security",
+        "Enable centralized vulnerability management with prioritized remediation",
+        "Implement IBM unified DevSecOps practices across consolidated toolchain"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Map security tools to SDLC stages, identify consolidation plan",
+        "Phase 2: Consolidation — Unify security scanning into GitHub and Defender for DevOps",
+        "Phase 3: Integration — Enable developer-friendly security feedback in IDE and PR reviews",
+        "Phase 4: Operations — Establish unified security dashboard and remediation workflows"
+      ]
+    },
+    "dpde2_sub4:DevSecOps Modernization": {
+      "challenges": [
+        "Security not embedded in development pipelines despite desire for DevSecOps",
+        "Development teams treating security as an afterthought or external gate",
+        "No automated security testing integrated into CI/CD workflows",
+        "Gap between security aspirations and actual engineering practices"
+      ],
+      "solutions": [
+        "Implement GitHub Advanced Security with automated scanning in every pipeline",
+        "Deploy Microsoft Defender for DevOps for continuous security monitoring",
+        "Enable security champions program with IBM DevSecOps coaching",
+        "Build security-as-code practices with automated policy enforcement"
+      ],
+      "approach": [
+        "Phase 1: Strategy — Define DevSecOps vision, maturity goals, and adoption roadmap",
+        "Phase 2: Pipeline — Embed security scanning into GitHub Actions CI/CD workflows",
+        "Phase 3: Culture — Train security champions and embed security in team practices",
+        "Phase 4: Maturity — Advance DevSecOps maturity with automated remediation and metrics"
+      ]
+    },
+    "dpde2_sub4:Compliance Modernization": {
+      "challenges": [
+        "DevSecOps adoption blocked by unclear compliance integration path",
+        "Security automation desired but compliance requirements not codified",
+        "No framework connecting DevSecOps practices to regulatory obligations",
+        "Teams uncertain how to balance speed of delivery with compliance rigor"
+      ],
+      "solutions": [
+        "Build compliance-as-code framework integrated into DevSecOps pipelines",
+        "Deploy Azure Policy with automated compliance checks in CI/CD",
+        "Enable IBM compliance integration framework for DevSecOps alignment",
+        "Implement automated evidence collection and audit trail generation"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Map compliance requirements to DevSecOps pipeline stages",
+        "Phase 2: Framework — Codify compliance controls as automated pipeline gates",
+        "Phase 3: Integration — Deploy compliance automation within DevSecOps workflows",
+        "Phase 4: Continuous Compliance — Enable real-time compliance reporting"
+      ]
+    },
+
+    "dpde3_sub1:Product Modernization": {
+      "challenges": [
+        "Product release cycles taking months, unable to respond to market demands",
+        "Legacy architecture slowing feature development and time-to-market",
+        "Engineering teams bogged down by technical debt in product codebase",
+        "Competitive products iterating faster and capturing market share"
+      ],
+      "solutions": [
+        "Modernize product architecture to enable rapid feature delivery on Azure",
+        "Deploy GitHub Copilot to accelerate product development velocity",
+        "Implement CI/CD with automated testing for continuous product releases",
+        "Enable IBM product engineering practices for agile product evolution"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Audit product architecture, identify release cycle bottlenecks",
+        "Phase 2: Architecture — Design modern product architecture enabling rapid iteration",
+        "Phase 3: Modernization — Refactor and deploy with automated CI/CD pipelines",
+        "Phase 4: Acceleration — Enable continuous delivery and measure time-to-market improvement"
+      ]
+    },
+    "dpde3_sub1:Cloud-Native Engineering": {
+      "challenges": [
+        "Slow release cycles caused by monolithic product architecture",
+        "Product components cannot be deployed or scaled independently",
+        "Engineering teams blocked by shared codebase and deployment bottlenecks",
+        "Unable to adopt cloud-native patterns that would accelerate delivery"
+      ],
+      "solutions": [
+        "Re-architect product into cloud-native microservices on AKS",
+        "Implement API-first design for independent service deployment",
+        "Deploy Azure Container Apps for serverless product workloads",
+        "Enable IBM cloud-native engineering practices for product teams"
+      ],
+      "approach": [
+        "Phase 1: Analysis — Decompose product into service boundaries using DDD",
+        "Phase 2: Platform — Deploy AKS and container infrastructure for product services",
+        "Phase 3: Migration — Extract and deploy product services incrementally",
+        "Phase 4: Acceleration — Enable independent service releases and auto-scaling"
+      ]
+    },
+    "dpde3_sub1:Experience Engineering": {
+      "challenges": [
+        "Slow release cycles degrading customer experience and satisfaction",
+        "Unable to respond quickly to customer feedback and market demands",
+        "Product UX stagnating while competitors iterate on user experience",
+        "Feature delivery delays causing customer churn to faster competitors"
+      ],
+      "solutions": [
+        "Implement rapid experimentation framework with Azure Front Door and feature flags",
+        "Deploy analytics-driven UX optimization with Application Insights",
+        "Enable A/B testing and progressive feature rollout for customer validation",
+        "Establish IBM experience engineering practices for customer-centric product delivery"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Analyze customer experience gaps and feedback patterns",
+        "Phase 2: Framework — Build experimentation and rapid UX iteration capabilities",
+        "Phase 3: Delivery — Launch customer-validated features with progressive rollout",
+        "Phase 4: Optimization — Establish continuous experience improvement cycle"
+      ]
+    },
+    "dpde3_sub2:Experience Engineering": {
+      "challenges": [
+        "Low customer adoption and satisfaction with digital product experience",
+        "No data-driven approach to understanding user behavior and preferences",
+        "Product design decisions made without customer insight or validation",
+        "Competitors offering superior digital experiences capturing market share"
+      ],
+      "solutions": [
+        "Deploy Application Insights and Azure Monitor for real-time user analytics",
+        "Implement experimentation platform with A/B testing and feature flags",
+        "Enable AI-powered personalization with Azure AI and Copilot",
+        "Establish IBM experience engineering practices for design-led innovation"
+      ],
+      "approach": [
+        "Phase 1: Discovery — Research customer pain points, map user journeys",
+        "Phase 2: Design — Redesign product experience with data-driven UX practices",
+        "Phase 3: Build — Implement experience improvements with progressive rollout",
+        "Phase 4: Optimize — Establish continuous experience measurement and improvement"
+      ]
+    },
+    "dpde3_sub2:Product Modernization": {
+      "challenges": [
+        "Poor customer experience caused by aging product architecture",
+        "Product performance issues creating user frustration and churn",
+        "Unable to implement modern UX patterns on legacy product stack",
+        "Customer expectations evolving faster than product capabilities"
+      ],
+      "solutions": [
+        "Modernize product frontend with modern frameworks and Azure CDN",
+        "Deploy Azure Front Door for global performance and edge optimization",
+        "Implement IBM product modernization methodology for UX transformation",
+        "Enable AI-powered personalization features with Azure AI services"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Audit product UX, identify performance and experience gaps",
+        "Phase 2: Design — Modernize product architecture for superior user experience",
+        "Phase 3: Build — Implement UX improvements and performance optimizations",
+        "Phase 4: Launch — Deploy modernized experience and measure customer satisfaction"
+      ]
+    },
+    "dpde3_sub3:Cloud-Native Engineering": {
+      "challenges": [
+        "Monolithic product architecture preventing independent feature scaling",
+        "Single codebase creating deployment bottlenecks and long release cycles",
+        "Unable to leverage cloud-native services for product innovation",
+        "Product reliability impacted by tightly coupled component dependencies"
+      ],
+      "solutions": [
+        "Decompose monolith into cloud-native microservices on Azure Kubernetes Service",
+        "Implement event-driven architecture with Azure Service Bus for loose coupling",
+        "Deploy Azure Container Apps for serverless product workload components",
+        "Enable IBM cloud-native engineering practices for product modernization"
+      ],
+      "approach": [
+        "Phase 1: Architecture — Analyze monolith, identify service boundaries using DDD",
+        "Phase 2: Platform — Deploy AKS and cloud-native infrastructure for product services",
+        "Phase 3: Decomposition — Extract services incrementally using strangler fig pattern",
+        "Phase 4: Maturity — Implement service mesh, observability, and resilience patterns"
+      ]
+    },
+    "dpde3_sub3:Product Modernization": {
+      "challenges": [
+        "Monolithic product architecture blocking feature innovation",
+        "Technical debt in product codebase slowing every enhancement",
+        "Product scalability constrained by rigid architectural boundaries",
+        "Engineering teams unable to work independently on product features"
+      ],
+      "solutions": [
+        "Modernize product with modular architecture enabling independent feature delivery",
+        "Deploy IBM product modernization assessment for structured refactoring",
+        "Implement API-first design decoupling frontend and backend evolution",
+        "Enable Azure PaaS services to replace custom-built product infrastructure"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Audit product architecture, map technical debt and dependencies",
+        "Phase 2: Architecture — Design modular product architecture with clear boundaries",
+        "Phase 3: Refactoring — Modularize product incrementally with IBM engineering practices",
+        "Phase 4: Optimization — Enable independent feature delivery and continuous improvement"
+      ]
+    },
+    "dpde3_sub4:Cloud-Native Engineering": {
+      "challenges": [
+        "Current architecture cannot support building cloud-native digital products",
+        "No container or Kubernetes infrastructure for modern product workloads",
+        "Engineering teams lack cloud-native development skills and tooling",
+        "Desire to build modern digital products blocked by infrastructure gaps"
+      ],
+      "solutions": [
+        "Deploy AKS as the cloud-native product platform with full DevOps integration",
+        "Implement Azure Container Apps for serverless product microservices",
+        "Enable GitHub Enterprise with Copilot for cloud-native development workflows",
+        "Establish IBM cloud-native engineering practices and skills development program"
+      ],
+      "approach": [
+        "Phase 1: Strategy — Define cloud-native product vision and platform requirements",
+        "Phase 2: Platform — Deploy AKS and cloud-native infrastructure with IaC",
+        "Phase 3: Build — Develop and launch first cloud-native product on the new platform",
+        "Phase 4: Scale — Expand cloud-native practices across all product teams"
+      ]
+    },
+    "dpde3_sub4:Product Modernization": {
+      "challenges": [
+        "Desire to build cloud-native products but legacy practices holding teams back",
+        "Product engineering methodology not aligned with cloud-native delivery",
+        "No product platform providing the foundation for modern digital products",
+        "Market opportunity cost from slow product innovation cycle"
+      ],
+      "solutions": [
+        "Deploy modern product engineering platform on Azure with cloud-native patterns",
+        "Implement CI/CD and GitOps for automated product deployment",
+        "Enable AI-assisted product development with GitHub Copilot",
+        "Establish IBM product engineering transformation for cloud-native delivery"
+      ],
+      "approach": [
+        "Phase 1: Assessment — Define product modernization goals and cloud-native readiness",
+        "Phase 2: Platform — Build cloud-native product platform on Azure",
+        "Phase 3: Launch — Develop and ship first cloud-native product with modern practices",
+        "Phase 4: Evolution — Continuously evolve product engineering capabilities"
+      ]
+    },
+    "dpde3_sub4:AI-Driven Product Engineering": {
+      "challenges": [
+        "Digital products lacking AI capabilities that customers now expect",
+        "No AI engineering skills or platform to build intelligent product features",
+        "Competitors embedding AI into products creating market differentiation",
+        "Product roadmap aspirations for AI outpacing engineering capabilities"
+      ],
+      "solutions": [
+        "Deploy Azure OpenAI and AI services as product intelligence platform",
+        "Implement GitHub Copilot for AI-augmented product development",
+        "Build AI-powered product features with Azure Cognitive Services",
+        "Enable IBM AI product engineering practices for responsible AI delivery"
+      ],
+      "approach": [
+        "Phase 1: Strategy — Define AI product vision, use cases, and ethical guidelines",
+        "Phase 2: Platform — Deploy AI services and integrate into product architecture",
+        "Phase 3: Build — Develop and launch AI-powered product features",
+        "Phase 4: Scale — Expand AI capabilities across product portfolio"
+      ]
+    }
+  },
+
+  "answerModifiers": {
+    "sc1_q1_a": {
+      "challengeAppend": "Critical business data locked in legacy on-premise warehouses with vendor dependencies"
+    },
+    "sc1_q1_b": {
+      "challengeAppend": "Data fragmented across on-prem and multiple cloud platforms with no unified access"
+    },
+    "sc1_q3_b": {
+      "challengeAppend": "Data quality and trust issues undermining confidence in analytics outputs",
+      "solutionAppend": "Deploy Microsoft Purview for automated data quality monitoring and lineage tracking"
+    },
+    "sc1_q3_d": {
+      "challengeAppend": "Real-time analytics requirements unmet by current batch-only architecture",
+      "solutionAppend": "Enable Fabric Real-Time Analytics with Azure Event Hubs for streaming workloads"
+    },
+    "sc1_q4_d": {
+      "challengeAppend": "AI and Copilot initiatives stalled by lack of AI-ready data foundation",
+      "solutionAppend": "Build AI-ready semantic models on Fabric with Copilot integration"
+    },
+    "sc2_q1_a": {
+      "challengeAppend": "No AI or Copilot maturity creating urgency to establish data foundation",
+      "solutionAppend": "Accelerate AI readiness with IBM fast-track assessment and Fabric deployment"
+    },
+    "sc2_q1_c": {
+      "challengeAppend": "Isolated AI models across teams creating duplicate effort and inconsistent outcomes"
+    },
+    "sc2_q3_a": {
+      "challengeAppend": "Low trust in data quality creating resistance to AI and Copilot adoption",
+      "solutionAppend": "Implement IBM GenAI quality accelerators for automated data trust scoring"
+    },
+    "sc2_q4_a": {
+      "challengeAppend": "Complete absence of governance and lineage exposing organization to compliance risk",
+      "solutionAppend": "Fast-track Microsoft Purview deployment with IBM governance automation accelerator"
+    },
+    "sc2_q5_a": {
+      "challengeAppend": "Enterprise Copilot rollout blocked without clean, governed data products",
+      "solutionAppend": "Build Copilot-ready data products with semantic models on Microsoft Fabric"
+    },
+    "sc2_q5_b": {
+      "challengeAppend": "Predictive ML models limited by fragmented and poorly governed training data",
+      "solutionAppend": "Deploy enterprise ML platform on Azure ML with Fabric data integration"
+    },
+    "amm1_q1_a": {
+      "challengeAppend": "Critical applications trapped on legacy on-premise infrastructure blocking innovation"
+    },
+    "amm1_q2_a": {
+      "challengeAppend": "Infrastructure maintenance costs consuming budget that should fund modernization"
+    },
+    "amm1_q4_c": {
+      "challengeAppend": "Microservices transformation required but monolithic architecture blocks adoption",
+      "solutionAppend": "Deploy IBM Mono2Micro for AI-powered monolith decomposition analysis"
+    },
+    "amm1_q4_d": {
+      "challengeAppend": "AI feature integration impossible on current legacy application architecture",
+      "solutionAppend": "Enable AI capabilities through Azure OpenAI integration during modernization"
+    },
+    "amm1_q5_c": {
+      "challengeAppend": "Containerization goal requires significant application refactoring and team upskilling"
+    },
+    "amm2_q1_a": {
+      "challengeAppend": "Cloud costs growing month-over-month without proportional business value increase"
+    },
+    "amm2_q1_b": {
+      "challengeAppend": "Performance bottlenecks degrading user experience and business operations"
+    },
+    "amm2_q4_d": {
+      "challengeAppend": "AI-driven automation desired but current cloud architecture cannot support it",
+      "solutionAppend": "Enable Azure AI services with cloud-native integration for intelligent operations"
+    },
+    "amm3_q1_a": {
+      "challengeAppend": "Majority of workloads still on-prem creating urgency for cloud migration strategy"
+    },
+    "amm3_q2_a": {
+      "challengeAppend": "Custom point-to-point integrations creating fragile dependencies across systems",
+      "solutionAppend": "Deploy Azure API Management and Service Bus for managed integration"
+    },
+    "amm3_q3_a": {
+      "challengeAppend": "Separate governance models across on-prem and cloud creating compliance exposure"
+    },
+    "dpde1_q1_a": {
+      "challengeAppend": "Legacy development tools incompatible with modern engineering practices"
+    },
+    "dpde1_q2_a": {
+      "challengeAppend": "Manual build, test, and release processes consuming weeks per release cycle"
+    },
+    "dpde1_q3_d": {
+      "challengeAppend": "Competitors gaining velocity advantage from AI-assisted development tools",
+      "solutionAppend": "Deploy GitHub Copilot Enterprise for organization-wide AI-assisted engineering"
+    },
+    "dpde1_q4_d": {
+      "challengeAppend": "Engineering teams eager for AI tools but no organizational strategy in place",
+      "solutionAppend": "Implement IBM AI engineering transformation roadmap with measurable outcomes"
+    },
+    "dpde2_q1_a": {
+      "challengeAppend": "Manual security reviews creating bottleneck and leaving vulnerabilities undetected"
+    },
+    "dpde2_q2_a": {
+      "challengeAppend": "Frequent audit failures and compliance gaps eroding stakeholder confidence"
+    },
+    "dpde2_q3_d": {
+      "challengeAppend": "Advanced threats outpacing manual detection and response capabilities",
+      "solutionAppend": "Deploy Microsoft Sentinel with AI-driven threat detection and automated response"
+    },
+    "dpde2_q4_d": {
+      "challengeAppend": "Unknown and emerging threats requiring AI-powered detection capabilities",
+      "solutionAppend": "Enable AI-driven security operations with Microsoft Defender and Sentinel"
+    },
+    "dpde3_q1_a": {
+      "challengeAppend": "Multi-month release cycles causing competitive disadvantage and revenue loss"
+    },
+    "dpde3_q2_a": {
+      "challengeAppend": "Monolithic product architecture blocking independent feature development and scaling"
+    },
+    "dpde3_q3_d": {
+      "challengeAppend": "Market demanding AI-driven product capabilities that current platform cannot deliver",
+      "solutionAppend": "Integrate Azure OpenAI and AI services into product architecture"
+    },
+    "dpde3_q4_a": {
+      "challengeAppend": "Customer insights delayed by manual feedback processes missing real-time signals",
+      "solutionAppend": "Deploy real-time customer analytics with Azure Monitor and Application Insights"
+    },
+    "dpde3_q5_d": {
+      "challengeAppend": "AI product engineering ambitions blocked by lack of AI platform and skills",
+      "solutionAppend": "Deploy Azure OpenAI service as the AI product intelligence layer"
+    }
+  }
+}
