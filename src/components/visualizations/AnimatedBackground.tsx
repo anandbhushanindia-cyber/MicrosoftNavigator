@@ -25,13 +25,13 @@ const IMAGE_CONFIG: Record<VisualizationVariant, {
 }> = {
   hero: {
     src: '/media/images/first-bcg.png',
-    opacity: 'opacity-50',
+    opacity: 'opacity-90',
     objectPosition: 'object-bottom',
     gradient: 'bg-gradient-to-b from-white via-white/80 to-white/30',
   },
   flow: {
     src: '/media/images/third-bcg.png',
-    opacity: 'opacity-60',
+    opacity: 'opacity-80',
     objectPosition: 'object-center',
     gradient: 'bg-gradient-to-b from-white via-white/80 to-white/30',
   },

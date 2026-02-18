@@ -100,28 +100,33 @@ function deepMergeScenario(scenario: Scenario, override: Record<string, unknown>
 
   for (const [key, overrideVal] of Object.entries(override)) {
     if (key === 'subScenarios' && typeof overrideVal === 'object' && overrideVal !== null) {
-      // Merge sub-scenarios by ID
+      // Merge sub-scenarios by ID, including nested questions
       merged.subScenarios = scenario.subScenarios.map(ss => {
         const ssOverride = (overrideVal as Record<string, unknown>)[ss.id];
         if (!ssOverride || typeof ssOverride !== 'object') return ss;
-        return { ...ss, ...(ssOverride as Record<string, unknown>) };
-      });
-    } else if (key === 'questions' && typeof overrideVal === 'object' && overrideVal !== null) {
-      // Merge questions by ID, and options within questions by ID
-      merged.questions = scenario.questions.map(q => {
-        const qOverride = (overrideVal as Record<string, unknown>)[q.id];
-        if (!qOverride || typeof qOverride !== 'object') return q;
-        const qMerged = { ...q, ...(qOverride as Record<string, unknown>) };
-        // Merge options by ID if present
-        const optOverrides = (qOverride as Record<string, unknown>).options;
-        if (optOverrides && typeof optOverrides === 'object') {
-          qMerged.options = q.options.map(opt => {
-            const optOvr = (optOverrides as Record<string, unknown>)[opt.id];
-            if (!optOvr || typeof optOvr !== 'object') return opt;
-            return { ...opt, ...(optOvr as Record<string, unknown>) };
+        const ssMerged = { ...ss, ...(ssOverride as Record<string, unknown>) };
+
+        // Deep-merge questions within each sub-scenario
+        const qOverrides = (ssOverride as Record<string, unknown>).questions;
+        if (qOverrides && typeof qOverrides === 'object' && ss.questions) {
+          ssMerged.questions = ss.questions.map(q => {
+            const qOverride = (qOverrides as Record<string, unknown>)[q.id];
+            if (!qOverride || typeof qOverride !== 'object') return q;
+            const qMerged = { ...q, ...(qOverride as Record<string, unknown>) };
+            // Merge options by ID if present
+            const optOverrides = (qOverride as Record<string, unknown>).options;
+            if (optOverrides && typeof optOverrides === 'object') {
+              qMerged.options = q.options.map(opt => {
+                const optOvr = (optOverrides as Record<string, unknown>)[opt.id];
+                if (!optOvr || typeof optOvr !== 'object') return opt;
+                return { ...opt, ...(optOvr as Record<string, unknown>) };
+              });
+            }
+            return qMerged;
           });
         }
-        return qMerged;
+
+        return ssMerged;
       });
     } else if (key === 'signalPathMappings' && typeof overrideVal === 'object' && overrideVal !== null) {
       // Merge signal path mappings by signalPath key

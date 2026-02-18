@@ -56,7 +56,7 @@ export const useNavigator = () => {
     [selectedScenario, selectedSubScenarioId]
   );
 
-  const scenarioQuestions = selectedScenario?.questions ?? [];
+  const scenarioQuestions = selectedSubScenario?.questions ?? [];
 
   // Helper: look up offering multipliers for a signal path
   const getMultipliers = (signalPath: string): Record<OfferingName, number> => {

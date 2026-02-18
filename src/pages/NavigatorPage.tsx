@@ -22,6 +22,7 @@ export const NavigatorPage: React.FC = () => {
     setCurrentStep,
     selectedScenario,
     selectedScenarioId,
+    selectedSubScenarioId,
     selectScenario,
     selectSubScenario,
     currentQuestion,
@@ -110,6 +111,7 @@ export const NavigatorPage: React.FC = () => {
             <QuestionFlow
               question={currentQuestion}
               scenarioId={selectedScenarioId || ''}
+              subScenarioId={selectedSubScenarioId || ''}
               currentIndex={currentQuestionIndex}
               totalQuestions={totalQuestions}
               onAnswer={(optionId, signalPath, weight) => {

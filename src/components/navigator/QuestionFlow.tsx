@@ -9,6 +9,7 @@ import { AnimatedBackground } from '../visualizations/AnimatedBackground';
 interface QuestionFlowProps {
   question: Question;
   scenarioId: string;
+  subScenarioId: string;
   currentIndex: number;
   totalQuestions: number;
   onAnswer: (optionId: string, signalPath: string, weight: number) => void;
@@ -52,6 +53,7 @@ const OPTION_COLORS = [
 export const QuestionFlow: React.FC<QuestionFlowProps> = ({
   question,
   scenarioId,
+  subScenarioId,
   currentIndex,
   totalQuestions,
   onAnswer,
@@ -135,7 +137,7 @@ export const QuestionFlow: React.FC<QuestionFlowProps> = ({
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 mb-10 leading-tight drop-shadow-sm">
             <EditableText
               value={question.text}
-              onSave={(v) => updateScenarioField(scenarioId, `questions.${question.id}.text`, v)}
+              onSave={(v) => updateScenarioField(scenarioId, `subScenarios.${subScenarioId}.questions.${question.id}.text`, v)}
               as="span"
               className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 leading-tight"
             />
@@ -191,7 +193,7 @@ export const QuestionFlow: React.FC<QuestionFlowProps> = ({
                     <span className="flex-1 text-lg sm:text-xl text-gray-700 group-active:text-gray-900 transition-colors">
                       <EditableText
                         value={option.text}
-                        onSave={(v) => updateScenarioField(scenarioId, `questions.${question.id}.options.${option.id}.text`, v)}
+                        onSave={(v) => updateScenarioField(scenarioId, `subScenarios.${subScenarioId}.questions.${question.id}.options.${option.id}.text`, v)}
                         as="span"
                         className="text-lg sm:text-xl text-gray-700"
                       />

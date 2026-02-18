@@ -5,6 +5,7 @@ export interface SubScenario {
   businessMeaning: string;
   signalPath: string;
   weight: number;
+  questions: Question[];
 }
 
 // --- Questions ---
@@ -59,7 +60,6 @@ export interface Scenario {
   enabled: boolean;
   offeringGroup?: string;
   subScenarios: SubScenario[];
-  questions: Question[];
   signalPathMappings: SignalPathMapping[];
 }
 
