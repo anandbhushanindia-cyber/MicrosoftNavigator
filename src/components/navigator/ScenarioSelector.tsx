@@ -18,6 +18,7 @@ import {
 import type { Scenario } from '../../types/navigator.types';
 import { EditableText } from '../admin/EditableText';
 import { useAdmin } from '../../contexts/AdminContext';
+import { AnimatedBackground } from '../visualizations/AnimatedBackground';
 
 interface ScenarioSelectorProps {
   scenarios: Scenario[];
@@ -25,18 +26,18 @@ interface ScenarioSelectorProps {
   onBack: () => void;
 }
 
-// --- Icon registry ---
+// --- Icon registry (sized for kiosk large screens) ---
 const SCENARIO_ICONS: Record<string, React.ReactNode> = {
-  Database: <Database className="w-6 h-6 sm:w-7 sm:h-7" />,
-  Zap: <Zap className="w-6 h-6 sm:w-7 sm:h-7" />,
-  ShieldCheck: <ShieldCheck className="w-6 h-6 sm:w-7 sm:h-7" />,
-  Bot: <Bot className="w-6 h-6 sm:w-7 sm:h-7" />,
-  Rocket: <Rocket className="w-6 h-6 sm:w-7 sm:h-7" />,
-  RefreshCw: <RefreshCw className="w-6 h-6 sm:w-7 sm:h-7" />,
-  Activity: <Activity className="w-6 h-6 sm:w-7 sm:h-7" />,
-  Cloud: <Cloud className="w-6 h-6 sm:w-7 sm:h-7" />,
-  GitBranch: <GitBranch className="w-6 h-6 sm:w-7 sm:h-7" />,
-  TrendingUp: <TrendingUp className="w-6 h-6 sm:w-7 sm:h-7" />,
+  Database: <Database className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
+  Zap: <Zap className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
+  ShieldCheck: <ShieldCheck className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
+  Bot: <Bot className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
+  Rocket: <Rocket className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
+  RefreshCw: <RefreshCw className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
+  Activity: <Activity className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
+  Cloud: <Cloud className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
+  GitBranch: <GitBranch className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
+  TrendingUp: <TrendingUp className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
 };
 
 // --- IBM Carbon-inspired offering group color config ---
@@ -54,33 +55,33 @@ const OFFERING_GROUP_CONFIG: Record<string, {
   DT: {
     label: 'Data Transformation',
     accentColor: 'border-l-blue-600',
-    badgeBg: 'bg-blue-50',
-    badgeText: 'text-blue-700',
-    iconBg: 'bg-blue-100',
-    iconText: 'text-blue-600',
-    cardBg: 'bg-blue-50/40',
+    badgeBg: 'bg-blue-100',
+    badgeText: 'text-blue-800',
+    iconBg: 'bg-blue-200',
+    iconText: 'text-blue-700',
+    cardBg: 'bg-gradient-to-br from-blue-100 via-blue-50/80 to-white backdrop-blur-sm',
     hoverBorder: 'active:border-blue-400',
     activeBorder: 'focus-visible:ring-blue-300/40',
   },
   AMM: {
     label: 'App Modernization',
     accentColor: 'border-l-teal-600',
-    badgeBg: 'bg-teal-50',
-    badgeText: 'text-teal-700',
-    iconBg: 'bg-teal-100',
-    iconText: 'text-teal-600',
-    cardBg: 'bg-teal-50/40',
+    badgeBg: 'bg-teal-100',
+    badgeText: 'text-teal-800',
+    iconBg: 'bg-teal-200',
+    iconText: 'text-teal-700',
+    cardBg: 'bg-gradient-to-br from-teal-100 via-teal-50/80 to-white backdrop-blur-sm',
     hoverBorder: 'active:border-teal-400',
     activeBorder: 'focus-visible:ring-teal-300/40',
   },
   DPDE: {
     label: 'Product Engineering',
     accentColor: 'border-l-purple-600',
-    badgeBg: 'bg-purple-50',
-    badgeText: 'text-purple-700',
-    iconBg: 'bg-purple-100',
-    iconText: 'text-purple-600',
-    cardBg: 'bg-purple-50/40',
+    badgeBg: 'bg-purple-100',
+    badgeText: 'text-purple-800',
+    iconBg: 'bg-purple-200',
+    iconText: 'text-purple-700',
+    cardBg: 'bg-gradient-to-br from-purple-100 via-purple-50/80 to-white backdrop-blur-sm',
     hoverBorder: 'active:border-purple-400',
     activeBorder: 'focus-visible:ring-purple-300/40',
   },
@@ -89,11 +90,11 @@ const OFFERING_GROUP_CONFIG: Record<string, {
 const DEFAULT_GROUP_CONFIG = {
   label: 'Transformation',
   accentColor: 'border-l-gray-400',
-  badgeBg: 'bg-gray-50',
-  badgeText: 'text-gray-600',
-  iconBg: 'bg-gray-100',
-  iconText: 'text-gray-500',
-  cardBg: 'bg-gray-50/40',
+  badgeBg: 'bg-gray-100',
+  badgeText: 'text-gray-700',
+  iconBg: 'bg-gray-200',
+  iconText: 'text-gray-600',
+  cardBg: 'bg-gradient-to-br from-gray-100 via-gray-50/80 to-white backdrop-blur-sm',
   hoverBorder: 'active:border-gray-400',
   activeBorder: 'focus-visible:ring-gray-300/40',
 };
@@ -111,19 +112,34 @@ export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="w-full max-w-6xl mx-auto"
+      className="relative w-full max-w-6xl mx-auto"
     >
-      {/* Back Button */}
+      {/* Animated Background Visualization */}
+      <AnimatedBackground variant="flow" />
+
+      {/* Content — sits above background */}
+      <div className="relative z-10">
+
+      {/* Back Button — kiosk-friendly touchable */}
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={onBack}
-        className="flex items-center gap-2 text-gray-500 mb-6 px-3 py-2 rounded-xl active:bg-gray-100 transition-colors min-h-[48px]"
+        className="
+          inline-flex items-center gap-2.5
+          text-gray-600 mb-8
+          px-5 py-3 rounded-2xl
+          bg-white/80 backdrop-blur-sm
+          border border-gray-200
+          shadow-sm hover:shadow-md active:shadow-inner
+          hover:bg-white active:bg-gray-50
+          transition-all min-h-[52px]
+        "
       >
-        <ArrowLeft className="w-5 h-5" />
-        <EditableText labelKey="scenario.backButton" as="span" className="text-base font-medium" />
+        <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+        <EditableText labelKey="scenario.backButton" as="span" className="text-base sm:text-lg font-semibold" />
       </motion.button>
 
       {/* Header */}
@@ -133,18 +149,18 @@ export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
         transition={{ delay: 0.2 }}
         className="mb-10 sm:mb-12"
       >
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 mb-4">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 drop-shadow-sm">
           <EditableText
             labelKey="scenario.heading"
             as="span"
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900"
           />
         </h2>
-        <p className="text-lg sm:text-xl text-gray-500">
+        <p className="text-lg sm:text-xl text-gray-600 font-medium">
           <EditableText
             labelKey="scenario.subheading"
             as="span"
-            className="text-lg sm:text-xl text-gray-500"
+            className="text-lg sm:text-xl text-gray-600 font-medium"
           />
         </p>
       </motion.div>
@@ -165,50 +181,43 @@ export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
               onClick={() => isEnabled && onSelect(scenario.id)}
               disabled={!isEnabled}
               className={`
-                relative text-left rounded-xl
-                border border-gray-200 border-l-4 ${group.accentColor}
+                relative text-left rounded-2xl
+                border border-white/80 border-l-4 ${group.accentColor}
                 transition-all min-h-[180px]
                 focus:outline-none focus-visible:ring-4 ${group.activeBorder}
                 ${isEnabled
-                  ? `${group.cardBg} ${group.hoverBorder} active:shadow-lg cursor-pointer hover:shadow-md`
-                  : 'bg-gray-50/60 border-l-gray-300 cursor-not-allowed opacity-60'
+                  ? `${group.cardBg} ${group.hoverBorder} shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:shadow-2xl cursor-pointer`
+                  : 'bg-white/70 backdrop-blur-sm border-l-gray-300 cursor-not-allowed opacity-60'
                 }
               `}
               aria-label={scenario.title}
             >
               <div className="flex flex-col h-full p-5 sm:p-6">
-                {/* Offering Group Badge */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className={`inline-flex items-center px-2.5 py-1 rounded text-[11px] font-semibold uppercase tracking-wider ${group.badgeBg} ${group.badgeText}`}>
-                    <EditableText
-                      labelKey={`scenario.group.${scenario.offeringGroup || 'default'}`}
-                      as="span"
-                      className="text-[11px] font-semibold uppercase tracking-wider"
-                    />
-                  </span>
-                  {!isEnabled && (
+                {/* Coming Soon badge for disabled scenarios */}
+                {!isEnabled && (
+                  <div className="flex items-center justify-end mb-4">
                     <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-gray-400 bg-gray-100 px-2.5 py-1 rounded whitespace-nowrap">
                       <Clock className="w-3 h-3" />
                       Coming Soon
                     </span>
-                  )}
-                </div>
+                  </div>
+                )}
 
                 {/* Icon + Title Row */}
                 <div className="flex items-start gap-4 mb-3">
                   <div className={`
                     shrink-0 inline-flex items-center justify-center
-                    w-12 h-12 sm:w-14 sm:h-14 rounded-xl
+                    w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-xl
                     ${isEnabled ? `${group.iconBg} ${group.iconText}` : 'bg-gray-100 text-gray-400'}
                   `}>
-                    {SCENARIO_ICONS[scenario.icon] || <Database className="w-6 h-6 sm:w-7 sm:h-7" />}
+                    {SCENARIO_ICONS[scenario.icon] || <Database className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />}
                   </div>
-                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 leading-snug pt-1 flex-1 min-w-0">
+                  <h3 className="text-xl sm:text-2xl lg:text-[1.65rem] font-semibold text-gray-900 leading-snug pt-1 flex-1 min-w-0">
                     <EditableText
                       value={scenario.title}
                       onSave={(v) => updateScenarioField(scenario.id, 'title', v)}
                       as="span"
-                      className="text-lg sm:text-xl font-semibold text-gray-900 leading-snug"
+                      className="text-xl sm:text-2xl lg:text-[1.65rem] font-semibold text-gray-900 leading-snug"
                     />
                   </h3>
                 </div>
@@ -241,6 +250,7 @@ export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
             </motion.button>
           );
         })}
+      </div>
       </div>
     </motion.section>
   );

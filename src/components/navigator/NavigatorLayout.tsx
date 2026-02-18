@@ -1,14 +1,32 @@
-import React from 'react';
-import { Calendar, MapPin } from 'lucide-react';
-import { EditableText } from '../admin/EditableText';
+import React, { useState, useEffect } from 'react';
+import { Calendar } from 'lucide-react';
 import { useAdmin } from '../../contexts/AdminContext';
 
 interface NavigatorLayoutProps {
   children: React.ReactNode;
 }
 
+function useSystemDateTime() {
+  const [dateTime, setDateTime] = useState(() => new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setDateTime(new Date()), 60_000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return dateTime.toLocaleDateString('en-US', {
+    weekday: 'short',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
 export const NavigatorLayout: React.FC<NavigatorLayoutProps> = ({ children }) => {
   const { handleTripleTap } = useAdmin();
+  const formattedDateTime = useSystemDateTime();
 
   return (
     <div className="fixed inset-0 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-gray-100">
@@ -52,24 +70,10 @@ export const NavigatorLayout: React.FC<NavigatorLayoutProps> = ({ children }) =>
                 />
               </div>
 
-              {/* Context Meta */}
-              <div className="flex items-center gap-4 text-gray-500 text-xs sm:text-sm font-medium">
-                <div className="flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4" />
-                  <EditableText
-                    labelKey="layout.location"
-                    as="span"
-                    className="text-xs sm:text-sm font-medium"
-                  />
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4" />
-                  <EditableText
-                    labelKey="layout.date"
-                    as="span"
-                    className="text-xs sm:text-sm font-medium"
-                  />
-                </div>
+              {/* Date & Time */}
+              <div className="flex items-center gap-1.5 text-gray-500 text-xs sm:text-sm font-medium">
+                <Calendar className="w-4 h-4" />
+                <span>{formattedDateTime}</span>
               </div>
 
             </div>

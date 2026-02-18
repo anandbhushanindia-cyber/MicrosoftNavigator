@@ -4,6 +4,7 @@ import { ArrowLeft, ChevronRight } from 'lucide-react';
 import type { SubScenario } from '../../types/navigator.types';
 import { EditableText } from '../admin/EditableText';
 import { useAdmin } from '../../contexts/AdminContext';
+import { AnimatedBackground } from '../visualizations/AnimatedBackground';
 
 interface SubScenarioSelectorProps {
   subScenarios: SubScenario[];
@@ -12,6 +13,21 @@ interface SubScenarioSelectorProps {
   onSelect: (subScenarioId: string) => void;
   onBack: () => void;
 }
+
+// --- Cycling color palette for sub-scenario tiles (visible on kiosk) ---
+const SUB_TILE_COLORS = [
+  'from-blue-100 via-blue-50/80 to-white',
+  'from-teal-100 via-teal-50/80 to-white',
+  'from-purple-100 via-purple-50/80 to-white',
+  'from-amber-100 via-amber-50/80 to-white',
+];
+
+const SUB_TILE_ACCENTS = [
+  'border-l-blue-500',
+  'border-l-teal-500',
+  'border-l-purple-500',
+  'border-l-amber-500',
+];
 
 export const SubScenarioSelector: React.FC<SubScenarioSelectorProps> = ({
   subScenarios,
@@ -27,31 +43,47 @@ export const SubScenarioSelector: React.FC<SubScenarioSelectorProps> = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="w-full max-w-4xl mx-auto"
+      className="relative w-full max-w-4xl mx-auto"
     >
-      {/* Back Button */}
+      {/* Animated Background Visualization */}
+      <AnimatedBackground variant="focus" />
+
+      {/* Content — sits above background */}
+      <div className="relative z-10">
+
+      {/* Back Button — kiosk-friendly touchable */}
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={onBack}
-        className="flex items-center gap-2 text-gray-500 mb-6 px-3 py-2 rounded-xl active:bg-gray-100 transition-colors min-h-[48px]"
+        className="
+          inline-flex items-center gap-2.5
+          text-gray-600 mb-8
+          px-5 py-3 rounded-2xl
+          bg-white/80 backdrop-blur-sm
+          border border-gray-200
+          shadow-sm hover:shadow-md active:shadow-inner
+          hover:bg-white active:bg-gray-50
+          transition-all min-h-[52px]
+        "
       >
-        <ArrowLeft className="w-5 h-5" />
-        <EditableText labelKey="subscenario.backButton" as="span" className="text-base font-medium" />
+        <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+        <EditableText labelKey="subscenario.backButton" as="span" className="text-base sm:text-lg font-semibold" />
       </motion.button>
 
-      {/* Breadcrumb */}
+      {/* Selected Scenario Highlight */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15 }}
-        className="mb-4"
+        className="mb-8"
       >
-        <span className="text-sm font-medium text-indigo-600 bg-indigo-50 px-3 py-1.5 rounded-full">
+        <p className="text-base text-gray-500 font-medium mb-1">You have selected</p>
+        <h3 className="text-2xl sm:text-3xl font-bold text-indigo-700">
           {scenarioTitle}
-        </span>
+        </h3>
       </motion.div>
 
       {/* Header */}
@@ -89,8 +121,11 @@ export const SubScenarioSelector: React.FC<SubScenarioSelectorProps> = ({
             onClick={() => onSelect(subScenario.id)}
             className={`
               relative text-left rounded-2xl p-6 sm:p-7
-              bg-white border-2 border-gray-200
-              active:border-indigo-400 active:shadow-lg
+              bg-gradient-to-br ${SUB_TILE_COLORS[index % SUB_TILE_COLORS.length]}
+              backdrop-blur-sm
+              border-2 border-white/80 border-l-4 ${SUB_TILE_ACCENTS[index % SUB_TILE_ACCENTS.length]}
+              active:border-indigo-400
+              shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:shadow-2xl
               transition-all min-h-[120px]
               focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300/40
             `}
@@ -122,6 +157,7 @@ export const SubScenarioSelector: React.FC<SubScenarioSelectorProps> = ({
             </div>
           </motion.button>
         ))}
+      </div>
       </div>
     </motion.section>
   );

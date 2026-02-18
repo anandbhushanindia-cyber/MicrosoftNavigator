@@ -4,6 +4,7 @@ import { ChevronRight, Circle, ArrowLeft } from 'lucide-react';
 import type { Question } from '../../types/navigator.types';
 import { EditableText } from '../admin/EditableText';
 import { useAdmin } from '../../contexts/AdminContext';
+import { AnimatedBackground } from '../visualizations/AnimatedBackground';
 
 interface QuestionFlowProps {
   question: Question;
@@ -13,6 +14,40 @@ interface QuestionFlowProps {
   onAnswer: (optionId: string, signalPath: string, weight: number) => void;
   onBack: () => void;
 }
+
+// --- Color palette for option bars (cycles per index) ---
+const OPTION_COLORS = [
+  {
+    border: 'border-l-blue-500',
+    activeBorder: 'active:border-l-blue-600',
+    radio: 'border-blue-400 group-active:border-blue-600',
+    dot: 'text-blue-500',
+  },
+  {
+    border: 'border-l-teal-500',
+    activeBorder: 'active:border-l-teal-600',
+    radio: 'border-teal-400 group-active:border-teal-600',
+    dot: 'text-teal-500',
+  },
+  {
+    border: 'border-l-purple-500',
+    activeBorder: 'active:border-l-purple-600',
+    radio: 'border-purple-400 group-active:border-purple-600',
+    dot: 'text-purple-500',
+  },
+  {
+    border: 'border-l-amber-500',
+    activeBorder: 'active:border-l-amber-600',
+    radio: 'border-amber-400 group-active:border-amber-600',
+    dot: 'text-amber-500',
+  },
+  {
+    border: 'border-l-rose-500',
+    activeBorder: 'active:border-l-rose-600',
+    radio: 'border-rose-400 group-active:border-rose-600',
+    dot: 'text-rose-500',
+  },
+];
 
 export const QuestionFlow: React.FC<QuestionFlowProps> = ({
   question,
@@ -31,23 +66,38 @@ export const QuestionFlow: React.FC<QuestionFlowProps> = ({
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -80 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="w-full max-w-5xl mx-auto"
+      className="relative w-full max-w-5xl mx-auto"
     >
-      {/* Back Button */}
+      {/* Animated Background Visualization */}
+      <AnimatedBackground variant="pulse" />
+
+      {/* Content — sits above background */}
+      <div className="relative z-10">
+
+      {/* Back Button — kiosk-friendly touchable */}
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.1 }}
         whileTap={{ scale: 0.95 }}
         onClick={onBack}
-        className="flex items-center gap-2 text-gray-500 mb-6 px-3 py-2 rounded-xl active:bg-gray-100 transition-colors min-h-[48px]"
+        className="
+          inline-flex items-center gap-2.5
+          text-gray-600 mb-8
+          px-5 py-3 rounded-2xl
+          bg-white/80 backdrop-blur-sm
+          border border-gray-200
+          shadow-sm hover:shadow-md active:shadow-inner
+          hover:bg-white active:bg-gray-50
+          transition-all min-h-[52px]
+        "
       >
-        <ArrowLeft className="w-5 h-5" />
-        <span className="text-base font-medium">
+        <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+        <span className="text-base sm:text-lg font-semibold">
           {currentIndex === 0 ? (
-            <EditableText labelKey="question.backToSub" as="span" className="text-base font-medium" />
+            <EditableText labelKey="question.backToSub" as="span" className="text-base sm:text-lg font-semibold" />
           ) : (
-            <EditableText labelKey="question.backPrevious" as="span" className="text-base font-medium" />
+            <EditableText labelKey="question.backPrevious" as="span" className="text-base sm:text-lg font-semibold" />
           )}
         </span>
       </motion.button>
@@ -63,7 +113,7 @@ export const QuestionFlow: React.FC<QuestionFlowProps> = ({
           </span>
         </div>
 
-        <div className="relative w-full h-2.5 bg-gray-200 rounded-full overflow-hidden">
+        <div className="relative w-full h-2.5 bg-white/60 backdrop-blur-sm rounded-full overflow-hidden shadow-inner">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
@@ -82,7 +132,7 @@ export const QuestionFlow: React.FC<QuestionFlowProps> = ({
           exit={{ opacity: 0, y: -16 }}
           transition={{ duration: 0.3 }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 mb-10 leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-900 mb-10 leading-tight drop-shadow-sm">
             <EditableText
               value={question.text}
               onSave={(v) => updateScenarioField(scenarioId, `questions.${question.id}.text`, v)}
@@ -93,70 +143,77 @@ export const QuestionFlow: React.FC<QuestionFlowProps> = ({
 
           {/* Options */}
           <div className="space-y-4">
-            {question.options.map((option, index) => (
-              <motion.button
-                key={option.id}
-                initial={{ opacity: 0, x: -12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.06 }}
-                whileTap={{ scale: 0.98, x: 6 }}
-                onClick={() =>
-                  onAnswer(option.id, option.signalPath, option.weight)
-                }
-                className="
-                  group w-full text-left p-6 sm:p-7 rounded-2xl
-                  bg-white border border-gray-200
-                  active:border-indigo-500 active:bg-indigo-50
-                  transition-all duration-200
-                  shadow-sm active:shadow-md
-                  min-h-[64px]
-                  focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-400/40
-                "
-                aria-label={`Select option: ${option.text}`}
-              >
-                <div className="flex items-center gap-5">
-                  {/* Radio Indicator */}
-                  <div className="flex-shrink-0">
-                    <div className="
-                      w-6 h-6 rounded-full border-2 border-gray-300
-                      flex items-center justify-center
-                      group-active:border-indigo-500 transition-colors
-                    ">
-                      <Circle
-                        className="
-                          w-3.5 h-3.5 text-indigo-500
-                          opacity-0 group-active:opacity-100
-                          transition-opacity
-                        "
-                        fill="currentColor"
-                      />
+            {question.options.map((option, index) => {
+              const color = OPTION_COLORS[index % OPTION_COLORS.length];
+
+              return (
+                <motion.button
+                  key={option.id}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.06 }}
+                  whileTap={{ scale: 0.98, x: 6 }}
+                  onClick={() =>
+                    onAnswer(option.id, option.signalPath, option.weight)
+                  }
+                  className={`
+                    group w-full text-left p-6 sm:p-7 rounded-2xl
+                    bg-white/95 backdrop-blur-sm
+                    border border-white/80 border-l-4 ${color.border}
+                    ${color.activeBorder} active:bg-indigo-50/80
+                    transition-all duration-200
+                    shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:shadow-2xl
+                    min-h-[64px]
+                    focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-400/40
+                  `}
+                  aria-label={`Select option: ${option.text}`}
+                >
+                  <div className="flex items-center gap-5">
+                    {/* Radio Indicator */}
+                    <div className="flex-shrink-0">
+                      <div className={`
+                        w-6 h-6 rounded-full border-2 ${color.radio}
+                        flex items-center justify-center
+                        transition-colors
+                      `}>
+                        <Circle
+                          className={`
+                            w-3.5 h-3.5 ${color.dot}
+                            opacity-0 group-active:opacity-100
+                            transition-opacity
+                          `}
+                          fill="currentColor"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Option Text */}
-                  <span className="flex-1 text-lg sm:text-xl text-gray-700 group-active:text-gray-900 transition-colors">
-                    <EditableText
-                      value={option.text}
-                      onSave={(v) => updateScenarioField(scenarioId, `questions.${question.id}.options.${option.id}.text`, v)}
-                      as="span"
-                      className="text-lg sm:text-xl text-gray-700"
+                    {/* Option Text */}
+                    <span className="flex-1 text-lg sm:text-xl text-gray-700 group-active:text-gray-900 transition-colors">
+                      <EditableText
+                        value={option.text}
+                        onSave={(v) => updateScenarioField(scenarioId, `questions.${question.id}.options.${option.id}.text`, v)}
+                        as="span"
+                        className="text-lg sm:text-xl text-gray-700"
+                      />
+                    </span>
+
+                    {/* Arrow */}
+                    <ChevronRight
+                      className="
+                        w-6 h-6 text-gray-300
+                        group-active:text-indigo-500
+                        transition-all
+                      "
                     />
-                  </span>
-
-                  {/* Arrow */}
-                  <ChevronRight
-                    className="
-                      w-6 h-6 text-gray-300
-                      group-active:text-indigo-500
-                      transition-all
-                    "
-                  />
-                </div>
-              </motion.button>
-            ))}
+                  </div>
+                </motion.button>
+              );
+            })}
           </div>
         </motion.div>
       </AnimatePresence>
+
+      </div>
     </motion.section>
   );
 };

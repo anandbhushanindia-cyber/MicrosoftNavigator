@@ -1,12 +1,8 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
-import { QRCodeSVG } from 'qrcode.react';
 import {
   Sparkles,
-  TrendingUp,
   RotateCcw,
-  QrCode,
-  ArrowRight,
   Layers,
   Cpu,
   AlertTriangle,
@@ -21,6 +17,10 @@ import {
   ExternalLink,
   ChevronLeft,
   ChevronRight,
+  Database,
+  Bot,
+  RefreshCw,
+  Blocks,
 } from 'lucide-react';
 import type { Recommendation, IBMOffer, OfferingName } from '../../types/navigator.types';
 import { EditableText } from '../admin/EditableText';
@@ -28,22 +28,12 @@ import { EditableList } from '../admin/EditableList';
 import { DocumentCard } from './DocumentCard';
 import { ZoomableMediaModal } from './ZoomableMediaModal';
 import { useArtifacts } from '../../hooks/useArtifacts';
+import { AnimatedBackground } from '../visualizations/AnimatedBackground';
 
 interface RecommendationScreenProps {
   recommendation: Recommendation;
   onReset: () => void;
 }
-
-// Color palette for signal path bars
-const SIGNAL_COLORS = [
-  'from-blue-500 to-indigo-600',
-  'from-violet-500 to-purple-600',
-  'from-emerald-500 to-teal-600',
-  'from-orange-500 to-red-500',
-  'from-cyan-500 to-blue-500',
-  'from-pink-500 to-rose-600',
-  'from-amber-500 to-orange-500',
-];
 
 // Offering display labels and colors
 const OFFERING_LABELS: Record<OfferingName, string> = {
@@ -53,18 +43,26 @@ const OFFERING_LABELS: Record<OfferingName, string> = {
   DPDE: 'Digital Product Design & Engineering',
 };
 
-const OFFERING_COLORS: Record<OfferingName, string> = {
-  Data: 'from-blue-500 to-cyan-600',
-  AI: 'from-violet-500 to-purple-600',
-  AMM: 'from-orange-500 to-red-500',
-  DPDE: 'from-emerald-500 to-teal-600',
-};
-
-const OFFERING_BG_COLORS: Record<OfferingName, string> = {
-  Data: 'bg-blue-50 border-blue-200 text-blue-700',
-  AI: 'bg-violet-50 border-violet-200 text-violet-700',
-  AMM: 'bg-orange-50 border-orange-200 text-orange-700',
-  DPDE: 'bg-emerald-50 border-emerald-200 text-emerald-700',
+const OFFERING_ICON_CONFIG: Record<OfferingName, {
+  icon: React.ReactNode;
+  bg: string;
+}> = {
+  Data: {
+    icon: <Database className="w-8 h-8 text-white" />,
+    bg: 'bg-gradient-to-br from-blue-500 to-cyan-600',
+  },
+  AI: {
+    icon: <Bot className="w-8 h-8 text-white" />,
+    bg: 'bg-gradient-to-br from-violet-500 to-purple-600',
+  },
+  AMM: {
+    icon: <RefreshCw className="w-8 h-8 text-white" />,
+    bg: 'bg-gradient-to-br from-orange-500 to-red-500',
+  },
+  DPDE: {
+    icon: <Blocks className="w-8 h-8 text-white" />,
+    bg: 'bg-gradient-to-br from-emerald-500 to-teal-600',
+  },
 };
 
 // Map offer type to icon
@@ -111,7 +109,6 @@ const MediaDisplay: React.FC<{ offer: IBMOffer; onZoom?: (offer: IBMOffer) => vo
     );
   }
 
-  // Video (MP4, WebM)
   if (isVideo) {
     return (
       <div
@@ -135,7 +132,6 @@ const MediaDisplay: React.FC<{ offer: IBMOffer; onZoom?: (offer: IBMOffer) => vo
     );
   }
 
-  // PDF — render as iframe with click-to-expand
   if (isPdf) {
     return (
       <div
@@ -156,7 +152,6 @@ const MediaDisplay: React.FC<{ offer: IBMOffer; onZoom?: (offer: IBMOffer) => vo
     );
   }
 
-  // Office docs (PPTX, XLSX) — styled download card
   if (isOfficeDoc) {
     return (
       <DocumentCard
@@ -169,7 +164,6 @@ const MediaDisplay: React.FC<{ offer: IBMOffer; onZoom?: (offer: IBMOffer) => vo
     );
   }
 
-  // Image (PNG, JPG, etc.)
   if (isImage) {
     return (
       <div
@@ -190,7 +184,6 @@ const MediaDisplay: React.FC<{ offer: IBMOffer; onZoom?: (offer: IBMOffer) => vo
     );
   }
 
-  // Fallback — unknown type
   return (
     <div className="w-full aspect-video bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex flex-col items-center justify-center gap-3 border border-slate-200">
       <div className="w-14 h-14 rounded-2xl bg-white shadow-md flex items-center justify-center text-slate-400">
@@ -215,7 +208,7 @@ const groupOffersByType = (offers: IBMOffer[]): { type: IBMOffer['type']; items:
     .map(type => ({ type, items: grouped[type]! }));
 };
 
-// --- Offer Type Carousel Container ---
+// --- Offer Type Carousel Container (QR code removed) ---
 const OfferTypeCarousel: React.FC<{
   type: IBMOffer['type'];
   items: IBMOffer[];
@@ -236,7 +229,6 @@ const OfferTypeCarousel: React.FC<{
 
   const currentItem = items[activeIndex];
 
-  // Swipe support via pointer events
   const [dragStartX, setDragStartX] = useState<number | null>(null);
 
   const handlePointerDown = (e: React.PointerEvent) => {
@@ -282,7 +274,6 @@ const OfferTypeCarousel: React.FC<{
           onPointerUp={handlePointerUp}
           style={{ touchAction: hasMultiple ? 'pan-y' : 'auto' }}
         >
-          {/* Navigation arrows (only when multiple items) */}
           {hasMultiple && (
             <>
               <button
@@ -319,31 +310,13 @@ const OfferTypeCarousel: React.FC<{
               </div>
 
               {/* Content */}
-              <div className="px-5 pt-3 pb-2 flex-1">
+              <div className="px-5 pt-3 pb-4 flex-1">
                 <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-1.5 leading-snug">
                   {currentItem.title}
                 </h4>
                 <p className="text-sm text-gray-600 leading-relaxed">
                   {currentItem.description}
                 </p>
-              </div>
-
-              {/* QR Code */}
-              <div className="px-5 pb-4 pt-2">
-                <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-200">
-                  <QRCodeSVG
-                    value={currentItem.referenceUrl}
-                    size={72}
-                    level="M"
-                    includeMargin={false}
-                    bgColor="#F9FAFB"
-                    fgColor="#1E293B"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <div className="text-xs font-semibold text-gray-700 mb-0.5">Scan for details</div>
-                    <div className="text-[11px] text-gray-400 truncate">{currentItem.referenceUrl}</div>
-                  </div>
-                </div>
               </div>
             </motion.div>
           </AnimatePresence>
@@ -391,11 +364,6 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
     primaryRecommendation,
     primaryDescription,
     primaryTechStack,
-    supportingSignalPath,
-    supportingCapability,
-    supportingDescription,
-    confidence,
-    signalScores,
     challenges,
     solutions,
     approach,
@@ -411,45 +379,12 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
   const ibmOffers = dynamicOffers;
 
   const prefersReducedMotion = useReducedMotion();
-  const [displayConfidence, setDisplayConfidence] = useState(0);
 
   // Zoom modal state
   const [zoomOffer, setZoomOffer] = useState<IBMOffer | null>(null);
   const handleZoom = useCallback((offer: IBMOffer) => {
     setZoomOffer(offer);
   }, []);
-
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      setDisplayConfidence(confidence);
-      return;
-    }
-    let current = 0;
-    const increment = confidence / 60;
-    const interval = setInterval(() => {
-      current += increment;
-      if (current >= confidence) {
-        setDisplayConfidence(confidence);
-        clearInterval(interval);
-      } else {
-        setDisplayConfidence(Math.floor(current));
-      }
-    }, 15);
-    return () => clearInterval(interval);
-  }, [confidence, prefersReducedMotion]);
-
-  const qrTimestamp = useMemo(() => Date.now().toString(), []);
-  const personalizedURL = useMemo(() => {
-    const baseURL = 'https://ibm.com/transformation-path';
-    const params = new URLSearchParams({
-      signal: primarySignalPath,
-      confidence: confidence.toString(),
-      ts: qrTimestamp,
-    });
-    return `${baseURL}?${params.toString()}`;
-  }, [primarySignalPath, confidence, qrTimestamp]);
-
-  const totalScore = signalScores.reduce((sum, s) => sum + s.score, 0);
 
   // Animation helpers
   const fadeIn = (delay: number) =>
@@ -458,7 +393,13 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
       : { initial: { opacity: 0, y: 24 }, animate: { opacity: 1, y: 0 }, transition: { delay, duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } };
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 px-4 sm:px-6 lg:px-10 py-6 sm:py-8 overflow-x-hidden">
+    <div className="relative w-full min-h-screen overflow-x-hidden">
+
+      {/* Animated Background Visualization */}
+      <AnimatedBackground variant="reveal" />
+
+      {/* ─── PAGE CONTENT ─── */}
+      <div className="relative z-10 px-4 sm:px-6 lg:px-10 py-6 sm:py-8">
       <div className="max-w-[1800px] mx-auto">
 
         {/* ─── HEADER ─── */}
@@ -487,83 +428,34 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
             <div className="h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500" />
 
             <div className="p-5 sm:p-7 lg:p-8">
-              <div className="flex flex-col lg:flex-row lg:items-start lg:gap-10">
-                {/* Left: Recommendation info */}
-                <div className="flex-1 min-w-0 mb-6 lg:mb-0">
-                  <div className="mb-3">
-                    <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-sm font-semibold">
-                      <Layers className="w-4 h-4" />
-                      {primarySignalPath}
-                    </span>
-                  </div>
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">
-                    {primaryRecommendation}
-                  </h2>
-                  <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-                    {primaryDescription}
-                  </p>
-                </div>
-
-                {/* Right: Solution Coverage Meter */}
-                <div className="lg:w-[320px] xl:w-[360px] shrink-0">
-                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4 sm:p-5 border border-blue-100">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <TrendingUp className="w-5 h-5 text-blue-600" />
-                        <div>
-                          <div className="text-sm font-semibold text-gray-900">
-                            <EditableText labelKey="results.solutionOptics" as="span" className="text-sm font-semibold text-gray-900" />
-                          </div>
-                          <div className="text-xs text-gray-500">
-                            <EditableText labelKey="results.basedOnResponses" as="span" className="text-xs text-gray-500" />
-                          </div>
-                        </div>
-                      </div>
-                      <motion.div
-                        initial={prefersReducedMotion ? { scale: 1 } : { scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.8, type: 'spring' }}
-                        className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
-                      >
-                        {displayConfidence}%
-                      </motion.div>
-                    </div>
-                    <div
-                      className="relative h-3 bg-white rounded-full overflow-hidden shadow-inner"
-                      role="progressbar"
-                      aria-valuenow={displayConfidence}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                    >
-                      <motion.div
-                        initial={{ width: 0 }}
-                        animate={{ width: `${displayConfidence}%` }}
-                        transition={prefersReducedMotion ? { duration: 0 } : { duration: 1.5, ease: 'easeOut', delay: 0.6 }}
-                        className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full"
-                      >
-                        <motion.div
-                          animate={prefersReducedMotion ? { x: '0%' } : { x: ['0%', '200%'] }}
-                          transition={prefersReducedMotion ? { duration: 0 } : { duration: 2, repeat: Infinity, ease: 'linear' }}
-                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                        />
-                      </motion.div>
-                    </div>
-                  </div>
-                </div>
+              <div className="mb-3">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-sm font-semibold">
+                  <Layers className="w-4 h-4" />
+                  {primarySignalPath}
+                </span>
               </div>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                {primaryRecommendation}
+              </h2>
+              <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-4xl">
+                {primaryDescription}
+              </p>
             </div>
           </div>
         </motion.div>
 
-        {/* ─── OFFERING SCORES ─── */}
+        {/* ─── OFFERING SCORES — with icons instead of bars ─── */}
         <motion.div {...fadeIn(0.42)} className="mb-8 lg:mb-10">
+          <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-5 flex items-center gap-2">
+            <Layers className="w-4 h-4 text-indigo-500" />
+            IBM&apos;s Offerings That Meet Your Current Requirements
+          </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {offeringScores.filter(o => o.score > 0).map((item, idx) => {
               const isPrimary = item.offering === primaryOffering;
               const isSupporting = item.offering === supportingOffering;
               const isOptional = item.offering === optionalOffering;
-              const maxScore = offeringScores[0]?.score || 1;
-              const pct = Math.round((item.score / maxScore) * 100);
+              const iconConfig = OFFERING_ICON_CONFIG[item.offering];
 
               return (
                 <motion.div
@@ -571,7 +463,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
                   initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.5 + idx * 0.08, type: 'spring' }}
-                  className={`relative rounded-2xl p-4 sm:p-5 border-2 transition-all ${
+                  className={`relative rounded-2xl p-5 sm:p-6 border-2 transition-all ${
                     isPrimary
                       ? 'bg-white border-indigo-300 shadow-lg ring-2 ring-indigo-100'
                       : 'bg-white border-gray-100 shadow-md'
@@ -592,24 +484,14 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
                     </div>
                   )}
 
-                  <div className="mt-1">
-                    <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-semibold mb-3 ${OFFERING_BG_COLORS[item.offering]}`}>
-                      {item.offering}
+                  <div className="mt-1 flex flex-col items-center text-center">
+                    {/* Large Icon */}
+                    <div className={`w-16 h-16 rounded-2xl ${iconConfig.bg} flex items-center justify-center shadow-lg mb-4`}>
+                      {iconConfig.icon}
                     </div>
-                    <h4 className="text-sm font-semibold text-gray-900 mb-2 leading-snug">
+                    <h4 className="text-base sm:text-lg font-bold text-gray-900 leading-snug">
                       {OFFERING_LABELS[item.offering]}
                     </h4>
-                    <div className="flex items-center gap-2">
-                      <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${pct}%` }}
-                          transition={prefersReducedMotion ? { duration: 0 } : { duration: 1, ease: 'easeOut', delay: 0.6 + idx * 0.1 }}
-                          className={`h-full bg-gradient-to-r ${OFFERING_COLORS[item.offering]} rounded-full`}
-                        />
-                      </div>
-                      <span className="text-sm font-bold text-gray-700 w-10 text-right">{item.score}</span>
-                    </div>
                   </div>
                 </motion.div>
               );
@@ -761,7 +643,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
           )}
         </div>
 
-        {/* ─── WHAT IBM OFFERS — TYPE-BASED CONTAINERS ─── */}
+        {/* ─── WHAT IBM OFFERS — TYPE-BASED CONTAINERS (no QR codes) ─── */}
         {(ibmOffers.length > 0 || artifactsLoading) && (
           <motion.div {...fadeIn(1.0)} className="mb-8 lg:mb-10">
             <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-5 flex items-center gap-2">
@@ -769,7 +651,6 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
               <EditableText labelKey="results.whatIbmOffers" as="span" className="text-sm font-bold text-gray-700 uppercase tracking-wider" />
             </h3>
             {artifactsLoading ? (
-              /* Loading skeleton — 3 pulsing placeholder cards */
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-6">
                 {[0, 1, 2].map((i) => (
                   <div key={i} className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 animate-pulse">
@@ -797,93 +678,11 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
           </motion.div>
         )}
 
-        {/* ─── SIGNAL PATH ANALYSIS + SUPPORTING CAPABILITY ─── */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6 mb-8 lg:mb-10">
-          {/* Signal Path Analysis */}
-          <motion.div {...fadeIn(1.3)}>
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-5 sm:p-6">
-              <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-4">
-                <EditableText labelKey="results.signalAnalysis" as="span" className="text-sm font-bold text-gray-700 uppercase tracking-wider" />
-              </h3>
-              <div className="space-y-3">
-                {signalScores.map((signal, idx) => {
-                  const pct = totalScore > 0 ? Math.round((signal.score / totalScore) * 100) : 0;
-                  const colorClass = SIGNAL_COLORS[idx % SIGNAL_COLORS.length];
-                  const isPrimary = idx === 0;
-
-                  return (
-                    <div key={signal.signalPath} className="flex items-center gap-3">
-                      <div className="w-36 sm:w-44 text-xs sm:text-sm text-gray-700 font-medium truncate">
-                        {isPrimary && <span className="text-indigo-600 mr-1">&#9679;</span>}
-                        {signal.signalPath}
-                      </div>
-                      <div className="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${pct}%` }}
-                          transition={prefersReducedMotion ? { duration: 0 } : { duration: 1, ease: 'easeOut', delay: 1.4 + idx * 0.08 }}
-                          className={`h-full bg-gradient-to-r ${colorClass} rounded-full`}
-                        />
-                      </div>
-                      <div className="w-14 text-right text-xs sm:text-sm font-semibold text-gray-600">
-                        {signal.score} pts
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Supporting Capability */}
-          {supportingSignalPath && (
-            <motion.div {...fadeIn(1.35)}>
-              <div className="relative group h-full">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur opacity-15 transition" />
-                <div className="relative bg-white rounded-2xl p-5 sm:p-6 shadow-lg border border-gray-100 h-full">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-md shrink-0">
-                      <ArrowRight className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <div className="text-xs font-bold text-purple-600 uppercase tracking-wider mb-0.5">
-                        <EditableText labelKey="results.supportingCapability" as="span" className="text-xs font-bold text-purple-600 uppercase tracking-wider" />
-                      </div>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900">
-                        {supportingCapability}
-                      </h3>
-                    </div>
-                  </div>
-
-                  <div className="mb-4">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-50 border border-purple-200 text-purple-700 text-xs font-medium">
-                      <Layers className="w-3.5 h-3.5" />
-                      {supportingSignalPath}
-                    </span>
-                  </div>
-
-                  {supportingDescription && (
-                    <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
-                      {supportingDescription}
-                    </p>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </div>
-
-        {/* ─── ACTION BAR ─── */}
+        {/* ─── ACTION BAR — Start Over only ─── */}
         <motion.div
-          {...fadeIn(1.5)}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 p-5 sm:p-6 bg-white rounded-2xl shadow-lg border border-gray-100"
+          {...fadeIn(1.2)}
+          className="flex items-center justify-center p-5 sm:p-6 bg-white rounded-2xl shadow-lg border border-gray-100"
         >
-          {/* QR Code Button */}
-          <div className="relative">
-            <QRCodeButton personalizedURL={personalizedURL} prefersReducedMotion={!!prefersReducedMotion} />
-          </div>
-
-          {/* Start Over */}
           <button
             onClick={onReset}
             type="button"
@@ -900,54 +699,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
           onClose={() => setZoomOffer(null)}
         />
       </div>
-    </div>
-  );
-};
-
-// QR Code button with popup
-const QRCodeButton: React.FC<{ personalizedURL: string; prefersReducedMotion: boolean }> = ({
-  personalizedURL,
-  prefersReducedMotion,
-}) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  return (
-    <motion.button
-      whileTap={prefersReducedMotion ? undefined : { scale: 0.95 }}
-      onClick={() => setIsExpanded(prev => !prev)}
-      type="button"
-      aria-haspopup="dialog"
-      aria-expanded={isExpanded}
-      className="relative group bg-gradient-to-r from-gray-700 to-gray-800 text-white px-6 py-4 rounded-xl font-semibold shadow-lg active:shadow-xl transition-all min-h-[56px]"
-    >
-      <div className="absolute inset-0 bg-white opacity-0 group-active:opacity-20 transition-opacity rounded-xl" />
-      <div className="relative flex items-center gap-2">
-        <QrCode className="w-5 h-5" />
-        <span className="text-base"><EditableText labelKey="results.scanReport" as="span" className="text-base" /></span>
       </div>
-
-      {isExpanded && (
-        <motion.div
-          initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 z-50 pointer-events-none"
-        >
-          <div className="bg-white p-4 rounded-2xl shadow-2xl border-4 border-gray-800">
-            <QRCodeSVG
-              value={personalizedURL}
-              size={200}
-              level="H"
-              includeMargin={true}
-              bgColor="#FFFFFF"
-              fgColor="#000000"
-            />
-            <div className="text-center mt-2 text-xs font-semibold text-gray-700">
-              Scan for Details
-            </div>
-          </div>
-          <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-white" />
-        </motion.div>
-      )}
-    </motion.button>
+    </div>
   );
 };

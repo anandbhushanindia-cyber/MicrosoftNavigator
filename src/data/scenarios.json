@@ -390,7 +390,7 @@
     {
       "id": "sc_fragmented_data",
       "title": "Fragmented data and slow insights",
-      "description": "Your data is spread across multiple systems, and generating insights takes too long.",
+      "description": "Your data is spread across multiple systems, and generating meaningful insights takes too long.",
       "icon": "Database",
       "color": "from-blue-500 to-cyan-600",
       "enabled": true,
@@ -1656,7 +1656,7 @@
     {
       "id": "sc_legacy_apps",
       "title": "Legacy applications limiting agility",
-      "description": "Core business applications run on legacy platforms and slow innovation.",
+      "description": "Core business applications run on legacy platforms and slow down innovation.",
       "icon": "RefreshCw",
       "color": "from-orange-500 to-red-500",
       "enabled": true,
@@ -3334,8 +3334,8 @@
     },
     {
       "id": "sc_dev_productivity",
-      "title": "Efficiency & productivity with Azure",
-      "description": "Improve engineering productivity, quality, and speed using modern cloud-native platforms and AI-powered development.",
+      "title": "Stalling Developer Efficiency & Velocity on Azure",
+      "description": "Outdated toolchains, manual processes, and low automation are slowing engineering output and release speed.",
       "icon": "Rocket",
       "color": "from-emerald-500 to-teal-600",
       "enabled": true,
@@ -3872,8 +3872,8 @@
     },
     {
       "id": "sc_security_risk",
-      "title": "Security & risk management",
-      "description": "Reduce security risks and improve compliance across applications and development pipelines.",
+      "title": "Increased Security Threat & Inadequate risk management",
+      "description": "Security vulnerabilities and compliance issues across applications and development pipelines.",
       "icon": "ShieldCheck",
       "color": "from-red-500 to-rose-600",
       "enabled": true,
@@ -4410,8 +4410,8 @@
     },
     {
       "id": "sc_product_evolution",
-      "title": "Growth-driven product evolution",
-      "description": "Accelerate innovation and launch digital products faster to meet market and customer demands.",
+      "title": "Lack of Innovation and Speed of Delivery",
+      "description": "Legacy Design Processes and Delivery Models restricting Innovative Product Development and Impacting Delivery Speed",
       "icon": "TrendingUp",
       "color": "from-violet-500 to-purple-600",
       "enabled": true,

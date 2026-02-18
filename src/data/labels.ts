@@ -5,7 +5,7 @@
  */
 export const DEFAULT_LABELS: Record<string, string> = {
   // ─── LandingScreen ───
-  'landing.heading': 'Microsoft Transformation\nNavigator',
+  'landing.heading': 'Digital Transformation Navigator',
   'landing.subtitle': 'Discover your transformation path with IBM + Microsoft',
   'landing.attribution': 'Powered by IBM Consulting',
   'landing.cta': 'Begin Your Journey',
@@ -14,7 +14,7 @@ export const DEFAULT_LABELS: Record<string, string> = {
   // ─── ScenarioSelector ───
   'scenario.backButton': 'Back',
   'scenario.heading': 'What best describes your current challenge?',
-  'scenario.subheading': 'Select the scenario that resonates most with your situation',
+  'scenario.subheading': 'Select the scenario that resonates most with your current state',
   'scenario.group.DT': 'Data Transformation',
   'scenario.group.AMM': 'App Modernization',
   'scenario.group.DPDE': 'Product Engineering',
@@ -24,8 +24,8 @@ export const DEFAULT_LABELS: Record<string, string> = {
 
   // ─── SubScenarioSelector ───
   'subscenario.backButton': 'Back to scenarios',
-  'subscenario.heading': 'Tell us more about your situation',
-  'subscenario.subheading': 'Select the option that best matches where you are today',
+  'subscenario.heading': 'Tell us more..',
+  'subscenario.subheading': 'Select one of the most critical problem areas that best matches your current state',
 
   // ─── QuestionFlow ───
   'question.backToSub': 'Back to sub-scenarios',
@@ -34,7 +34,7 @@ export const DEFAULT_LABELS: Record<string, string> = {
   // ─── RecommendationScreen ───
   'results.badge': 'Personalized Recommendation',
   'results.heading': 'Your Transformation Path',
-  'results.solutionOptics': 'Solution Optics',
+  'results.solutionOptics': 'Alignment with IBM Primary Offerings',
   'results.basedOnResponses': 'Based on your responses',
   'results.badgePrimary': 'Primary',
   'results.badgeSupporting': 'Supporting',
@@ -44,7 +44,7 @@ export const DEFAULT_LABELS: Record<string, string> = {
   'results.deliveryApproach': 'Delivery Approach',
   'results.keyCapabilities': 'Key Capabilities',
   'results.techStack': 'Technology Stack',
-  'results.whatIbmOffers': 'What IBM Offers',
+  'results.whatIbmOffers': "IBM'S Solution details",
   'results.signalAnalysis': 'Signal Path Analysis',
   'results.supportingCapability': 'Supporting Capability',
   'results.startOver': 'Start Over',
@@ -81,4 +81,5 @@ export const DEFAULT_CONFIG: Record<string, number> = {
   'supportingThreshold': 0.4,
   'optionalThreshold': 0.25,
   'minScoreToDisplay': 10,
+  'backgroundMode': 0, // 0 = animated visualization, 1 = static image
 };
