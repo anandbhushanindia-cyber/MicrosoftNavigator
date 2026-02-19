@@ -24,30 +24,6 @@ const OPTION_COLORS = [
     radio: 'border-blue-400 group-active:border-blue-600',
     dot: 'text-blue-500',
   },
-  {
-    border: 'border-l-teal-500',
-    activeBorder: 'active:border-l-teal-600',
-    radio: 'border-teal-400 group-active:border-teal-600',
-    dot: 'text-teal-500',
-  },
-  {
-    border: 'border-l-purple-500',
-    activeBorder: 'active:border-l-purple-600',
-    radio: 'border-purple-400 group-active:border-purple-600',
-    dot: 'text-purple-500',
-  },
-  {
-    border: 'border-l-amber-500',
-    activeBorder: 'active:border-l-amber-600',
-    radio: 'border-amber-400 group-active:border-amber-600',
-    dot: 'text-amber-500',
-  },
-  {
-    border: 'border-l-rose-500',
-    activeBorder: 'active:border-l-rose-600',
-    radio: 'border-rose-400 group-active:border-rose-600',
-    dot: 'text-rose-500',
-  },
 ];
 
 export const QuestionFlow: React.FC<QuestionFlowProps> = ({

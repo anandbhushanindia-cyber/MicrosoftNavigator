@@ -17,16 +17,10 @@ interface SubScenarioSelectorProps {
 // --- Cycling color palette for sub-scenario tiles (visible on kiosk) ---
 const SUB_TILE_COLORS = [
   'from-blue-100 via-blue-50/80 to-white',
-  'from-teal-100 via-teal-50/80 to-white',
-  'from-purple-100 via-purple-50/80 to-white',
-  'from-amber-100 via-amber-50/80 to-white',
 ];
 
 const SUB_TILE_ACCENTS = [
   'border-l-blue-500',
-  'border-l-teal-500',
-  'border-l-purple-500',
-  'border-l-amber-500',
 ];
 
 export const SubScenarioSelector: React.FC<SubScenarioSelectorProps> = ({

@@ -357,8 +357,6 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
     scenarioTitle,
     subScenarioText,
     primaryOffering,
-    supportingOffering,
-    optionalOffering,
     offeringScores,
     primarySignalPath,
     primaryRecommendation,
@@ -453,8 +451,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {offeringScores.filter(o => o.score > 0).map((item, idx) => {
               const isPrimary = item.offering === primaryOffering;
-              const isSupporting = item.offering === supportingOffering;
-              const isOptional = item.offering === optionalOffering;
+              const isSupporting = !isPrimary;
               const iconConfig = OFFERING_ICON_CONFIG[item.offering];
 
               return (
@@ -470,16 +467,14 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
                   }`}
                 >
                   {/* Badge */}
-                  {(isPrimary || isSupporting || isOptional) && (
+                  {(isPrimary || isSupporting) && (
                     <div className="absolute -top-2.5 left-4">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${
                         isPrimary
                           ? 'bg-indigo-600 text-white'
-                          : isSupporting
-                          ? 'bg-purple-500 text-white'
-                          : 'bg-gray-500 text-white'
+                          : 'bg-purple-500 text-white'
                       }`}>
-                        {isPrimary ? 'Primary' : isSupporting ? 'Supporting' : 'Optional'}
+                        {isPrimary ? 'Primary' : 'Supporting'}
                       </span>
                     </div>
                   )}
