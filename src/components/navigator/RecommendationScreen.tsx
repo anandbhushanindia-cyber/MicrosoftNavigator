@@ -48,23 +48,23 @@ const OFFERING_LABELS: Record<OfferingName, string> = {
 
 const OFFERING_ICON_CONFIG: Record<OfferingName, {
   icon: React.ReactNode;
-  bg: string;
+  color: string;
 }> = {
   Data: {
-    icon: <DataWarehousing size={40} className="text-white" />,
-    bg: 'bg-gradient-to-br from-blue-500 to-cyan-600',
+    icon: <DataWarehousing size={48} />,
+    color: 'text-blue-600',
   },
   AI: {
-    icon: <AiPicto size={40} className="text-white" />,
-    bg: 'bg-gradient-to-br from-violet-500 to-purple-600',
+    icon: <AiPicto size={48} />,
+    color: 'text-violet-600',
   },
   AMM: {
-    icon: <AppModernization size={40} className="text-white" />,
-    bg: 'bg-gradient-to-br from-orange-500 to-red-500',
+    icon: <AppModernization size={48} />,
+    color: 'text-orange-600',
   },
   DPDE: {
-    icon: <DesignAndDevelopment_01 size={40} className="text-white" />,
-    bg: 'bg-gradient-to-br from-emerald-500 to-teal-600',
+    icon: <DesignAndDevelopment_01 size={48} />,
+    color: 'text-emerald-600',
   },
 };
 
@@ -484,7 +484,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
 
                   <div className="mt-1 flex flex-col items-center text-center">
                     {/* Large Icon */}
-                    <div className={`w-16 h-16 rounded-2xl ${iconConfig.bg} flex items-center justify-center shadow-lg mb-4`}>
+                    <div className={`w-16 h-16 flex items-center justify-center mb-4 ${iconConfig.color}`}>
                       {iconConfig.icon}
                     </div>
                     <h4 className="text-base sm:text-lg font-bold text-gray-900 leading-snug">
@@ -505,8 +505,8 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
               <div className="h-1.5 bg-gradient-to-r from-rose-500 to-red-500" />
               <div className="p-5 sm:p-6 flex-1">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-red-500 flex items-center justify-center shadow-md shrink-0">
-                    <Warning_01 size={28} className="text-white" />
+                  <div className="w-12 h-12 flex items-center justify-center shrink-0 text-rose-500">
+                    <Warning_01 size={32} />
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900">
                     <EditableText labelKey="results.yourChallenge" as="span" className="text-lg sm:text-xl font-bold text-gray-900" />
@@ -533,8 +533,8 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
               <div className="h-1.5 bg-gradient-to-r from-emerald-500 to-green-500" />
               <div className="p-5 sm:p-6 flex-1">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center shadow-md shrink-0">
-                    <RocketPicto size={28} className="text-white" />
+                  <div className="w-12 h-12 flex items-center justify-center shrink-0 text-emerald-500">
+                    <RocketPicto size={32} />
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900">
                     <EditableText labelKey="results.ibmSolution" as="span" className="text-lg sm:text-xl font-bold text-gray-900" />
@@ -561,8 +561,8 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
               <div className="h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500" />
               <div className="p-5 sm:p-6 flex-1">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center shadow-md shrink-0">
-                    <Strategy size={28} className="text-white" />
+                  <div className="w-12 h-12 flex items-center justify-center shrink-0 text-blue-500">
+                    <Strategy size={32} />
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900">
                     <EditableText labelKey="results.deliveryApproach" as="span" className="text-lg sm:text-xl font-bold text-gray-900" />
