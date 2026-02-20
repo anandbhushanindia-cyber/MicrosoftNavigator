@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ZoomIn, ZoomOut, RotateCcw, Maximize2 } from 'lucide-react';
+import { Close, ZoomIn, ZoomOut, RotateCounterclockwise, Maximize } from '@carbon/icons-react';
 import type { IBMOffer } from '../../types/navigator.types';
 
 interface ZoomableMediaModalProps {
@@ -201,7 +201,7 @@ export const ZoomableMediaModal: React.FC<ZoomableMediaModalProps> = ({
                   className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
                   title="Zoom out"
                 >
-                  <ZoomOut className="w-4 h-4" />
+                  <ZoomOut size={16} />
                 </button>
                 <span className="text-xs text-white/70 font-mono min-w-[3rem] text-center">
                   {Math.round(scale * 100)}%
@@ -211,7 +211,7 @@ export const ZoomableMediaModal: React.FC<ZoomableMediaModalProps> = ({
                   className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
                   title="Zoom in"
                 >
-                  <ZoomIn className="w-4 h-4" />
+                  <ZoomIn size={16} />
                 </button>
                 {scale > 1 && (
                   <button
@@ -219,7 +219,7 @@ export const ZoomableMediaModal: React.FC<ZoomableMediaModalProps> = ({
                     className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
                     title="Reset zoom"
                   >
-                    <RotateCcw className="w-4 h-4" />
+                    <RotateCounterclockwise size={16} />
                   </button>
                 )}
               </>
@@ -227,7 +227,7 @@ export const ZoomableMediaModal: React.FC<ZoomableMediaModalProps> = ({
             {/* Fullscreen hint for video */}
             {isVideo && (
               <span className="text-xs text-white/50 flex items-center gap-1">
-                <Maximize2 className="w-3.5 h-3.5" />
+                <Maximize size={14} />
                 Use video controls for fullscreen
               </span>
             )}
@@ -237,7 +237,7 @@ export const ZoomableMediaModal: React.FC<ZoomableMediaModalProps> = ({
               className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors ml-2"
               title="Close (Esc)"
             >
-              <X className="w-5 h-5" />
+              <Close size={20} />
             </button>
           </div>
         </div>

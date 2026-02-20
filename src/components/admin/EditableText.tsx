@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Pencil } from 'lucide-react';
+import { Edit } from '@carbon/icons-react';
 import { useAdmin } from '../../contexts/AdminContext';
 
 interface EditableTextProps {
@@ -186,7 +186,7 @@ export const EditableText: React.FC<EditableTextProps> = ({
       title="Double-click to edit"
     >
       {viewContent}
-      <Pencil className="inline-block w-3 h-3 ml-1 text-blue-400 opacity-0 group-hover/editable:opacity-70 transition-opacity align-super" />
+      <Edit size={12} className="inline-block ml-1 text-blue-400 opacity-0 group-hover/editable:opacity-70 transition-opacity align-super" />
     </Tag>
   );
 };

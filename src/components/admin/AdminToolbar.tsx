@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Download, Upload, RotateCcw, X, Settings } from 'lucide-react';
+import { Download, Upload, RotateCounterclockwise, Close, Settings } from '@carbon/icons-react';
 import { useAdmin } from '../../contexts/AdminContext';
 
 export const AdminToolbar: React.FC = () => {
@@ -57,7 +57,7 @@ export const AdminToolbar: React.FC = () => {
       <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 p-3 flex items-center gap-2">
         {/* Admin badge */}
         <div className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-bold uppercase tracking-wider">
-          <Settings className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '3s' }} />
+          <Settings size={14} className="animate-spin" style={{ animationDuration: '3s' }} />
           Admin
           {hasChanges && (
             <span className="ml-1 bg-white text-blue-600 px-1.5 py-0.5 rounded-full text-[10px] font-bold">
@@ -76,7 +76,7 @@ export const AdminToolbar: React.FC = () => {
           title="Export configuration"
           className="p-2 rounded-lg hover:bg-gray-100 text-gray-600 hover:text-blue-600 transition-colors"
         >
-          <Download className="w-4 h-4" />
+          <Download size={16} />
         </button>
 
         {/* Import */}
@@ -86,7 +86,7 @@ export const AdminToolbar: React.FC = () => {
           title="Import configuration"
           className="p-2 rounded-lg hover:bg-gray-100 text-gray-600 hover:text-blue-600 transition-colors"
         >
-          <Upload className="w-4 h-4" />
+          <Upload size={16} />
         </button>
 
         {/* Reset */}
@@ -100,7 +100,7 @@ export const AdminToolbar: React.FC = () => {
               : 'hover:bg-gray-100 text-gray-600 hover:text-orange-600'
           }`}
         >
-          <RotateCcw className="w-4 h-4" />
+          <RotateCounterclockwise size={16} />
         </button>
 
         {/* Divider */}
@@ -113,7 +113,7 @@ export const AdminToolbar: React.FC = () => {
           title="Exit admin mode"
           className="p-2 rounded-lg hover:bg-gray-100 text-gray-600 hover:text-red-600 transition-colors"
         >
-          <X className="w-4 h-4" />
+          <Close size={16} />
         </button>
       </div>
 

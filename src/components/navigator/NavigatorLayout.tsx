@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar } from 'lucide-react';
+import { Calendar } from '@carbon/icons-react';
 import { useAdmin } from '../../contexts/AdminContext';
 
 interface NavigatorLayoutProps {
@@ -72,7 +72,7 @@ export const NavigatorLayout: React.FC<NavigatorLayoutProps> = ({ children }) =>
 
               {/* Date & Time */}
               <div className="flex items-center gap-1.5 text-gray-500 text-xs sm:text-sm font-medium">
-                <Calendar className="w-4 h-4" />
+                <Calendar size={16} />
                 <span>{formattedDateTime}</span>
               </div>
 

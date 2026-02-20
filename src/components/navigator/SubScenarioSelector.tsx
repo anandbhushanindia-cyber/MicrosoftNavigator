@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ChevronRight } from '@carbon/icons-react';
 import type { SubScenario } from '../../types/navigator.types';
 import { EditableText } from '../admin/EditableText';
 import { useAdmin } from '../../contexts/AdminContext';
@@ -63,7 +63,7 @@ export const SubScenarioSelector: React.FC<SubScenarioSelectorProps> = ({
           transition-all min-h-[52px]
         "
       >
-        <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+        <ArrowLeft size={24} />
         <EditableText labelKey="subscenario.backButton" as="span" className="text-base sm:text-lg font-semibold" />
       </motion.button>
 
@@ -146,7 +146,7 @@ export const SubScenarioSelector: React.FC<SubScenarioSelectorProps> = ({
                     className="text-sm text-gray-500 leading-snug"
                   />
                 </span>
-                <ChevronRight className="w-5 h-5 text-gray-400 shrink-0" />
+                <ChevronRight size={20} className="text-gray-400 shrink-0" />
               </div>
             </div>
           </motion.button>

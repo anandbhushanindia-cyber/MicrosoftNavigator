@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, FileSpreadsheet, Presentation, Download, ExternalLink } from 'lucide-react';
+import { DocumentPdf, DataTable, PresentationFile, Download, Launch } from '@carbon/icons-react';
 
 interface DocumentCardProps {
   url: string;
@@ -10,9 +10,9 @@ interface DocumentCardProps {
 }
 
 const FILE_ICONS: Record<string, React.ReactNode> = {
-  pptx: <Presentation className="w-8 h-8" />,
-  xlsx: <FileSpreadsheet className="w-8 h-8" />,
-  pdf: <FileText className="w-8 h-8" />,
+  pptx: <PresentationFile size={32} />,
+  xlsx: <DataTable size={32} />,
+  pdf: <DocumentPdf size={32} />,
 };
 
 const FILE_COLORS: Record<string, { bg: string; text: string; border: string; accent: string }> = {
@@ -94,12 +94,12 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
         >
           {fileType === 'pdf' ? (
             <>
-              <ExternalLink className="w-3.5 h-3.5" />
+              <Launch size={14} />
               Open
             </>
           ) : (
             <>
-              <Download className="w-3.5 h-3.5" />
+              <Download size={14} />
               Download
             </>
           )}

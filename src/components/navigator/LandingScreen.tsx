@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
+import { MagicWand } from '@carbon/icons-react';
 import { EditableText } from '../admin/EditableText';
 import { AnimatedBackground } from '../visualizations/AnimatedBackground';
 
@@ -116,7 +116,7 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({ onStart }) => {
             as="span"
             className="text-lg sm:text-xl font-semibold"
           />
-          <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
+          <MagicWand size={24} />
         </motion.button>
 
       </div>

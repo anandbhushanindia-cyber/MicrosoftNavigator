@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, Circle, ArrowLeft } from 'lucide-react';
+import { ChevronRight, RadioButtonChecked, ArrowLeft } from '@carbon/icons-react';
 import type { Question } from '../../types/navigator.types';
 import { EditableText } from '../admin/EditableText';
 import { useAdmin } from '../../contexts/AdminContext';
@@ -70,7 +70,7 @@ export const QuestionFlow: React.FC<QuestionFlowProps> = ({
           transition-all min-h-[52px]
         "
       >
-        <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+        <ArrowLeft size={24} />
         <span className="text-base sm:text-lg font-semibold">
           {currentIndex === 0 ? (
             <EditableText labelKey="question.backToSub" as="span" className="text-base sm:text-lg font-semibold" />
@@ -154,13 +154,13 @@ export const QuestionFlow: React.FC<QuestionFlowProps> = ({
                         flex items-center justify-center
                         transition-colors
                       `}>
-                        <Circle
+                        <RadioButtonChecked
+                          size={14}
                           className={`
-                            w-3.5 h-3.5 ${color.dot}
+                            ${color.dot}
                             opacity-0 group-active:opacity-100
                             transition-opacity
                           `}
-                          fill="currentColor"
                         />
                       </div>
                     </div>
@@ -177,8 +177,9 @@ export const QuestionFlow: React.FC<QuestionFlowProps> = ({
 
                     {/* Arrow */}
                     <ChevronRight
+                      size={24}
                       className="
-                        w-6 h-6 text-gray-300
+                        text-gray-300
                         group-active:text-indigo-500
                         transition-all
                       "

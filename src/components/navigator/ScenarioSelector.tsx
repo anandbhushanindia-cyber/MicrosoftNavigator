@@ -1,20 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ArrowLeft, ChevronRight, Time } from '@carbon/icons-react';
 import {
-  ArrowLeft,
-  Database,
-  Zap,
-  ShieldCheck,
-  ChevronRight,
-  Bot,
-  Rocket,
-  RefreshCw,
-  Activity,
-  Clock,
-  Cloud,
-  GitBranch,
-  TrendingUp,
-} from 'lucide-react';
+  DataWarehousing,
+  Lightning as LightningPicto,
+  SecurityShield,
+  Ai as AiPicto,
+  Rocket as RocketPicto,
+  AppModernization,
+  Analytics as AnalyticsPicto,
+  CloudComputing,
+  Devops,
+  Growth as GrowthPicto,
+} from '@carbon/pictograms-react';
 import type { Scenario } from '../../types/navigator.types';
 import { EditableText } from '../admin/EditableText';
 import { useAdmin } from '../../contexts/AdminContext';
@@ -26,18 +24,18 @@ interface ScenarioSelectorProps {
   onBack: () => void;
 }
 
-// --- Icon registry (sized for kiosk large screens) ---
+// --- Icon registry using Carbon pictograms (larger, more detailed for kiosk) ---
 const SCENARIO_ICONS: Record<string, React.ReactNode> = {
-  Database: <Database className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
-  Zap: <Zap className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
-  ShieldCheck: <ShieldCheck className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
-  Bot: <Bot className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
-  Rocket: <Rocket className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
-  RefreshCw: <RefreshCw className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
-  Activity: <Activity className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
-  Cloud: <Cloud className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
-  GitBranch: <GitBranch className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
-  TrendingUp: <TrendingUp className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />,
+  Database: <DataWarehousing size={48} />,
+  Zap: <LightningPicto size={48} />,
+  ShieldCheck: <SecurityShield size={48} />,
+  Bot: <AiPicto size={48} />,
+  Rocket: <RocketPicto size={48} />,
+  RefreshCw: <AppModernization size={48} />,
+  Activity: <AnalyticsPicto size={48} />,
+  Cloud: <CloudComputing size={48} />,
+  GitBranch: <Devops size={48} />,
+  TrendingUp: <GrowthPicto size={48} />,
 };
 
 // --- IBM Carbon-inspired offering group color config ---
@@ -138,7 +136,7 @@ export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
           transition-all min-h-[52px]
         "
       >
-        <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+        <ArrowLeft size={24} />
         <EditableText labelKey="scenario.backButton" as="span" className="text-base sm:text-lg font-semibold" />
       </motion.button>
 
@@ -197,7 +195,7 @@ export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
                 {!isEnabled && (
                   <div className="flex items-center justify-end mb-4">
                     <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-gray-400 bg-gray-100 px-2.5 py-1 rounded whitespace-nowrap">
-                      <Clock className="w-3 h-3" />
+                      <Time size={12} />
                       Coming Soon
                     </span>
                   </div>
@@ -210,7 +208,7 @@ export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
                     w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-xl
                     ${isEnabled ? `${group.iconBg} ${group.iconText}` : 'bg-gray-100 text-gray-400'}
                   `}>
-                    {SCENARIO_ICONS[scenario.icon] || <Database className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10" />}
+                    {SCENARIO_ICONS[scenario.icon] || <DataWarehousing size={48} />}
                   </div>
                   <h3 className="text-xl sm:text-2xl lg:text-[1.65rem] font-semibold text-gray-900 leading-snug pt-1 flex-1 min-w-0">
                     <EditableText
@@ -242,7 +240,7 @@ export const ScenarioSelector: React.FC<ScenarioSelectorProps> = ({
                         as="span"
                         className="text-xs font-medium text-gray-400"
                       />
-                      <ChevronRight className="w-4 h-4" />
+                      <ChevronRight size={16} />
                     </div>
                   )}
                 </div>

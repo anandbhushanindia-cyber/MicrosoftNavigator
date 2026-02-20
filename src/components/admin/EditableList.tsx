@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plus, X } from 'lucide-react';
+import { Add, Close } from '@carbon/icons-react';
 import { EditableText } from './EditableText';
 import { useAdmin } from '../../contexts/AdminContext';
 
@@ -65,7 +65,7 @@ export const EditableList: React.FC<EditableListProps> = ({
             className="shrink-0 w-5 h-5 rounded-full bg-red-100 text-red-500 flex items-center justify-center opacity-0 group-hover/listitem:opacity-100 transition-opacity mt-0.5"
             title="Remove item"
           >
-            <X className="w-3 h-3" />
+            <Close size={12} />
           </button>
         </div>
       ))}
@@ -74,7 +74,7 @@ export const EditableList: React.FC<EditableListProps> = ({
         onClick={handleAdd}
         className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 px-2.5 py-1 rounded transition-colors"
       >
-        <Plus className="w-3 h-3" />
+        <Add size={12} />
         Add item
       </button>
     </div>

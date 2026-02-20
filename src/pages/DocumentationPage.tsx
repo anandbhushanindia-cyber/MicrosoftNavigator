@@ -1,34 +1,34 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  BookOpen,
+  Book,
   ChevronRight,
   ChevronDown,
   Search,
   ArrowUp,
   Menu,
-  X,
+  Close,
   Layers,
-  GitBranch,
-  Database,
+  Branch,
+  DataBase,
   Bot,
-  Clock,
-  TrendingUp,
+  Time,
+  Growth,
   Activity,
   Rocket,
-  ShieldCheck,
-  Zap,
+  Security,
+  Lightning,
   Settings,
-  FileText,
-  Code2,
-  BarChart3,
-  Cpu,
-  Monitor,
-  Palette,
-  Info,
+  Document,
+  Code,
+  ChartBar,
+  Chip,
+  Screen,
+  ColorPalette,
+  Information,
   Copy,
-  Check,
-} from 'lucide-react';
+  Checkmark,
+} from '@carbon/icons-react';
 
 // ─── Types ───
 interface TOCItem {
@@ -146,14 +146,14 @@ const SCENARIOS_OVERVIEW = [
 ];
 
 const ICON_MAP: Record<string, React.ReactNode> = {
-  Database: <Database className="w-4 h-4" />,
-  Bot: <Bot className="w-4 h-4" />,
-  Clock: <Clock className="w-4 h-4" />,
-  TrendingUp: <TrendingUp className="w-4 h-4" />,
-  Activity: <Activity className="w-4 h-4" />,
-  Rocket: <Rocket className="w-4 h-4" />,
-  ShieldCheck: <ShieldCheck className="w-4 h-4" />,
-  Zap: <Zap className="w-4 h-4" />,
+  Database: <DataBase size={16} />,
+  Bot: <Bot size={16} />,
+  Clock: <Time size={16} />,
+  TrendingUp: <Growth size={16} />,
+  Activity: <Activity size={16} />,
+  Rocket: <Rocket size={16} />,
+  ShieldCheck: <Security size={16} />,
+  Zap: <Lightning size={16} />,
 };
 
 const GROUP_COLORS: Record<string, { bg: string; text: string; border: string; badge: string }> = {
@@ -164,20 +164,20 @@ const GROUP_COLORS: Record<string, { bg: string; text: string; border: string; b
 
 // ─── Table of Contents ───
 const TOC_ITEMS: TOCItem[] = [
-  { id: 'overview', label: 'Project Overview', level: 1, icon: <Info className="w-4 h-4" /> },
-  { id: 'user-flow', label: 'User Flow', level: 1, icon: <GitBranch className="w-4 h-4" /> },
-  { id: 'project-structure', label: 'Project Structure', level: 1, icon: <Layers className="w-4 h-4" /> },
-  { id: 'type-definitions', label: 'Type Definitions', level: 1, icon: <Code2 className="w-4 h-4" /> },
-  { id: 'signal-matrix', label: 'Signal Mapping Matrix', level: 1, icon: <BarChart3 className="w-4 h-4" /> },
-  { id: 'scoring-algorithm', label: 'Scoring Algorithm', level: 1, icon: <Cpu className="w-4 h-4" /> },
-  { id: 'scenarios', label: 'Scenarios Overview', level: 1, icon: <Layers className="w-4 h-4" /> },
-  { id: 'question-tables', label: 'Question Mapping Tables', level: 1, icon: <FileText className="w-4 h-4" /> },
-  { id: 'admin-system', label: 'Admin System', level: 1, icon: <Settings className="w-4 h-4" /> },
-  { id: 'contextual-content', label: 'Contextual Content', level: 1, icon: <FileText className="w-4 h-4" /> },
-  { id: 'kiosk-idle', label: 'Kiosk & Idle Timeout', level: 1, icon: <Monitor className="w-4 h-4" /> },
-  { id: 'artifact-system', label: 'Artifact System', level: 1, icon: <Database className="w-4 h-4" /> },
-  { id: 'components', label: 'Components Reference', level: 1, icon: <Palette className="w-4 h-4" /> },
-  { id: 'configuration', label: 'Configuration & Labels', level: 1, icon: <Settings className="w-4 h-4" /> },
+  { id: 'overview', label: 'Project Overview', level: 1, icon: <Information size={16} /> },
+  { id: 'user-flow', label: 'User Flow', level: 1, icon: <Branch size={16} /> },
+  { id: 'project-structure', label: 'Project Structure', level: 1, icon: <Layers size={16} /> },
+  { id: 'type-definitions', label: 'Type Definitions', level: 1, icon: <Code size={16} /> },
+  { id: 'signal-matrix', label: 'Signal Mapping Matrix', level: 1, icon: <ChartBar size={16} /> },
+  { id: 'scoring-algorithm', label: 'Scoring Algorithm', level: 1, icon: <Chip size={16} /> },
+  { id: 'scenarios', label: 'Scenarios Overview', level: 1, icon: <Layers size={16} /> },
+  { id: 'question-tables', label: 'Question Mapping Tables', level: 1, icon: <Document size={16} /> },
+  { id: 'admin-system', label: 'Admin System', level: 1, icon: <Settings size={16} /> },
+  { id: 'contextual-content', label: 'Contextual Content', level: 1, icon: <Document size={16} /> },
+  { id: 'kiosk-idle', label: 'Kiosk & Idle Timeout', level: 1, icon: <Screen size={16} /> },
+  { id: 'artifact-system', label: 'Artifact System', level: 1, icon: <DataBase size={16} /> },
+  { id: 'components', label: 'Components Reference', level: 1, icon: <ColorPalette size={16} /> },
+  { id: 'configuration', label: 'Configuration & Labels', level: 1, icon: <Settings size={16} /> },
 ];
 
 // ─── Utility Components ───
@@ -217,7 +217,7 @@ const CodeBlock: React.FC<{ children: string; language?: string }> = ({ children
             onClick={handleCopy}
             className="flex items-center gap-1 text-xs text-gray-400 hover:text-white transition-colors"
           >
-            {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+            {copied ? <Checkmark size={12} /> : <Copy size={12} />}
             {copied ? 'Copied' : 'Copy'}
           </button>
         </div>
@@ -311,7 +311,7 @@ const Collapsible: React.FC<{
       >
         <span className="font-semibold text-gray-800">{title}</span>
         <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
-          <ChevronDown className="w-5 h-5 text-gray-400" />
+          <ChevronDown size={20} className="text-gray-400" />
         </motion.div>
       </button>
       <AnimatePresence>
@@ -479,7 +479,7 @@ export const DocumentationPage: React.FC = () => {
         {/* Sidebar Header */}
         <div className="flex items-center gap-3 px-5 py-5 border-b border-gray-100">
           <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center">
-            <BookOpen className="w-5 h-5 text-white" />
+            <Book size={20} className="text-white" />
           </div>
           <div>
             <h1 className="text-sm font-bold text-gray-900 leading-tight">Microsoft Navigator</h1>
@@ -489,14 +489,14 @@ export const DocumentationPage: React.FC = () => {
             onClick={() => setSidebarOpen(false)}
             className="ml-auto lg:hidden p-1.5 rounded-lg hover:bg-gray-100"
           >
-            <X className="w-4 h-4 text-gray-500" />
+            <Close size={16} className="text-gray-500" />
           </button>
         </div>
 
         {/* Search */}
         <div className="px-4 py-3 border-b border-gray-100">
           <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 focus-within:border-indigo-300 focus-within:ring-2 focus-within:ring-indigo-100">
-            <Search className="w-4 h-4 text-gray-400" />
+            <Search size={16} className="text-gray-400" />
             <input
               type="text"
               value={searchQuery}
@@ -528,7 +528,7 @@ export const DocumentationPage: React.FC = () => {
               </span>
               <span className="truncate">{item.label}</span>
               {activeSection === item.id && (
-                <ChevronRight className="w-3.5 h-3.5 ml-auto text-indigo-400" />
+                <ChevronRight size={14} className="ml-auto text-indigo-400" />
               )}
             </button>
           ))}
@@ -570,7 +570,7 @@ export const DocumentationPage: React.FC = () => {
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
           >
-            <Menu className="w-5 h-5 text-gray-600" />
+            <Menu size={20} className="text-gray-600" />
           </button>
           <div className="flex-1 min-w-0">
             <h1 className="text-lg font-bold text-gray-900 truncate">
@@ -590,7 +590,7 @@ export const DocumentationPage: React.FC = () => {
           {/* ═══════════════════════════════════════════
               SECTION 1: Project Overview
               ═══════════════════════════════════════════ */}
-          <SectionHeading id="overview" number={1} title="Project Overview" icon={<Info className="w-5 h-5" />} />
+          <SectionHeading id="overview" number={1} title="Project Overview" icon={<Information size={20} />} />
 
           <p className="text-gray-700 leading-relaxed mb-6">
             A <strong>kiosk-optimized touchscreen web application</strong> that guides enterprise users
@@ -606,7 +606,7 @@ export const DocumentationPage: React.FC = () => {
               { name: 'Vite', version: '7.2.4', desc: 'Build tool' },
               { name: 'Tailwind CSS', version: '3.4.17', desc: 'Styling' },
               { name: 'Framer Motion', version: '12.31.0', desc: 'Animations' },
-              { name: 'Lucide React', version: '0.563.0', desc: 'Icons' },
+              { name: 'Carbon Icons', version: '11.75.0', desc: 'Icons' },
             ].map((tech) => (
               <div key={tech.name} className="p-3 rounded-xl bg-white border border-gray-100 shadow-sm">
                 <div className="font-semibold text-gray-900 text-sm">{tech.name}</div>
@@ -617,10 +617,10 @@ export const DocumentationPage: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
-            <StatCard label="Scenarios" value={8} icon={<Layers className="w-5 h-5" />} />
-            <StatCard label="Questions" value={160} icon={<FileText className="w-5 h-5" />} />
-            <StatCard label="Signal Paths" value={55} icon={<GitBranch className="w-5 h-5" />} />
-            <StatCard label="Options" value={640} icon={<BarChart3 className="w-5 h-5" />} />
+            <StatCard label="Scenarios" value={8} icon={<Layers size={20} />} />
+            <StatCard label="Questions" value={160} icon={<Document size={20} />} />
+            <StatCard label="Signal Paths" value={55} icon={<Branch size={20} />} />
+            <StatCard label="Options" value={640} icon={<ChartBar size={20} />} />
           </div>
 
           <InfoCard title="Deployment" variant="green">
@@ -634,7 +634,7 @@ export const DocumentationPage: React.FC = () => {
           {/* ═══════════════════════════════════════════
               SECTION 2: User Flow
               ═══════════════════════════════════════════ */}
-          <SectionHeading id="user-flow" number={2} title="User Flow" icon={<GitBranch className="w-5 h-5" />} />
+          <SectionHeading id="user-flow" number={2} title="User Flow" icon={<Branch size={20} />} />
 
           <div className="space-y-0 mb-8">
             {[
@@ -672,7 +672,7 @@ export const DocumentationPage: React.FC = () => {
           {/* ═══════════════════════════════════════════
               SECTION 3: Project Structure
               ═══════════════════════════════════════════ */}
-          <SectionHeading id="project-structure" number={3} title="Project Structure" icon={<Layers className="w-5 h-5" />} />
+          <SectionHeading id="project-structure" number={3} title="Project Structure" icon={<Layers size={20} />} />
 
           <CodeBlock language="plaintext">{`MicrosoftNavigator/
 ├── src/
@@ -741,7 +741,7 @@ export const DocumentationPage: React.FC = () => {
           {/* ═══════════════════════════════════════════
               SECTION 4: Type Definitions
               ═══════════════════════════════════════════ */}
-          <SectionHeading id="type-definitions" number={4} title="Type Definitions" icon={<Code2 className="w-5 h-5" />} />
+          <SectionHeading id="type-definitions" number={4} title="Type Definitions" icon={<Code size={20} />} />
 
           <Collapsible title="Core Data Types" defaultOpen>
             <CodeBlock language="typescript">{`// Sub-Scenario (4 per scenario)
@@ -777,7 +777,7 @@ interface Scenario {
   id: string;
   title: string;
   description: string;
-  icon: string;            // Lucide icon name
+  icon: string;            // Carbon icon name
   color: string;           // Tailwind gradient
   enabled: boolean;
   offeringGroup?: string;  // 'DT' | 'AMM' | 'DPDE'
@@ -850,7 +850,7 @@ interface Recommendation {
           {/* ═══════════════════════════════════════════
               SECTION 5: Signal Mapping Matrix
               ═══════════════════════════════════════════ */}
-          <SectionHeading id="signal-matrix" number={5} title="Signal Mapping Matrix" icon={<BarChart3 className="w-5 h-5" />} />
+          <SectionHeading id="signal-matrix" number={5} title="Signal Mapping Matrix" icon={<ChartBar size={20} />} />
 
           <p className="text-gray-700 mb-4 text-sm leading-relaxed">
             The signal mapping matrix defines how each signal path contributes to the 4 offering scores.
@@ -888,7 +888,7 @@ interface Recommendation {
           {/* ═══════════════════════════════════════════
               SECTION 6: Scoring Algorithm
               ═══════════════════════════════════════════ */}
-          <SectionHeading id="scoring-algorithm" number={6} title="Scoring Algorithm & Recommendation Engine" icon={<Cpu className="w-5 h-5" />} />
+          <SectionHeading id="scoring-algorithm" number={6} title="Scoring Algorithm & Recommendation Engine" icon={<Chip size={20} />} />
 
           <InfoCard title="Source Code" variant="blue">
             <code className="text-xs font-mono">src/hooks/useNavigator.ts</code> — function{' '}
@@ -1030,7 +1030,7 @@ interface Recommendation {
           {/* ═══════════════════════════════════════════
               SECTION 7: Scenarios Overview
               ═══════════════════════════════════════════ */}
-          <SectionHeading id="scenarios" number={7} title="Scenarios Overview" icon={<Layers className="w-5 h-5" />} />
+          <SectionHeading id="scenarios" number={7} title="Scenarios Overview" icon={<Layers size={20} />} />
 
           <div className="grid gap-3 mb-8">
             {SCENARIOS_OVERVIEW.map((sc) => {
@@ -1041,7 +1041,7 @@ interface Recommendation {
                   className={`flex items-center gap-4 p-4 rounded-xl border ${colors.border} ${colors.bg} transition-all hover:shadow-sm`}
                 >
                   <div className={`flex-shrink-0 w-10 h-10 rounded-xl ${colors.badge} flex items-center justify-center`}>
-                    {ICON_MAP[sc.icon] || <Layers className="w-4 h-4" />}
+                    {ICON_MAP[sc.icon] || <Layers size={16} />}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-0.5">
@@ -1059,7 +1059,7 @@ interface Recommendation {
           {/* ═══════════════════════════════════════════
               SECTION 8: Question Mapping Tables
               ═══════════════════════════════════════════ */}
-          <SectionHeading id="question-tables" number={8} title="Complete Question Mapping Tables" icon={<FileText className="w-5 h-5" />} />
+          <SectionHeading id="question-tables" number={8} title="Complete Question Mapping Tables" icon={<Document size={20} />} />
 
           <p className="text-gray-700 mb-6 text-sm leading-relaxed">
             <strong>Total:</strong> 8 scenarios × 4 sub-scenarios × 5 questions × 4 options ={' '}
@@ -1103,7 +1103,7 @@ interface Recommendation {
           {/* ═══════════════════════════════════════════
               SECTION 9: Admin System
               ═══════════════════════════════════════════ */}
-          <SectionHeading id="admin-system" number={9} title="Admin System" icon={<Settings className="w-5 h-5" />} />
+          <SectionHeading id="admin-system" number={9} title="Admin System" icon={<Settings size={20} />} />
 
           <h3 className="text-lg font-semibold text-gray-800 mb-3">How to Activate</h3>
           <div className="grid sm:grid-cols-3 gap-3 mb-6">
@@ -1156,7 +1156,7 @@ interface Recommendation {
           {/* ═══════════════════════════════════════════
               SECTION 10: Contextual Content
               ═══════════════════════════════════════════ */}
-          <SectionHeading id="contextual-content" number={10} title="Contextual Content System" icon={<FileText className="w-5 h-5" />} />
+          <SectionHeading id="contextual-content" number={10} title="Contextual Content System" icon={<Document size={20} />} />
 
           <p className="text-gray-700 mb-4 text-sm leading-relaxed">
             Provides journey-specific challenges, solutions, and approach content that overrides generic
@@ -1187,7 +1187,7 @@ interface Recommendation {
               { num: 3, label: 'Empty Arrays', desc: 'Last resort', color: 'bg-gray-50 border-gray-200' },
             ].map((p, i) => (
               <React.Fragment key={p.num}>
-                {i > 0 && <div className="flex items-center px-1"><ChevronRight className="w-4 h-4 text-gray-300" /></div>}
+                {i > 0 && <div className="flex items-center px-1"><ChevronRight size={16} className="text-gray-300" /></div>}
                 <div className={`flex-1 p-3 rounded-lg border ${p.color} text-center`}>
                   <div className="text-xs font-bold text-gray-600">#{p.num}</div>
                   <div className="text-sm font-semibold text-gray-800">{p.label}</div>
@@ -1200,7 +1200,7 @@ interface Recommendation {
           {/* ═══════════════════════════════════════════
               SECTION 11: Kiosk & Idle Timeout
               ═══════════════════════════════════════════ */}
-          <SectionHeading id="kiosk-idle" number={11} title="Kiosk & Idle Timeout" icon={<Monitor className="w-5 h-5" />} />
+          <SectionHeading id="kiosk-idle" number={11} title="Kiosk & Idle Timeout" icon={<Screen size={20} />} />
 
           <div className="grid sm:grid-cols-2 gap-4 mb-6">
             <InfoCard title="Kiosk Mode Prevents" variant="rose">
@@ -1246,7 +1246,7 @@ interface Recommendation {
           {/* ═══════════════════════════════════════════
               SECTION 12: Artifact System
               ═══════════════════════════════════════════ */}
-          <SectionHeading id="artifact-system" number={12} title="Artifact System" icon={<Database className="w-5 h-5" />} />
+          <SectionHeading id="artifact-system" number={12} title="Artifact System" icon={<DataBase size={20} />} />
 
           <p className="text-gray-700 mb-4 text-sm leading-relaxed">
             Dynamic loading of IBM solution artifacts (videos, PDFs, architecture diagrams) from Azure Blob Storage.
@@ -1294,7 +1294,7 @@ interface Recommendation {
           {/* ═══════════════════════════════════════════
               SECTION 13: Components Reference
               ═══════════════════════════════════════════ */}
-          <SectionHeading id="components" number={13} title="Components Reference" icon={<Palette className="w-5 h-5" />} />
+          <SectionHeading id="components" number={13} title="Components Reference" icon={<ColorPalette size={20} />} />
 
           <Collapsible title="Navigator Components" defaultOpen>
             <div className="mt-3 overflow-x-auto">
@@ -1384,7 +1384,7 @@ interface Recommendation {
           {/* ═══════════════════════════════════════════
               SECTION 14: Configuration & Labels
               ═══════════════════════════════════════════ */}
-          <SectionHeading id="configuration" number={14} title="Configuration & Labels" icon={<Settings className="w-5 h-5" />} />
+          <SectionHeading id="configuration" number={14} title="Configuration & Labels" icon={<Settings size={20} />} />
 
           <Collapsible title="Default Labels (src/data/labels.ts)" defaultOpen>
             <div className="mt-3 overflow-x-auto">
@@ -1477,7 +1477,7 @@ interface Recommendation {
             onClick={scrollToTop}
             className="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-indigo-600 text-white shadow-lg hover:bg-indigo-700 flex items-center justify-center transition-colors"
           >
-            <ArrowUp className="w-5 h-5" />
+            <ArrowUp size={20} />
           </motion.button>
         )}
       </AnimatePresence>

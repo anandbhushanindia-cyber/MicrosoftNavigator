@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Timer } from 'lucide-react';
+import { Timer } from '@carbon/icons-react';
 import { EditableText } from '../admin/EditableText';
 
 interface IdleWarningModalProps {
@@ -45,7 +45,7 @@ export const IdleWarningModal: React.FC<IdleWarningModalProps> = ({
               bg-indigo-50 text-indigo-600
               mb-6
             ">
-              <Timer className="w-10 h-10" />
+              <Timer size={40} />
             </div>
 
             {/* Title */}

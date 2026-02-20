@@ -1,27 +1,29 @@
 import React, { useState, useCallback } from 'react';
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
 import {
-  Sparkles,
-  RotateCcw,
+  MagicWand,
+  RotateCounterclockwise,
   Layers,
-  Cpu,
-  AlertTriangle,
-  CheckCircle,
-  ArrowRightCircle,
-  Zap,
+  Chip,
+  Lightning,
   Play,
-  FileImage,
-  FileText,
-  Wrench,
-  Monitor,
-  ExternalLink,
+  Image,
+  Document,
+  Tools,
+  Screen,
+  Launch,
   ChevronLeft,
   ChevronRight,
-  Database,
-  Bot,
-  RefreshCw,
-  Blocks,
-} from 'lucide-react';
+} from '@carbon/icons-react';
+import {
+  DataWarehousing,
+  Ai as AiPicto,
+  AppModernization,
+  DesignAndDevelopment_01,
+  Warning_01,
+  Rocket as RocketPicto,
+  Strategy,
+} from '@carbon/pictograms-react';
 import type { Recommendation, IBMOffer, OfferingName } from '../../types/navigator.types';
 import { EditableText } from '../admin/EditableText';
 import { EditableList } from '../admin/EditableList';
@@ -29,6 +31,7 @@ import { DocumentCard } from './DocumentCard';
 import { ZoomableMediaModal } from './ZoomableMediaModal';
 import { useArtifacts } from '../../hooks/useArtifacts';
 import { AnimatedBackground } from '../visualizations/AnimatedBackground';
+import { getCapabilityIcon, getTechStackIcon } from '../../utils/iconMapping';
 
 interface RecommendationScreenProps {
   recommendation: Recommendation;
@@ -48,30 +51,30 @@ const OFFERING_ICON_CONFIG: Record<OfferingName, {
   bg: string;
 }> = {
   Data: {
-    icon: <Database className="w-8 h-8 text-white" />,
+    icon: <DataWarehousing size={40} className="text-white" />,
     bg: 'bg-gradient-to-br from-blue-500 to-cyan-600',
   },
   AI: {
-    icon: <Bot className="w-8 h-8 text-white" />,
+    icon: <AiPicto size={40} className="text-white" />,
     bg: 'bg-gradient-to-br from-violet-500 to-purple-600',
   },
   AMM: {
-    icon: <RefreshCw className="w-8 h-8 text-white" />,
+    icon: <AppModernization size={40} className="text-white" />,
     bg: 'bg-gradient-to-br from-orange-500 to-red-500',
   },
   DPDE: {
-    icon: <Blocks className="w-8 h-8 text-white" />,
+    icon: <DesignAndDevelopment_01 size={40} className="text-white" />,
     bg: 'bg-gradient-to-br from-emerald-500 to-teal-600',
   },
 };
 
 // Map offer type to icon
 const OFFER_TYPE_ICONS: Record<IBMOffer['type'], React.ReactNode> = {
-  video: <Play className="w-5 h-5" />,
-  demo: <Monitor className="w-5 h-5" />,
-  architecture: <FileImage className="w-5 h-5" />,
-  document: <FileText className="w-5 h-5" />,
-  tool: <Wrench className="w-5 h-5" />,
+  video: <Play size={20} />,
+  demo: <Screen size={20} />,
+  architecture: <Image size={20} />,
+  document: <Document size={20} />,
+  tool: <Tools size={20} />,
 };
 
 const OFFER_TYPE_LABELS: Record<IBMOffer['type'], string> = {
@@ -282,7 +285,7 @@ const OfferTypeCarousel: React.FC<{
                 aria-label="Previous item"
                 className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 shadow-md border border-gray-200 flex items-center justify-center text-gray-600 hover:text-indigo-600 hover:border-indigo-300 transition-all min-h-[44px] min-w-[44px]"
               >
-                <ChevronLeft className="w-5 h-5" />
+                <ChevronLeft size={20} />
               </button>
               <button
                 onClick={goNext}
@@ -290,7 +293,7 @@ const OfferTypeCarousel: React.FC<{
                 aria-label="Next item"
                 className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 shadow-md border border-gray-200 flex items-center justify-center text-gray-600 hover:text-indigo-600 hover:border-indigo-300 transition-all min-h-[44px] min-w-[44px]"
               >
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight size={20} />
               </button>
             </>
           )}
@@ -406,7 +409,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
             {...fadeIn(0.15)}
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-200 mb-3"
           >
-            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+            <MagicWand size={14} className="text-blue-600" />
             <span className="text-xs sm:text-sm font-semibold text-blue-600 uppercase tracking-wider">
               <EditableText labelKey="results.badge" as="span" className="text-xs sm:text-sm font-semibold text-blue-600 uppercase tracking-wider" />
             </span>
@@ -428,7 +431,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
             <div className="p-5 sm:p-7 lg:p-8">
               <div className="mb-3">
                 <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-sm font-semibold">
-                  <Layers className="w-4 h-4" />
+                  <Layers size={16} />
                   {primarySignalPath}
                 </span>
               </div>
@@ -445,7 +448,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
         {/* ─── OFFERING SCORES — with icons instead of bars ─── */}
         <motion.div {...fadeIn(0.42)} className="mb-8 lg:mb-10">
           <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-5 flex items-center gap-2">
-            <Layers className="w-4 h-4 text-indigo-500" />
+            <Layers size={16} className="text-indigo-500" />
             IBM&apos;s Offerings That Meet Your Current Requirements
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -502,8 +505,8 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
               <div className="h-1.5 bg-gradient-to-r from-rose-500 to-red-500" />
               <div className="p-5 sm:p-6 flex-1">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-red-500 flex items-center justify-center shadow-md shrink-0">
-                    <AlertTriangle className="w-5 h-5 text-white" />
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-red-500 flex items-center justify-center shadow-md shrink-0">
+                    <Warning_01 size={28} className="text-white" />
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900">
                     <EditableText labelKey="results.yourChallenge" as="span" className="text-lg sm:text-xl font-bold text-gray-900" />
@@ -530,8 +533,8 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
               <div className="h-1.5 bg-gradient-to-r from-emerald-500 to-green-500" />
               <div className="p-5 sm:p-6 flex-1">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center shadow-md shrink-0">
-                    <CheckCircle className="w-5 h-5 text-white" />
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-green-500 flex items-center justify-center shadow-md shrink-0">
+                    <RocketPicto size={28} className="text-white" />
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900">
                     <EditableText labelKey="results.ibmSolution" as="span" className="text-lg sm:text-xl font-bold text-gray-900" />
@@ -558,8 +561,8 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
               <div className="h-1.5 bg-gradient-to-r from-blue-500 to-indigo-500" />
               <div className="p-5 sm:p-6 flex-1">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center shadow-md shrink-0">
-                    <ArrowRightCircle className="w-5 h-5 text-white" />
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center shadow-md shrink-0">
+                    <Strategy size={28} className="text-white" />
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900">
                     <EditableText labelKey="results.deliveryApproach" as="span" className="text-lg sm:text-xl font-bold text-gray-900" />
@@ -590,7 +593,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
             <motion.div {...fadeIn(0.8)}>
               <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-5 sm:p-6">
                 <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-4 flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-amber-500" />
+                  <Lightning size={16} className="text-amber-500" />
                   <EditableText labelKey="results.keyCapabilities" as="span" className="text-sm font-bold text-gray-700 uppercase tracking-wider" />
                 </h3>
                 <div className="flex flex-wrap gap-2.5">
@@ -602,7 +605,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
                       transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.9 + idx * 0.05, type: 'spring' }}
                       className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 text-amber-800 text-sm font-semibold"
                     >
-                      <Zap className="w-3.5 h-3.5" />
+                      {getCapabilityIcon(cap)}
                       {cap}
                     </motion.span>
                   ))}
@@ -616,7 +619,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
             <motion.div {...fadeIn(0.85)}>
               <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-5 sm:p-6">
                 <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-4 flex items-center gap-2">
-                  <Cpu className="w-4 h-4 text-blue-500" />
+                  <Chip size={16} className="text-blue-500" />
                   <EditableText labelKey="results.techStack" as="span" className="text-sm font-bold text-gray-700 uppercase tracking-wider" />
                 </h3>
                 <div className="flex flex-wrap gap-2.5">
@@ -628,7 +631,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
                       transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.95 + idx * 0.05, type: 'spring' }}
                       className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-sm font-semibold"
                     >
-                      <Cpu className="w-3.5 h-3.5" />
+                      {getTechStackIcon(tech)}
                       {tech}
                     </motion.span>
                   ))}
@@ -642,7 +645,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
         {(ibmOffers.length > 0 || artifactsLoading) && (
           <motion.div {...fadeIn(1.0)} className="mb-8 lg:mb-10">
             <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-5 flex items-center gap-2">
-              <ExternalLink className="w-4 h-4 text-indigo-500" />
+              <Launch size={16} className="text-indigo-500" />
               <EditableText labelKey="results.whatIbmOffers" as="span" className="text-sm font-bold text-gray-700 uppercase tracking-wider" />
             </h3>
             {artifactsLoading ? (
@@ -683,7 +686,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
             type="button"
             className="group flex items-center gap-3 px-8 sm:px-10 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 active:from-blue-600 active:to-indigo-700 text-white font-semibold rounded-xl transition-all shadow-lg min-h-[56px] text-base sm:text-lg"
           >
-            <RotateCcw className="w-5 h-5 group-active:-rotate-180 transition-transform duration-500" />
+            <RotateCounterclockwise size={20} className="group-active:-rotate-180 transition-transform duration-500" />
             <EditableText labelKey="results.startOver" as="span" className="font-semibold" />
           </button>
         </motion.div>
