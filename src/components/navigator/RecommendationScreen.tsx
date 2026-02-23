@@ -32,6 +32,7 @@ import { ZoomableMediaModal } from './ZoomableMediaModal';
 import { useArtifacts } from '../../hooks/useArtifacts';
 import { AnimatedBackground } from '../visualizations/AnimatedBackground';
 import { getCapabilityIcon, getTechStackIcon } from '../../utils/iconMapping';
+import { EnterpriseAdvantage } from './EnterpriseAdvantage';
 
 interface RecommendationScreenProps {
   recommendation: Recommendation;
@@ -641,9 +642,14 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
           )}
         </div>
 
+        {/* ─── IBM ENTERPRISE ADVANTAGE ─── */}
+        <motion.div {...fadeIn(0.9)} className="mb-8 lg:mb-10">
+          <EnterpriseAdvantage primaryOffering={primaryOffering} />
+        </motion.div>
+
         {/* ─── WHAT IBM OFFERS — TYPE-BASED CONTAINERS (no QR codes) ─── */}
         {(ibmOffers.length > 0 || artifactsLoading) && (
-          <motion.div {...fadeIn(1.0)} className="mb-8 lg:mb-10">
+          <motion.div {...fadeIn(1.1)} className="mb-8 lg:mb-10">
             <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider mb-5 flex items-center gap-2">
               <Launch size={16} className="text-indigo-500" />
               <EditableText labelKey="results.whatIbmOffers" as="span" className="text-sm font-bold text-gray-700 uppercase tracking-wider" />
@@ -678,7 +684,7 @@ export const RecommendationScreen: React.FC<RecommendationScreenProps> = ({
 
         {/* ─── ACTION BAR — Start Over only ─── */}
         <motion.div
-          {...fadeIn(1.2)}
+          {...fadeIn(1.3)}
           className="flex items-center justify-center p-5 sm:p-6 bg-white rounded-2xl shadow-lg border border-gray-100"
         >
           <button
